@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>InicioConductor</ion-title>
+  <ion-toolbar color="success">
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+  <ion-card>
+    <img style="
+      border-top: black 2px solid;
+      border-left: black 2px solid;
+      border-right: black 2px solid;
+      border-radius: 5px;"
+       src="./assets/img/duoctwitter.png" />
+  </ion-card>
+  <ion-toolbar color="#ffffff">
+    <ion-searchbar color="succ" placeholder="¿A dónde vas?"></ion-searchbar>
+  </ion-toolbar>
+
+  
+  <ion-tabs>
+    <ion-tab-bar slot="bottom" color="dark" style="text-decoration: none;">
+      <ion-tab-button [routerLink]="['/prueba1']" tab="schedule">
+        <ion-icon name="home"></ion-icon>
+        <ion-label >Inicio</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button [routerLink]="['/mapa']" tab="map">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Mapa</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button [routerLink]="['/cuenta-cliente']" tab="speakers">
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label>Cuenta</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 
 </ion-content>
+
