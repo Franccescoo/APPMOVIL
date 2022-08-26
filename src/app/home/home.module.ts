@@ -5,7 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { TabInicioClienteComponent } from '../components/tab-inicio-cliente/tab-inicio-cliente.component';
+import { TabMapaClienteComponent } from '../components/tab-mapa-cliente/tab-mapa-cliente.component';
+import { TabPerfilClienteComponent } from '../components/tab-perfil-cliente/tab-perfil-cliente.component';
 
 @NgModule({
   imports: [
@@ -14,6 +16,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, TabInicioClienteComponent,TabMapaClienteComponent,TabPerfilClienteComponent]
 })
 export class HomePageModule {}

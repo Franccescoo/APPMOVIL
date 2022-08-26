@@ -1,3 +1,26 @@
-<p>
-  tab-inicio-cliente works!
-</p>
+
+<ion-content>
+  <ion-grid>
+    <ion-card>
+      <img style="
+        border-top: black 2px solid;
+        border-left: black 2px solid;
+        border-right: black 2px solid;
+        border-radius: 5px ; "
+         src="./assets/img/duoctwitter.png" />
+    </ion-card>
+    <ion-toolbar color="#ffffff">
+      <ion-searchbar color="succ" placeholder="¿A dónde vas?"></ion-searchbar>
+    </ion-toolbar>
+  </ion-grid>
+  
+  <a [routerLink]="['/viaje-cliente']" style="text-decoration: none; color: black;">
+    <ion-row style="border: black 2px solid;border-radius: 20px;width: 89px;height: 84px;">
+      <ion-col size="2"><ion-label style="font-size: 15px; text-align: center;" ><ion-icon style="text-align: center; padding-top: 7px; padding-left: 5px; font-size: 60px;" name="car-sport-outline"></ion-icon></ion-label></ion-col>
+      <ion-label style="font-size: 20px;text-align: center;width: 54px;">Viaje</ion-label>
+    </ion-row>
+  </a>
+  
+  
+  
+  </ion-content>
