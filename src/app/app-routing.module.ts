@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'mapa-cliente',
     pathMatch: 'full'
   },
   {
@@ -30,10 +30,6 @@ const routes: Routes = [
   {
     path: 'recuperar-pass-cliente',
     loadChildren: () => import('./pages/recuperar-pass-cliente/recuperar-pass-cliente.module').then( m => m.RecuperarPassClientePageModule)
-  },
-  {
-    path: 'recuperar-pass-conductor',
-    loadChildren: () => import('./pages/recuperar-pass-conductor/recuperar-pass-conductor.module').then( m => m.RecuperarPassConductorPageModule)
   },
   {
     path: 'inicio-cliente',
@@ -70,10 +66,6 @@ const routes: Routes = [
   {
     path: 'pedir-viaje-cliente',
     loadChildren: () => import('./pages/pedir-viaje-cliente/pedir-viaje-cliente.module').then( m => m.PedirViajeClientePageModule)
-  },
-  {
-    path: 'recibir-viaje-conductor',
-    loadChildren: () => import('./pages/recibir-viaje-conductor/recibir-viaje-conductor.module').then( m => m.RecibirViajeConductorPageModule)
   },
   {
     path: 'modificar-cliente',
