@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'mapa-cliente',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {

@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>ModificarCliente</ion-title>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="cuenta-cliente"></ion-back-button>
+    </ion-buttons>
+  <ion-title >Modificar Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-avatar>
+    <ion-icon style="font-size: 100px; padding-top: 15px; padding-left: px;" name="person-circle-outline"></ion-icon>
+  </ion-avatar>
+
+  <ion-grid style="padding-top: 70px; padding-left: unset; padding-right: unset;">
+    <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+      <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Nombre"></ion-input></ion-col>
+      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+    </ion-row>
+    <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+      <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Apellido"></ion-input></ion-col>
+      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+    </ion-row>
+    <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+      <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Número de télefono"></ion-input></ion-col>
+      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+    </ion-row>
+    <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+      <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Correo electrónico"></ion-input></ion-col>
+      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+    </ion-row>
+    <ion-row style="background-color: #e2e2e2;">
+      <ion-col size="10"><ion-input type="password" style="font-size: 15px;" placeholder="Contraseña"></ion-input></ion-col>
+      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
 
 </ion-content>

@@ -1,9 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>PagoCliente</ion-title>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="cuenta-cliente"> </ion-back-button>
+    </ion-buttons>
+    <ion-title>Pago</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-list style="padding-top: 0px;">
+    <ion-item-group>
+
+      <ion-item-divider style="background-color: #e2e2e2; font-size: 10px;">
+        <ion-label style="color: black;">Métodos de pago</ion-label>
+      </ion-item-divider>
+
+        <ion-grid style="padding-left: unset;padding-right: unset;padding-bottom: 0px;">
+          <ion-row style="border-bottom: rgb(184, 184, 184) 1px solid;">
+            <ion-col size="10"><ion-label style="font-size: 12px;" ><ion-icon style="text-align: center; padding-top: 7px; padding-left: 10px; font-size: 10px;" name="logo-paypal"></ion-icon>PayPal</ion-label></ion-col>
+            <ion-col size="2"><ion-icon style="padding-top: px;" name="chevron-forward-outline"></ion-icon></ion-col>
+          </ion-row>
+          <ion-row style="border-bottom: rgb(184, 184, 184) 1px solid;">
+            <ion-col size="10"><ion-label style="font-size: 14px;"> <ion-icon style="text-align: center; padding-top: 7px; padding-left: 10px; font-size: 10px;" name="cash-outline"></ion-icon>Efectivo</ion-label></ion-col>
+            <ion-col size="2"><ion-icon style="padding-top: px;" name="chevron-forward-outline"></ion-icon></ion-col>
+          </ion-row>
+          <ion-row style="border-bottom: rgb(184, 184, 184) 1px solid;">
+            <ion-col size="10"><ion-label style="font-size: 12px;"> <ion-icon style="text-align: center; padding-top: 7px; padding-left: 10px; font-size: 13px;" name="card-outline"></ion-icon>Tarjeta de crédito o de débito</ion-label></ion-col>
+            <ion-col size="2"><ion-icon style="padding-top: px;" name="chevron-forward-outline"></ion-icon></ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-item-divider style="background-color: #e2e2e2; font-size: 10px;">
+          <ion-label style="color: black;">Cupones DuocUc</ion-label>
+        </ion-item-divider>
+        <ion-grid style="padding-left: unset;padding-right: unset;padding-bottom: 0px;">
+          <ion-row style="border-bottom: rgb(184, 184, 184) 1px solid;">
+            <ion-col size="10"><ion-label style="font-size: 12px;" ><ion-icon style="text-align: center; padding-top: 2px; padding-left: 10px; font-size: 14px;" name="ticket-outline"></ion-icon>Cupones</ion-label></ion-col>
+            <ion-col size="2"><ion-icon style="padding-top: px;" name="chevron-forward-outline"></ion-icon></ion-col>
+          </ion-row>
+        </ion-grid>
+
+    
+    </ion-item-group>
+  </ion-list>
+
+  
 </ion-content>
