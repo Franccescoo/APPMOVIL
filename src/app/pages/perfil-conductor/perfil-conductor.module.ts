@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PerfilConductorPageRoutingModule } from './perfil-conductor-routing.module';
 
 import { PerfilConductorPage } from './perfil-conductor.page';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PerfilConductorPageRoutingModule
+    PerfilConductorPageRoutingModule,
+    MatProgressSpinnerModule
   ],
   declarations: [PerfilConductorPage]
 })

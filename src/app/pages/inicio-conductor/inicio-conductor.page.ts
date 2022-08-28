@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './inicio-conductor.page.html',
   styleUrls: ['./inicio-conductor.page.scss'],
 })
+
 export class InicioConductorPage implements OnInit {
 
   constructor() { }

@@ -12,24 +12,20 @@
 
     <img src="./assets/img/Twitter.png"/>
 
-  <ion-toolbar color="#ffffff">
-    <ion-searchbar color="succ" placeholder="¿A dónde vas?"></ion-searchbar>
-  </ion-toolbar>
-
   
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="dark" style="text-decoration: none;">
-      <ion-tab-button [routerLink]="['/prueba1']" tab="schedule">
+      <ion-tab-button [routerLink]="['/inicio-conductor']" tab="schedule">
         <ion-icon name="home"></ion-icon>
         <ion-label >Inicio</ion-label>
       </ion-tab-button>
   
-      <ion-tab-button [routerLink]="['/mapa']" tab="map">
+      <ion-tab-button [routerLink]="['/mapa-conductor']" tab="map">
         <ion-icon name="map"></ion-icon>
         <ion-label>Mapa</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button [routerLink]="['/cuenta-cliente']" tab="speakers">
+      <ion-tab-button [routerLink]="['/perfil-conductor']" tab="speakers">
         <ion-icon name="person-circle"></ion-icon>
         <ion-label>Cuenta</ion-label>
       </ion-tab-button>
