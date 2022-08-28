@@ -78,7 +78,11 @@ const routes: Routes = [
   {
     path: 'pago-cliente',
     loadChildren: () => import('./pages/pago-cliente/pago-cliente.module').then( m => m.PagoClientePageModule)
+  },  {
+    path: 'home-conductor',
+    loadChildren: () => import('./pages/home-conductor/home-conductor.module').then( m => m.HomeConductorPageModule)
   },
+
 ];
 
 @NgModule({
