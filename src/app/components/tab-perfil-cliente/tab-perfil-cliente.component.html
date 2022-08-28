@@ -1,3 +1,9 @@
+<ion-header>
+  <ion-toolbar color="success">
+  <ion-title>Perfil</ion-title>
+</ion-toolbar>
+</ion-header>
+
 <ion-content >
   <ion-list-header style="background-color: #e2e2e2; font-size: 15px;">
     <ion-label>Opciones</ion-label>
@@ -20,14 +26,11 @@
       <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Tus Viajes</ion-label>
     </ion-item>
   </a>
-    <ion-item>
-      <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Viaje Gratis</ion-label>
-    </ion-item>
-
+<a [routerLink]="['/ayuda-cliente']" style="text-decoration: none;" expand="block">
     <ion-item>
       <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Ayuda</ion-label>
     </ion-item>
-
+  </a>
     <a [routerLink]="['/ajustes-cliente']" style="text-decoration: none;" expand="block">
       <ion-item>
         <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Configuración</ion-label>
