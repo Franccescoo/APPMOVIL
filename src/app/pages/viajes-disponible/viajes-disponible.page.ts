@@ -14,10 +14,10 @@ export class ViajesDisponiblePage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Important message',
-      message: 'This is an alert!',
-      buttons: ['OK'],
+      header: 'Viaje Tomado',
+      subHeader: 'Espera al conductor',
+      message: '¡Que tengas buen viaje!',
+      buttons: ['Listo'],
     });
 
     await alert.present();
