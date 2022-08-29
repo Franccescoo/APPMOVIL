@@ -94,6 +94,56 @@ const routes: Routes = [
     path: 'solicitud-viaje',
     loadChildren: () => import('./pages/solicitud-viaje/solicitud-viaje.module').then( m => m.SolicitudViajePageModule)
   },
+<<<<<<< Updated upstream
+=======
+  {
+    path: 'perfil-conductor',
+    loadChildren: () => import('./pages/perfil-conductor/perfil-conductor.module').then( m => m.PerfilConductorPageModule)
+  },
+  {
+    path: 'ajustes-cliente',
+    loadChildren: () => import('./pages/ajustes-cliente/ajustes-cliente.module').then( m => m.AjustesClientePageModule)
+  },
+  {
+    path: 'ajustes-conductor',
+    loadChildren: () => import('./pages/ajustes-conductor/ajustes-conductor.module').then( m => m.AjustesConductorPageModule)
+  },
+  {
+    path: 'pedir-viaje-cliente',
+    loadChildren: () => import('./pages/pedir-viaje-cliente/pedir-viaje-cliente.module').then( m => m.PedirViajeClientePageModule)
+  },
+  {
+    path: 'modificar-cliente',
+    loadChildren: () => import('./pages/modificar-cliente/modificar-cliente.module').then( m => m.ModificarClientePageModule)
+  },
+  {
+    path: 'modificar-conductor',
+    loadChildren: () => import('./pages/modificar-conductor/modificar-conductor.module').then( m => m.ModificarConductorPageModule)
+  },
+  {
+    path: 'pago-cliente',
+    loadChildren: () => import('./pages/pago-cliente/pago-cliente.module').then( m => m.PagoClientePageModule)
+  },
+  {
+    path: 'home-conductor',
+    loadChildren: () => import('./pages/home-conductor/home-conductor.module').then( m => m.HomeConductorPageModule)
+  },
+  {
+    path: 'historial-viajes',
+    loadChildren: () => import('./pages/historial-viajes/historial-viajes.module').then( m => m.HistorialViajesPageModule)
+  },
+  {
+    path: 'viajes-disponible',
+    loadChildren: () => import('./pages/viajes-disponible/viajes-disponible.module').then( m => m.ViajesDisponiblePageModule)
+  },
+  {
+    path: 'ayuda-cliente',
+    loadChildren: () => import('./pages/ayuda-cliente/ayuda-cliente.module').then( m => m.AyudaClientePageModule)
+  },
+
+
+];
+>>>>>>> Stashed changes
 
 
 
