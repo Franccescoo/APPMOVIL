@@ -3,46 +3,10 @@
   <ion-title>Mapa</ion-title>
 </ion-toolbar>
 </ion-header>
-
- <ion-toolbar color="#ffffff">
-    <ion-searchbar  placeholder="Punto de partida"></ion-searchbar>
-  </ion-toolbar>
-  <ion-toolbar color="#ffffff">
-    <ion-searchbar  placeholder="¿A dónde vas?"></ion-searchbar>
-  </ion-toolbar>
+<ion-content>
   
   <div style="height: 91%;" id="map"></div>
-  <ion-button id="open-modal" expand="block">Viajes Disponibles</ion-button>
-
-  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancelar</ion-button>
-          </ion-buttons>
-          <ion-title>Viajes</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-list>
-          
-        <ion-item>
-          <ion-label position="stacked">Matias Peñaloza</ion-label>
-          <ion-icon name="car-sport-outline"></ion-icon>
-        </ion-item>
-        <ion-item>
-          <ion-label position="stacked">David Carvajal</ion-label>
-          <ion-icon name="car-sport-outline"></ion-icon>
-        </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Franccesco Artuso</ion-label>
-          <ion-icon name="car-sport-outline"></ion-icon>
-        </ion-item>
-      </ion-list>
+  <ion-button [routerLink]="['/viajes-disponible']" style="margin-top: 5px;"color="success"expand="full">Viajes Disponibles</ion-button>
 
 
   

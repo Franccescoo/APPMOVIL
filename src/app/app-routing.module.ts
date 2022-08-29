@@ -82,9 +82,14 @@ const routes: Routes = [
   {
     path: 'home-conductor',
     loadChildren: () => import('./pages/home-conductor/home-conductor.module').then( m => m.HomeConductorPageModule)
-  },  {
+  },
+  {
     path: 'historial-viajes',
     loadChildren: () => import('./pages/historial-viajes/historial-viajes.module').then( m => m.HistorialViajesPageModule)
+  },
+  {
+    path: 'viajes-disponible',
+    loadChildren: () => import('./pages/viajes-disponible/viajes-disponible.module').then( m => m.ViajesDisponiblePageModule)
   },
 
 
