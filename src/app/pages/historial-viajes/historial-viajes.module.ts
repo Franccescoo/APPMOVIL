@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { HistorialViajesPageRoutingModule } from './historial-viajes-routing.module';
 
 import { HistorialViajesPage } from './historial-viajes.page';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HistorialViajesPageRoutingModule
+    HistorialViajesPageRoutingModule,
+    MatPaginatorModule
   ],
   declarations: [HistorialViajesPage]
 })

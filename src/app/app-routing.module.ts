@@ -90,7 +90,11 @@ const routes: Routes = [
   {
     path: 'viajes-disponible',
     loadChildren: () => import('./pages/viajes-disponible/viajes-disponible.module').then( m => m.ViajesDisponiblePageModule)
+  },  {
+    path: 'solicitud-viaje',
+    loadChildren: () => import('./pages/solicitud-viaje/solicitud-viaje.module').then( m => m.SolicitudViajePageModule)
   },
+
 
 
 ];

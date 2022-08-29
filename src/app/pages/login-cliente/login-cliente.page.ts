@@ -15,7 +15,7 @@ export class LoginClientePage implements OnInit {
 
   validarpass(){
     if (this.user == "matias" && this.clave == "123") {
-      this.route.navigate(['/home-conductor']);
+      this.route.navigate(['/home']);
     }
     else {
       this.presentAlert();
