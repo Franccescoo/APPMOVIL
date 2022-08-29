@@ -3,3 +3,37 @@
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content >
+  <ion-list-header style="background-color: #e2e2e2; font-size: 15px;">
+    <ion-label>Opciones</ion-label>
+  </ion-list-header>
+
+  
+  <a [routerLink]="['/modificar-cliente']" style="text-decoration: none;" expand="block" >
+    <ion-item>
+      <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Modificar Perfil</ion-label>
+    </ion-item>
+  </a>
+    
+  <a [routerLink]="['/pago-cliente']" style="text-decoration: none;" expand="block" >
+    <ion-item >
+      <ion-label ><ion-icon name="chevron-forward-outline"></ion-icon>Pago</ion-label>
+    </ion-item> 
+  </a>
+    <ion-item>
+      <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Ayuda</ion-label>
+    </ion-item>
+
+    <a [routerLink]="['/ajustes-cliente']" style="text-decoration: none;" expand="block">
+      <ion-item>
+        <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Configuración</ion-label>
+      </ion-item>
+    </a>
+
+
+
+
+</ion-content>
+
+
