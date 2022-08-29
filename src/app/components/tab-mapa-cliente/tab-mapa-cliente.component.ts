@@ -37,6 +37,7 @@ export class TabMapaClienteComponent implements OnInit {
     if (ev.detail.role === 'confirm') {
     }
   }
+  
   ngOnInit(){
       this.loadMap();
   }

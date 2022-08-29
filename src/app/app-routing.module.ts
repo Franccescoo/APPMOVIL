@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-conductor',
+    redirectTo: 'login-cliente',
     pathMatch: 'full'
   },
   {
@@ -78,10 +78,15 @@ const routes: Routes = [
   {
     path: 'pago-cliente',
     loadChildren: () => import('./pages/pago-cliente/pago-cliente.module').then( m => m.PagoClientePageModule)
-  },  {
+  },
+  {
     path: 'home-conductor',
     loadChildren: () => import('./pages/home-conductor/home-conductor.module').then( m => m.HomeConductorPageModule)
+  },  {
+    path: 'historial-viajes',
+    loadChildren: () => import('./pages/historial-viajes/historial-viajes.module').then( m => m.HistorialViajesPageModule)
   },
+
 
 ];
 
