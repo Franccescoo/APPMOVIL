@@ -15,7 +15,7 @@ export class LoginConductorPage implements OnInit {
   clave: string ="";
 
   validarpass(){
-    if (this.user == "matias" && this.clave == "123") {
+    if (this.user == "matias@gmail.com" && this.clave == "12345") {
       this.route.navigate(['/home-conductor']);
     }
     else {
