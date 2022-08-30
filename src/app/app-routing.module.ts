@@ -116,7 +116,11 @@ const routes: Routes = [
   {
     path: 'escanearqr',
     loadChildren: () => import('./pages/escanearqr/escanearqr.module').then( m => m.EscanearqrPageModule)
+  },  {
+    path: 'fototelefono',
+    loadChildren: () => import('./pages/fototelefono/fototelefono.module').then( m => m.FototelefonoPageModule)
   },
+
 ];
 
 @NgModule({
