@@ -64,7 +64,7 @@
     <ion-item>
       <mat-icon slot="start">cancel</mat-icon>
       <ion-label style="font-size: 14px;">Finalizar Viaje</ion-label>
-      <ion-button fill="outline" slot="end" color="danger" [routerLink]="['/solicitud-viaje']">Finalizar</ion-button>
+      <ion-button (click)="presentAlert()" fill="outline" slot="end" color="danger" [routerLink]="['/home-conductor']">Finalizar</ion-button>
     </ion-item>
   
   </ion-card>
