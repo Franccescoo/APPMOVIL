@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-modificar-cliente',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modificar-cliente.page.scss'],
 })
 export class ModificarClientePage implements OnInit {
+
 
   constructor() { }
 
