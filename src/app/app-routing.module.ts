@@ -102,6 +102,7 @@ const routes: Routes = [
   {
     path: 'codigo-qr',
     loadChildren: () => import('./pages/codigo-qr/codigo-qr.module').then( m => m.CodigoQRPageModule)
+<<<<<<< Updated upstream
   },
   {
     path: 'qrconductor',
@@ -109,11 +110,19 @@ const routes: Routes = [
   },  {
     path: 'finalizar-viaje',
     loadChildren: () => import('./pages/finalizar-viaje/finalizar-viaje.module').then( m => m.FinalizarViajePageModule)
+=======
+  },  {
+    path: 'escanearqr',
+    loadChildren: () => import('./pages/escanearqr/escanearqr.module').then( m => m.EscanearqrPageModule)
+>>>>>>> Stashed changes
   },
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 ];
 
 @NgModule({
