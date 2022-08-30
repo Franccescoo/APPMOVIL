@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Codigo QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <img src="././assets/img/QR.png"  height= "350" width= "400">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Viaje:</ion-card-subtitle>
+      <ion-card-title>Escanea el código</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Una vez que escaneado el código haz click en el botón para continuar<br>
+    </ion-card-content>
+
+  <ion-item>
+    <ion-button color="success" fill="outline" [routerLink]="['/finalizar-viaje']" (click)="presentAlert()"  slot="start">Completado</ion-button>
+    <ion-button color="danger" fill="outline" [routerLink]="['/codigo-qr']" slot="end">Volver</ion-button>
+  </ion-item>
+  </ion-card>
+
+</ion-content>

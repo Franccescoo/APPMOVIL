@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="success">
-    <ion-title>Confirmar Viaje</ion-title>
+    <ion-title>Finalizar Viaje</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -56,15 +56,15 @@
 
     <ion-item>
       <span slot="start" class="material-icons">qr_code</span>
-      <ion-label style="font-size: 15px;">Codigo QR</ion-label>
+      <ion-label disabled="true" style="font-size: 15px;">Codigo QR</ion-label>
       <ion-button fill="outline" slot="end" [routerLink]="['/qrconductor']">Generar</ion-button>
     </ion-item>
 
 
     <ion-item>
       <mat-icon slot="start">cancel</mat-icon>
-      <ion-label style="font-size: 14px;">Cancelar Viaje</ion-label>
-      <ion-button fill="outline" slot="end" color="danger" [routerLink]="['/solicitud-viaje']">Cancelar</ion-button>
+      <ion-label style="font-size: 14px;">Finalizar Viaje</ion-label>
+      <ion-button fill="outline" slot="end" color="danger" [routerLink]="['/solicitud-viaje']">Finalizar</ion-button>
     </ion-item>
   
   </ion-card>

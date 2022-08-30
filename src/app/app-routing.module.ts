@@ -103,6 +103,15 @@ const routes: Routes = [
     path: 'codigo-qr',
     loadChildren: () => import('./pages/codigo-qr/codigo-qr.module').then( m => m.CodigoQRPageModule)
   },
+  {
+    path: 'qrconductor',
+    loadChildren: () => import('./pages/qrconductor/qrconductor.module').then( m => m.QRConductorPageModule)
+  },  {
+    path: 'finalizar-viaje',
+    loadChildren: () => import('./pages/finalizar-viaje/finalizar-viaje.module').then( m => m.FinalizarViajePageModule)
+  },
+
+
 
 
 ];
