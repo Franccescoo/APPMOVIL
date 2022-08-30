@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Confirmar Viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Nombre:</ion-card-subtitle>
+      <ion-card-title>Matias Peñaloza</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Desde : DuocUC Plaza Norte<br>
+        Hasta : Mall Plaza de Quilicura<br>
+        Acompañantes : Ninguno<br>
+        Celular : 979066489<br>
+    </ion-card-content>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>Ubicación aquí</ion-label>
+      <ion-button fill="outline" slot="end">Ver</ion-button>
+    </ion-item>
+    <ion-item>
+      <span slot="start" class="material-icons">qr_code</span>
+      <ion-label>Generar codigo QR</ion-label>
+      <ion-button fill="outline" slot="end">Generar</ion-button>
+    </ion-item>
+    <ion-item>
+      <mat-icon slot="start">cancel</mat-icon>
+      <ion-label>Cancelar Viaje</ion-label>
+      <ion-button fill="outline" slot="end" color="danger" [routerLink]="['/solicitud-viaje']">Cancelar</ion-button>
+    </ion-item>
+  
+  </ion-card>
+  
+</ion-content>

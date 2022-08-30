@@ -14,11 +14,11 @@
         <ion-label>Matias Peñaloza</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        Desde : Mall Plaza Norte<br>
+        Desde : DuocUC Plaza Norte<br>
         Hasta : Mall Plaza de Quilicura<br>
-        Vehiculo : 4 puertas<br>
-        Patente : YXS13512<br>
-        <ion-button (click)="presentAlert()">Tomar Viaje</ion-button>
+        Acompañantes : Ninguno<br>
+        Celular : 979066489<br>
+        <ion-button (click)="presentAlert()" [routerLink]="['/codigo-qr']">Aceptar Viaje ?</ion-button>
       </div>
     </ion-accordion>
     <ion-accordion value="second">
@@ -26,11 +26,11 @@
         <ion-label>David Carvajal</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        Desde : Mall Plaza Norte<br>
-        Hasta : Lampa<br>
-        Vehiculo : 2 puertas<br>
-        Patente : XAW1QA<br>
-        <ion-button (click)="presentAlert()">Tomar Viaje</ion-button>
+        Desde : DuocUC Plaza Norte<br>
+        Hasta : Mall Plaza de Quilicura<br>
+        Acompañantes : 2 Personas<br>
+        Celular : 974422165<br>
+        <ion-button (click)="presentAlert()" [routerLink]="['/codigo-qr']">Aceptar Viaje ?</ion-button>
       </div>
     </ion-accordion>
     <ion-accordion value="third">
@@ -38,12 +38,19 @@
         <ion-label>Franccesco Artuso</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        Desde : Mall Plaza Norte<br>
-        Hasta : Colina<br>
-        Vehiculo : 4 puertas<br>
-        Patente : PFS1YA11<br>
-        <ion-button (click)="presentAlert()">Tomar Viaje</ion-button>
+        Desde : DuocUC Plaza Norte<br>
+        Hasta : Mall Plaza de Quilicura<br>
+        Acompañantes : 1 Persona<br>
+        Celular : 963244565<br>
+        <ion-button (click)="presentAlert()" [routerLink]="['/codigo-qr']" >Aceptar Viaje ?</ion-button>
       </div>
     </ion-accordion>
   </ion-accordion-group>
 </ion-content>
+
+<mat-paginator [length]="100"
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 25, 100]"
+aria-label="Select page"
+style="background-color: #2dd36f;color: black;">
+</mat-paginator>

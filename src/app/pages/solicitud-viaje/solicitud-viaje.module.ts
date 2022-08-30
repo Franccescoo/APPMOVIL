@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { SolicitudViajePageRoutingModule } from './solicitud-viaje-routing.module';
 
 import { SolicitudViajePage } from './solicitud-viaje.page';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SolicitudViajePageRoutingModule
+    SolicitudViajePageRoutingModule,
+    MatPaginatorModule
   ],
   declarations: [SolicitudViajePage]
 })
