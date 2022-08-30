@@ -124,6 +124,10 @@ const routes: Routes = [
     path: 'finalizar-viaje-cliente',
     loadChildren: () => import('./pages/finalizar-viaje-cliente/finalizar-viaje-cliente.module').then( m => m.FinalizarViajeClientePageModule)
   },
+  {
+    path: 'pagarcliente',
+    loadChildren: () => import('./pages/pagarcliente/pagarcliente.module').then( m => m.PagarclientePageModule)
+  },
 
 ];
 
