@@ -98,7 +98,8 @@ const routes: Routes = [
   {
     path: 'ayuda-cliente',
     loadChildren: () => import('./pages/ayuda-cliente/ayuda-cliente.module').then( m => m.AyudaClientePageModule)
-  },  {
+  },
+  {
     path: 'codigo-qr',
     loadChildren: () => import('./pages/codigo-qr/codigo-qr.module').then( m => m.CodigoQRPageModule)
   },
