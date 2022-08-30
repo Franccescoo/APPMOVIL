@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="success">
-    <ion-title>Viaje seleccionado</ion-title>
+    <ion-title>Viaje Pagado</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,7 +8,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Nombre Conductor:</ion-card-subtitle>
+      <ion-card-subtitle>Nombre del conductor:</ion-card-subtitle>
       <ion-card-title>Matias Peñaloza</ion-card-title>
     </ion-card-header>
   
@@ -57,16 +57,15 @@
 
     <ion-item>
       <span slot="start" class="material-icons">qr_code</span>
-      <ion-label style="font-size: 15px;">Escanear Codigo QR</ion-label>
-      <ion-button fill="outline" slot="end"[routerLink]="['/fototelefono']" >Escanear</ion-button>
+      <ion-label style="font-size: 15px;">Codigo QR</ion-label>
+      <ion-button disabled="true"  fill="outline" slot="end" [routerLink]="['/qrconductor']">Generar</ion-button>
     </ion-item>
-    
 
 
     <ion-item>
       <mat-icon slot="start">cancel</mat-icon>
-      <ion-label style="font-size: 14px;">Cancelar Viaje</ion-label>
-      <ion-button fill="outline" slot="end" color="danger" [routerLink]="['/viajes-disponible']">Cancelar</ion-button>
+      <ion-label style="font-size: 14px;">Finalizar Viaje</ion-label>
+      <ion-button fill="outline" slot="end" color="danger" [routerLink]="['/viajes-disponible']">Finalizar</ion-button>
     </ion-item>
   
   </ion-card>

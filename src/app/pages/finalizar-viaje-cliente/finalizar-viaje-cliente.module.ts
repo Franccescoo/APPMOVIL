@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EscanearqrPageRoutingModule } from './escanearqr-routing.module';
+import { FinalizarViajeClientePageRoutingModule } from './finalizar-viaje-cliente-routing.module';
 
-import { EscanearqrPage } from './escanearqr.page';
+import { FinalizarViajeClientePage } from './finalizar-viaje-cliente.page';
 import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
@@ -14,9 +14,9 @@ import {MatIconModule} from '@angular/material/icon'
     CommonModule,
     FormsModule,
     IonicModule,
-    EscanearqrPageRoutingModule,
+    FinalizarViajeClientePageRoutingModule,
     MatIconModule
   ],
-  declarations: [EscanearqrPage]
+  declarations: [FinalizarViajeClientePage]
 })
-export class EscanearqrPageModule {}
+export class FinalizarViajeClientePageModule {}

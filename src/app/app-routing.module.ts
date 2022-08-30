@@ -120,6 +120,14 @@ const routes: Routes = [
     path: 'fototelefono',
     loadChildren: () => import('./pages/fototelefono/fototelefono.module').then( m => m.FototelefonoPageModule)
   },
+  {
+    path: 'finalizar-viaje-cliente',
+    loadChildren: () => import('./pages/finalizar-viaje-cliente/finalizar-viaje-cliente.module').then( m => m.FinalizarViajeClientePageModule)
+  },
+  {
+    path: 'pagarcliente',
+    loadChildren: () => import('./pages/pagarcliente/pagarcliente.module').then( m => m.PagarclientePageModule)
+  },
 
 ];
 
