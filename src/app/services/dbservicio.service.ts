@@ -17,18 +17,31 @@ import { ViajeComuna } from './viajecomuna';
 export class DbservicioService {
 //variable para guardar y manipular la BD
   public database: SQLiteObject;
+  
 //variables para crear tablas e insertar registros por defecto en tablas
-  tablaAuto:  string  = "CREATE TABLE IF NOT EXISTS Auto(patente VARCHAR(6) NOT NULL, color VARCHAR(20) NOT NULL, modelo VARCHAR(100) NOT NULL, annio INTEGER NOT NULL);";
-  tablaViaje: string = "CREATE TABLE IF NOT EXISTS Viaje(idViaje INTEGER PRIMARY KEY autoincrement, fechaViaje VARCHAR(20) NOT NULL, horaSalida INTEGER NOT NULL, asientos INTEGER NOT NULL, monto INTEGER NOT NULL);";
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS  ;";
-
-  tablaNoticias: string = "CREATE TABLE IF NOT EXISTS noticia(id_noticia INTEGER PRIMARY KEY autoincrement, titulo VARCHAR(50) NOT NULL, texto TEXT NOT NULL);";
+  tablaAuto:         string = "CREATE TABLE IF NOT EXISTS Auto(patente VARCHAR(6) NOT NULL, color VARCHAR(20) NOT NULL, modelo VARCHAR(100) NOT NULL, annio INTEGER NOT NULL);";
+  tablaViaje:        string = "CREATE TABLE IF NOT EXISTS viaje(id_viaje INTEGER PRIMARY KEY autoincrement, fechaViaje VARCHAR(20) NOT NULL, horaSalida INTEGER NOT NULL, asientos INTEGER NOT NULL, monto INTEGER NOT NULL);";
+  tablaUsuario:      string = "CREATE TABLE IF NOT EXISTS Usuario(idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL, apellido VARCHAR(100) NOT NULL, correo VARCHAR(100) NOT NULL, clave VARCHAR(100) NOT NULL);";
+  tablaViajeComuna:  string = "CREATE TABLE IF NOT EXISTS ViajeComuna(idViajeComuna INTEGER PRIMARY KEY autoincrement);";
+  tablaDetalleViaje: string = "CREATE TABLE IF NOT EXISTS DetalleViaje(idDetalle INTEGER PRIMARY KEY autoincrement, status VARCHAR(100) NOT NULL);";
+  tablaComuna:       string = "CREATE TABLE IF NOT EXISTS Comuna(idComuna INTEGER PRIMARY KEY autoincrement, nombreComuna VARCHAR(50) NOT NULL);";
+  tablaMarca:        string = "CREATE TABLE IF NOT EXISTS Marca(idMarca INTEGER PRIMARY KEY autoincrement, nombreMarca VARCHAR(50) NOT NULL);";
+  tablaRol:          string = "CREATE TABLE IF NO EXISTS Rol(idRol INTEGER PRIMARY KEY autoincrement, nombreRol VARCHAR(20) NOT NULL);";
 
 //Variable para insertar datos
-  registroNoticias: string ="INSERT INTO or IGNORE noticia(id_noticia,titulo,texto) VALUES(1,'Noticia del día','Hoy salio el sol, que tristeza existe en el ambiente');";
+ //  EJEMPLO registroNoticias: string ="INSERT INTO or IGNORE noticia(id_noticia,titulo,texto) VALUES(1,'Noticia del día','Hoy salio el sol, que tristeza existe en el ambiente');";
+
 //observable para manipular los registros de una tabla
-  listaNoticias = new BehaviorSubject([]);
-  //observable para validar si la BD esta disponible o no
+  listaAuto =         new BehaviorSubject([]);
+  listaUsuario =      new BehaviorSubject([]);
+  listaViajeCommuna = new BehaviorSubject([]);
+  listaViaje =        new BehaviorSubject([]);
+  listaRol =          new BehaviorSubject([]);
+  listaMarca =        new BehaviorSubject([]);
+  listaComuna =       new BehaviorSubject([]);
+  
+
+//observable para validar si la BD esta disponible o no
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
@@ -55,7 +68,7 @@ export class DbservicioService {
     this.platform.ready().then(()=>{
       //creación de la BD
       this.sqlite.create({
-        name: 'actividad.db',
+        name: 'miauto.db',
         location: 'default'
       }).then((db: SQLiteObject)=>{
         this.database = db;
@@ -72,12 +85,19 @@ export class DbservicioService {
   //método para crear tablas
   async crearTablas(){
     try{
-      await this.database.executeSql(this.tablaNoticias,[]);
-      await this.database.executeSql(this.registroNoticias,[]);
+      await this.database.executeSql(this.tablaViajeComuna,[]);
+      await this.database.executeSql(this.tablaAuto,[]);
+      await this.database.executeSql(this.tablaComuna,[]);
+      await this.database.executeSql(this.tablaDetalleViaje,[]);
+      await this.database.executeSql(this.tablaRol,[]);
+      await this.database.executeSql(this.tablaUsuario,[]);
+      await this.database.executeSql(this.tablaViaje,[]);
+      await this.database.executeSql(this.tablaMarca,[]);
+
       //puedo mostrar mensaje de tablas creadas
       this.presentAlert("Tablas Creadas","Creación de Tablas");
       //llamar a metodo para traer todos los registros de la tabla
-      this.buscarNoticias();
+      this.buscarViaje();
       //manipular observable de la bd lista
       this.isDBReady.next(true);
     }catch(e){
@@ -85,22 +105,24 @@ export class DbservicioService {
     }
   }
 
-  buscarNoticias(){
+  buscarViaje(){
     //realizamos la consulta a la BD
-    return this.database.executeSql('SELECT * FROM noticia',[]).then(res=>{
+    return this.database.executeSql('SELECT * FROM viaje',[]).then(res=>{
       //variable para guardar los registros en una coleccion de datos de la clase noticia
-      let items: Noticias[] = [];
+      let items: Viaje[] = [];
       if(res.rows.length > 0){
         for(var i=0; i < res.rows.length; i++){
           items.push({
-            id : res.rows.item(i).id_noticia,
-            titulo : res.rows.item(i).titulo,
-            texto : res.rows.item(i).texto
+            idViaje : res.rows.item(i).id_viaje,
+            fechaViaje : res.rows.item(i).fechaViaje,
+            horaSalida : res.rows.item(i).horaSalida,
+            asientos: res.rows.item(i).asientos,
+            monto: res.rows.item(i).monto
           });
-
+          
         }
       }
-      this.listaNoticias.next(items);
+      this.listaViaje.next(items);
 
     })
   }
@@ -109,30 +131,28 @@ export class DbservicioService {
     return this.isDBReady.asObservable();
   }
 
-  fetchNoticias(): Observable<Noticias[]>{
-    return this.listaNoticias.asObservable();
-
+  fetchNoticias(): Observable<Viaje[]>{
+    return this.listaViaje.asObservable();
   }
 
-  modificarNoticia(id,titulo_nuevo, texto_nuevo){
-    let data = [titulo_nuevo,texto_nuevo,id];
-    return this.database.executeSql('UPDATE noticia SET titulo = ?, texto = ? WHERE id = ?',data).then(data2 =>{
-      this.buscarNoticias();
+  //modificarNoticia(id,titulo_nuevo, texto_nuevo){
+  //  let data = [titulo_nuevo,texto_nuevo,id];
+  //  return this.database.executeSql('UPDATE noticia SET titulo = ?, texto = ? WHERE id = ?',data).then(data2 =>{
+  //    this.buscarNoticias();
+  //  })
+  //}
+
+  eliminarViaje(id){
+    return this.database.executeSql('DELETE FROM viaje  WHERE id_viaje = ?',[id]).then(a=>{
+      this.buscarViaje();
     })
 
   }
 
-  eliminarNoticia(id){
-    return this.database.executeSql('DELETE FROM noticia WHERE id = ?',[id]).then(a=>{
-      this.buscarNoticias();
-    })
-
-  }
-
-  agregarNoticias(titulo, texto){
-    let data = [titulo,texto];
-    return this.database.executeSql('INSERT INTO noticia(titulo,texto) VALUES(?,?)',data).then(res=>{
-      this.buscarNoticias();
+  agregarNoticias(fechaViaje, horaSalida,asientos,monto){
+    let data = [fechaViaje,horaSalida,asientos,monto];
+    return this.database.executeSql('INSERT INTO viaje(fechaViaje,horaSalida,asientos,monto) VALUES(?,?,?,?)',data).then(res=>{
+      this.buscarViaje ();
     });
 
   }
