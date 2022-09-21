@@ -18,6 +18,10 @@ export class DbservicioService {
 //variable para guardar y manipular la BD
   public database: SQLiteObject;
 //variables para crear tablas e insertar registros por defecto en tablas
+  tablaAuto:  string  = "CREATE TABLE IF NOT EXISTS Auto(patente VARCHAR(6) NOT NULL, color VARCHAR(20) NOT NULL, modelo VARCHAR(100) NOT NULL, annio INTEGER NOT NULL);";
+  tablaViaje: string = "CREATE TABLE IF NOT EXISTS Viaje(idViaje INTEGER PRIMARY KEY autoincrement, fechaViaje VARCHAR(20) NOT NULL, horaSalida INTEGER NOT NULL, asientos INTEGER NOT NULL, monto INTEGER NOT NULL);";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS  ;";
+
   tablaNoticias: string = "CREATE TABLE IF NOT EXISTS noticia(id_noticia INTEGER PRIMARY KEY autoincrement, titulo VARCHAR(50) NOT NULL, texto TEXT NOT NULL);";
 
 //Variable para insertar datos
