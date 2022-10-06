@@ -131,7 +131,7 @@ export class DbservicioService {
     return this.isDBReady.asObservable();
   }
 
-  fetchNoticias(): Observable<Viaje[]>{
+  fetchViaje(): Observable<Viaje[]>{
     return this.listaViaje.asObservable();
   }
 
@@ -149,7 +149,7 @@ export class DbservicioService {
 
   }
 
-  agregarNoticias(fechaViaje, horaSalida,asientos,monto){
+  agregarViaje(fechaViaje, horaSalida,asientos,monto){
     let data = [fechaViaje,horaSalida,asientos,monto];
     return this.database.executeSql('INSERT INTO viaje(fechaViaje,horaSalida,asientos,monto) VALUES(?,?,?,?)',data).then(res=>{
       this.buscarViaje ();
