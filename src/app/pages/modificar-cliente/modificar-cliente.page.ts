@@ -11,19 +11,12 @@ export class ModificarClientePage implements OnInit {
 
 
   constructor(private api: ApiService) {
-    this.subsUser(id);
    }
 
   ngOnInit() {
   }
 
-  subsUser(id){
-    this.api.getUser(id).subscribe((res) =>{
-      if (res){
-        this.listaUsuarios = res;
-      }
-    })
-  }
+  su
 
 
 
