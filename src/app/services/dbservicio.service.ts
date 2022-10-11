@@ -126,6 +126,25 @@ export class DbservicioService {
 
     })
   }
+  buscarComuna(){
+    //realizamos la consulta a la BD
+    return this.database.executeSql('SELECT * FROM comuna',[]).then(res=>{
+      //variable para guardar los registros en una coleccion de datos de la clase noticia
+      let items: Comuna[] = [];
+      if(res.rows.length > 0){
+        for(var i=0; i < res.rows.length; i++){
+          items.push({
+            idComuna : res.rows.item(i).id_comuna,
+            nombreComuna : res.rows.item(i).nombreComuna
+          });
+          
+        }
+      }
+      this.listaViaje.next(items);
+
+    })
+  }
+  
 
   dbState(){
     return this.isDBReady.asObservable();
@@ -133,6 +152,9 @@ export class DbservicioService {
 
   fetchViaje(): Observable<Viaje[]>{
     return this.listaViaje.asObservable();
+  }
+  fetchComuna(): Observable<Comuna[]>{
+    return this.listaComuna.asObservable();
   }
 
   //modificarNoticia(id,titulo_nuevo, texto_nuevo){
@@ -148,11 +170,24 @@ export class DbservicioService {
     })
 
   }
+  eliminarComuna(id){
+    return this.database.executeSql('DELETE FROM comuna  WHERE id_viaje = ?',[id]).then(a=>{
+      this.buscarComuna();
+    })
+
+  }
 
   agregarViaje(fechaViaje, horaSalida,asientos,monto){
     let data = [fechaViaje,horaSalida,asientos,monto];
     return this.database.executeSql('INSERT INTO viaje(fechaViaje,horaSalida,asientos,monto) VALUES(?,?,?,?)',data).then(res=>{
       this.buscarViaje ();
+    });
+
+  }
+  agregarComuna(id_comuna, nombreComuna){
+    let data = [id_comuna,nombreComuna];
+    return this.database.executeSql('INSERT INTO comuna(idcomuna,nombrecomuna) VALUES(?,?,)',data).then(res=>{
+      this.buscarComuna ();
     });
 
   }
