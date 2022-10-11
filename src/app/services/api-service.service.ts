@@ -20,27 +20,27 @@ export class ApiService {
   // Se declara la variable http de tipo HttpClient
   constructor(private http: HttpClient) { }
 
-  getPosts(): Observable<any> {
-    return this.http.get(this.apiURL + '/posts/').pipe(
+  getAutos(): Observable<any> {
+    return this.http.get(this.apiURL + '/autos/').pipe(
       retry(3)
     );
   }
 
   createPost(post): Observable<any> {
-    return this.http.post(this.apiURL + '/posts', post, this.httpOptions)
+    return this.http.post(this.apiURL + '/autos', post, this.httpOptions)
       .pipe(
         retry(3)
       );
   }
 
-  updatePost(id, post): Observable<any> {
-    return this.http.put(this.apiURL + '/posts/' + id, post, this.httpOptions).
+  updateAutos(id, post): Observable<any> {
+    return this.http.put(this.apiURL + '/autos/' + id, post, this.httpOptions).
       pipe(retry(3));
   }
 
 
-  deletePost(id):Observable<any>{
-    return this.http.delete(this.apiURL+'/posts/'+id,this.httpOptions);
+  deleteAutos(id):Observable<any>{
+    return this.http.delete(this.apiURL+'/autos/'+id,this.httpOptions);
     }
 
 

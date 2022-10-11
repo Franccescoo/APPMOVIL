@@ -19,7 +19,7 @@ export class DbservicioService {
   public database: SQLiteObject;
   
 //variables para crear tablas e insertar registros por defecto en tablas
-  tablaAuto:         string = "CREATE TABLE IF NOT EXISTS Auto(patente VARCHAR(6) NOT NULL, color VARCHAR(20) NOT NULL, modelo VARCHAR(100) NOT NULL, annio INTEGER NOT NULL);";
+  tablaAuto:         string = "CREATE TABLE IF NOT EXISTS Auto(patente VARCHAR(10) NOT NULL, color VARCHAR(20) NOT NULL, modelo VARCHAR(100) NOT NULL, annio INTEGER NOT NULL);";
   tablaViaje:        string = "CREATE TABLE IF NOT EXISTS viaje(id_viaje INTEGER PRIMARY KEY autoincrement, fechaViaje VARCHAR(20) NOT NULL, horaSalida INTEGER NOT NULL, asientos INTEGER NOT NULL, monto INTEGER NOT NULL);";
   tablaUsuario:      string = "CREATE TABLE IF NOT EXISTS Usuario(idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL, apellido VARCHAR(100) NOT NULL, correo VARCHAR(100) NOT NULL, clave VARCHAR(100) NOT NULL);";
   tablaViajeComuna:  string = "CREATE TABLE IF NOT EXISTS ViajeComuna(idViajeComuna INTEGER PRIMARY KEY autoincrement);";
