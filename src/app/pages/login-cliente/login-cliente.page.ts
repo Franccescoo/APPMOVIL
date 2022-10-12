@@ -26,16 +26,18 @@ export class LoginClientePage implements OnInit {
     }
   }
 
-  constructor(private alertController: AlertController, private route: Router, private api: Apiservices2Service, private bd: DbservicioService) { }
+  constructor(private alertController: AlertController, private route: Router, private api: Apiservices2Service, private bd: DbservicioService) {
+
+    this.bd.agregarUsuario(this.usuario.id,this.usuario.nombre,this.usuario.apellido,this.usuario.clave,this.usuario.rol);
+   }
   ngOnInit() {
-    this.api.getUsers().subscribe((res) => {
+    this.bd.dbState().subscribe((res) => {
       if (res) {
-        this.usuario = res;
-
-
-
+        this.bd.fetchUsuario().subscribe((item)=> {
+          this.usuario = item;
+        })
       }
-    })
+    });
   }
 
 
@@ -50,4 +52,12 @@ export class LoginClientePage implements OnInit {
 
     await alert.present();
   }
+
+
+
+
+
+
+
+  
 }
