@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core';
+import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
 
 
 declare let google;
@@ -19,9 +20,35 @@ interface Marker {
 })
 export class TabMapaClienteComponent implements OnInit {
   map: any;
+  locationService: any;
+  latitude: any;
+  longitude: any;
+
+  constructor(public geolocation: Geolocation) { }
+
+  ngAfterViewInit() {
+    this.geolocationNative();
+  }
+
   ngOnInit(){
       this.loadMap();
+      
   }
+
+  geolocationNative() {
+    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+
+      console.log(geposition);
+    })
+  }
+
+  Coord(pos){
+      var lng = pos.coords.longitude;
+      var lat = pos.coords.latitude;
+      const msg = 'You appear to be at longitude: ' + lng + ' and latitude: ' + lat;
+
+    }
+ 
 
   loadMap() {
     // create a new map by passing HTMLElement
@@ -54,5 +81,6 @@ export class TabMapaClienteComponent implements OnInit {
       title: marker.title
     });
   }
+  
 }
 
