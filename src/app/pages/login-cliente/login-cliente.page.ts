@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { ApiService } from 'src/app/services/api-service.service';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login-cliente.page.scss'],
 })
 export class LoginClientePage implements OnInit {
+  usuario: any;
 
   user: string = "";
   clave: string ="";
@@ -22,7 +24,7 @@ export class LoginClientePage implements OnInit {
     }
   }
 
-  constructor(private alertController: AlertController,private route:Router) {}
+  constructor(private alertController: AlertController,private route:Router,private api: ApiService) {}
   ngOnInit() {
   }
 
@@ -37,5 +39,13 @@ export class LoginClientePage implements OnInit {
 
     await alert.present();
 
+}
+subsUser(id){
+  this.api.getUser(id).subscribe((res)=>{
+    if (res){
+      this.usuario = res;
+      
+    }
+  })
 }
 }

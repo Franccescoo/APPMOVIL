@@ -126,6 +126,27 @@ export class DbservicioService {
 
     })
   }
+  buscarUsuario(){
+    //realizamos la consulta a la BD
+    return this.database.executeSql('SELECT * FROM usuario',[]).then(res=>{
+      //variable para guardar los registros en una coleccion de datos de la clase noticia
+      let items: Usuario[] = [];
+      if(res.rows.length > 0){
+        for(var i=0; i < res.rows.length; i++){
+          items.push({
+            idUsuario : res.rows.item(i).id_usuario,
+            nombre : res.rows.item(i).nombre,
+            apellido : res.rows.item(i).apellido,
+            correo: res.rows.item(i).correo,
+            clave: res.rows.item(i).clave
+          });
+          
+        }
+      }
+      this.listaViaje.next(items);
+
+    })
+  }
   buscarComuna(){
     //realizamos la consulta a la BD
     return this.database.executeSql('SELECT * FROM comuna',[]).then(res=>{
@@ -180,6 +201,14 @@ export class DbservicioService {
   agregarViaje(fechaViaje, horaSalida,asientos,monto){
     let data = [fechaViaje,horaSalida,asientos,monto];
     return this.database.executeSql('INSERT INTO viaje(fechaViaje,horaSalida,asientos,monto) VALUES(?,?,?,?)',data).then(res=>{
+      this.buscarViaje ();
+    });
+
+  }
+//idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL, apellido VARCHAR(100) NOT NULL, correo VARCHAR(100) NOT NULL, clave VARCHAR(100) NOT NULL)
+  agregarUsuario(idUsuario, nombre,apellido,correo,clave){
+    let data = [idUsuario, nombre,apellido,correo,clave];
+    return this.database.executeSql('INSERT INTO viaje(idUsuario, nombre,apellido,correo,clave) VALUES(?,?,?,?,?)',data).then(res=>{
       this.buscarViaje ();
     });
 
