@@ -200,12 +200,15 @@ export class DbservicioService {
   fetchComuna(): Observable<Comuna[]>{
     return this.listaComuna.asObservable();
   }
+  fetchUsuario(): Observable<Usuario[]>{
+    return this.listaUsuario.asObservable();
+  } 
 
   //modificarNoticia(id,titulo_nuevo, texto_nuevo){
   //  let data = [titulo_nuevo,texto_nuevo,id];
   //  return this.database.executeSql('UPDATE noticia SET titulo = ?, texto = ? WHERE id = ?',data).then(data2 =>{
   //    this.buscarNoticias();
-  //  })
+  //})
   //}
 
   eliminarViaje(id){
