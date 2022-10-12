@@ -98,6 +98,16 @@ export class DbservicioService {
   //método para crear tablas
   async crearTablas(){
     try{
+      await this.database.executeSql(this.TablaComuna1,[])
+      await this.database.executeSql(this.TablaComuna2,[])
+      await this.database.executeSql(this.TablaComuna3,[])
+      await this.database.executeSql(this.TablaComuna4,[])
+      await this.database.executeSql(this.TablaComuna5,[])
+      await this.database.executeSql(this.TablaComuna6,[])
+      await this.database.executeSql(this.TablaComuna7,[])
+      await this.database.executeSql(this.tablaRolCon,[])
+      await this.database.executeSql(this.tablaRolPas,[])
+
       await this.database.executeSql(this.tablaViajeComuna,[]);
       await this.database.executeSql(this.tablaAuto,[]);
       await this.database.executeSql(this.tablaComuna,[]);
