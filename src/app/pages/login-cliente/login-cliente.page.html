@@ -9,14 +9,14 @@
   <ion-grid>
     <ion-row style="border: black 2px solid; border-radius: 20px;">
       <ion-col size="2"><ion-icon style="text-align: center; padding-top: 7px; padding-left: 10px; font-size: 25px;" name="mail-outline"></ion-icon></ion-col>
-      <ion-col size="10"><ion-input [(ngModel)]="user" id="user"type="text" placeholder="Correo Electronico" style="float: left; border-left: black 1px solid;"></ion-input></ion-col>
+      <ion-col size="10"><ion-input [(ngModel)]="usuario.nombre" id="user"type="text" placeholder="Correo Electronico" style="float: left; border-left: black 1px solid;"></ion-input></ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-grid>
     <ion-row style="border: black 2px solid; border-radius: 20px;">
       <ion-col size="2"><ion-icon style="text-align: center; padding-top: 7px; padding-left: 10px; font-size: 25px;" name="lock-closed-outline"></ion-icon></ion-col>
-      <ion-col size="10"><ion-input [(ngModel)]="clave" id="clave" type="password" placeholder="Contraseña" style="float: left; border-left: black 1px solid;"></ion-input></ion-col>
+      <ion-col size="10"><ion-input [(ngModel)]="usuario.clave" id="clave" type="password" placeholder="Contraseña" style="float: left; border-left: black 1px solid;"></ion-input></ion-col>
     </ion-row>
   </ion-grid>  
 

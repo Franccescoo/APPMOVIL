@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { ApiService } from 'src/app/services/api-service.service';
+import { Apiservices2Service } from 'src/app/services/apiservices2.service';
+
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 
@@ -25,7 +26,7 @@ export class LoginClientePage implements OnInit {
     }
   }
 
-  constructor(private alertController: AlertController,private route:Router,private api: ApiService, private bd: DbservicioService) {}
+  constructor(private alertController: AlertController,private route:Router,private api: Apiservices2Service, private bd: DbservicioService) {}
   ngOnInit() {
   }
 
