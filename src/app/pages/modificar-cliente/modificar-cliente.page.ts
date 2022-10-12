@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api-service.service';
+
 
 @Component({
   selector: 'app-modificar-cliente',
@@ -10,7 +10,7 @@ export class ModificarClientePage implements OnInit {
   listaUsuarios: any;
 
 
-  constructor(private api: ApiService) {
+  constructor() {
    }
 
   ngOnInit() {

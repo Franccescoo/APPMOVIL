@@ -15,10 +15,10 @@ export class LoginClientePage implements OnInit {
   usuario: any;
 
   user: string = "";
-  clave: string ="";
+  clave: string = "";
 
-  validarpass(){
-    if (this.user == "victor@gmail.com" && this.clave == "12345") {
+  validarpass() {
+    if (this.usuario.nombre == this.user && this.usuario.clave == this.clave) {
       this.route.navigate(['/home']);
     }
     else {
@@ -26,9 +26,18 @@ export class LoginClientePage implements OnInit {
     }
   }
 
-  constructor(private alertController: AlertController,private route:Router,private api: Apiservices2Service, private bd: DbservicioService) {}
+  constructor(private alertController: AlertController, private route: Router, private api: Apiservices2Service, private bd: DbservicioService) { }
   ngOnInit() {
+    this.api.getUsers().subscribe((res) => {
+      if (res) {
+        this.usuario = res;
+
+
+
+      }
+    })
   }
+
 
 
   async presentAlert() {
@@ -40,16 +49,5 @@ export class LoginClientePage implements OnInit {
     });
 
     await alert.present();
-
-}
-subsUser(){
-  this.api.getUsers().subscribe((res)=>{
-    if (res){
-      this.usuario = res;
-      this.bd.agregarUsuario(this.usuario.id,this.usuario.nombre,this.usuario.clave,this.usuario.correo,this.usuario.id_rol);
-
-      
-    }
-  })
-}
+  }
 }
