@@ -13,6 +13,10 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class LoginClientePage implements OnInit {
   usuario: any;
+  login: any = {
+    nombre:'',
+    Contra:''
+  };
 
   user: string = "";
   clave: string = "";
@@ -28,7 +32,7 @@ export class LoginClientePage implements OnInit {
 
   constructor(private alertController: AlertController, private route: Router, private api: Apiservices2Service, private bd: DbservicioService) {
 
-    this.bd.agregarUsuario(this.usuario.id,this.usuario.nombre,this.usuario.apellido,this.usuario.clave,this.usuario.rol);
+    this.subsUsuario();
    }
   ngOnInit() {
     this.bd.dbState().subscribe((res) => {
@@ -54,7 +58,14 @@ export class LoginClientePage implements OnInit {
   }
 
 
-
+  subsUsuario(){
+    this.api.getUsers().subscribe((res)=>{
+      if(res){
+        this.usuario = res;
+        this.bd.agregarUsuario(this.usuario.id,this.usuario.nombre,this.usuario.clave,this.usuario.idRol);
+      }
+    })
+  }
 
 
 

@@ -20,7 +20,7 @@ export class DbservicioService {
 //variables para crear tablas e insertar registros por defecto en tablas
   tablaAuto:         string = "CREATE TABLE IF NOT EXISTS Auto(patente VARCHAR(10) NOT NULL, color VARCHAR(20) NOT NULL, modelo VARCHAR(100) NOT NULL, annio INTEGER NOT NULL);";
   tablaViaje:        string = "CREATE TABLE IF NOT EXISTS viaje(id_viaje INTEGER PRIMARY KEY autoincrement, fechaViaje VARCHAR(20) NOT NULL, horaSalida INTEGER NOT NULL, asientos INTEGER NOT NULL, monto INTEGER NOT NULL);";
-  tablaUsuario:      string = "CREATE TABLE IF NOT EXISTS Usuario(idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL, apellido VARCHAR(100) NOT NULL, correo VARCHAR(100) NOT NULL, clave VARCHAR(100) NOT NULL);";
+  tablaUsuario:      string = "CREATE TABLE IF NOT EXISTS Usuario(idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL,clave VARCHAR(100) NOT NULL,FK_ID_ROL, FOREING KEY(FK_ID_ROL) REFERENCE Rol(idRol);";
   tablaViajeComuna:  string = "CREATE TABLE IF NOT EXISTS ViajeComuna(idViajeComuna INTEGER PRIMARY KEY autoincrement);";
   tablaDetalleViaje: string = "CREATE TABLE IF NOT EXISTS DetalleViaje(idDetalle INTEGER PRIMARY KEY autoincrement, status VARCHAR(100) NOT NULL);";
   tablaComuna:       string = "CREATE TABLE IF NOT EXISTS Comuna(idComuna INTEGER PRIMARY KEY autoincrement, nombreComuna VARCHAR(50) NOT NULL);";
@@ -58,7 +58,7 @@ export class DbservicioService {
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
-  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController) {
+  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController,public storage: Storage) {
     this.crearBD();
    }
 
@@ -159,9 +159,7 @@ export class DbservicioService {
           items.push({
             idUsuario : res.rows.item(i).id_usuario,
             nombre : res.rows.item(i).nombre,
-            apellido : res.rows.item(i).apellido,
-            correo: res.rows.item(i).correo,
-            clave: res.rows.item(i).clave
+            clave: res.rows.item(i).clave,
           });
           
         }
@@ -232,9 +230,9 @@ export class DbservicioService {
 
   }
 //idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL, apellido VARCHAR(100) NOT NULL, correo VARCHAR(100) NOT NULL, clave VARCHAR(100) NOT NULL)
-  agregarUsuario(idUsuario, nombre,apellido,correo,clave){
-    let data = [idUsuario, nombre,apellido,correo,clave];
-    return this.database.executeSql('INSERT INTO viaje(idUsuario, nombre,apellido,correo,clave) VALUES(?,?,?,?,?)',data).then(res=>{
+  agregarUsuario(idUsuario, nombre,clave,Rol){
+    let data = [idUsuario, nombre,clave,Rol];
+    return this.database.executeSql('INSERT INTO viaje(idUsuario, nombre,clave,FK_ID_ROL) VALUES(?,?,?,?)',data).then(res=>{
       this.buscarViaje ();
     });
 
@@ -245,6 +243,33 @@ export class DbservicioService {
       this.buscarComuna ();
     });
 
+  }
+  login(nombre, clave) {
+    let log = [nombre, clave]
+    return this.database.executeSql("SELECT * FROM usuario WHERE nombre=? AND clave=?", [log[0], log[1]])
+      .then(res => {
+        let items: Usuario[] = [];
+        if (res.rows.length > 0) {
+          for (var i = 0; i < res.rows.length; i++) {
+            items.push({
+              idUsuario: res.rows.item(i).id,
+              nombre: res.rows.item(i).nombre,
+              clave: res.rows.item(i).clave,
+            });
+
+          }
+          this.storage.set('logeado', nombre)
+          this.storage.get('logeado')
+
+
+          return true;
+        }
+
+
+        else {
+          return false;
+        }
+      })
   }
 
 }

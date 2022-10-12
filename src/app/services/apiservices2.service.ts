@@ -15,7 +15,7 @@ export class Apiservices2Service {
     })
   }
   // Se establece la base url del API a consumir
-  apiURL = 'https://jsonplaceholder.typicode.com';
+  apiURL = 'https://my-json-server.typicode.com/victorrosendo/repoUsuariosRamos';
   // Se declara la variable http de tipo HttpClient
   constructor(private http: HttpClient) { }
 
