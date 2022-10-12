@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Auto } from './auto';
 import { Comuna } from './comuna';
 import { DetalleViaje } from './detalleviaje';
-import { Marca } from './marca';
 import { Rol } from './rol';
 import { Usuario } from './usuario';
 import { Viaje } from './viaje';
@@ -25,11 +24,25 @@ export class DbservicioService {
   tablaViajeComuna:  string = "CREATE TABLE IF NOT EXISTS ViajeComuna(idViajeComuna INTEGER PRIMARY KEY autoincrement);";
   tablaDetalleViaje: string = "CREATE TABLE IF NOT EXISTS DetalleViaje(idDetalle INTEGER PRIMARY KEY autoincrement, status VARCHAR(100) NOT NULL);";
   tablaComuna:       string = "CREATE TABLE IF NOT EXISTS Comuna(idComuna INTEGER PRIMARY KEY autoincrement, nombreComuna VARCHAR(50) NOT NULL);";
-  tablaMarca:        string = "CREATE TABLE IF NOT EXISTS Marca(idMarca INTEGER PRIMARY KEY autoincrement, nombreMarca VARCHAR(50) NOT NULL);";
+
   tablaRol:          string = "CREATE TABLE IF NO EXISTS Rol(idRol INTEGER PRIMARY KEY autoincrement, nombreRol VARCHAR(20) NOT NULL);";
 
 //Variable para insertar datos
  //  EJEMPLO registroNoticias: string ="INSERT INTO or IGNORE noticia(id_noticia,titulo,texto) VALUES(1,'Noticia del día','Hoy salio el sol, que tristeza existe en el ambiente');";
+
+ tablaRolCon: string ="INSERT INTO or IGNORE Rol(idRol, nombreRol) VALUES (1, 'Conductor');";
+ tablaRolPas: string = "INSERT INTO or IGNORE Rol(idRol, nombreRol) VALUES (2, 'Pasajero');";
+
+
+
+ TablaComuna1: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (1, 'Quilicura');";
+ TablaComuna2: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (2, 'Conchali');";
+ TablaComuna3: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (3, 'Huechuraba');";
+ TablaComuna4: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (4, 'Las Condes');";
+ TablaComuna5: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (5, 'La Cisterna');";
+ TablaComuna6: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (6, 'Recoleta');";
+ TablaComuna7: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (7, 'Independencia');";
+
 
 //observable para manipular los registros de una tabla
   listaAuto =         new BehaviorSubject([]);
@@ -92,7 +105,7 @@ export class DbservicioService {
       await this.database.executeSql(this.tablaRol,[]);
       await this.database.executeSql(this.tablaUsuario,[]);
       await this.database.executeSql(this.tablaViaje,[]);
-      await this.database.executeSql(this.tablaMarca,[]);
+
 
       //puedo mostrar mensaje de tablas creadas
       this.presentAlert("Tablas Creadas","Creación de Tablas");

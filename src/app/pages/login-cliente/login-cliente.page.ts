@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api-service.service';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class LoginClientePage implements OnInit {
     }
   }
 
-  constructor(private alertController: AlertController,private route:Router,private api: ApiService) {}
+  constructor(private alertController: AlertController,private route:Router,private api: ApiService, private bd: DbservicioService) {}
   ngOnInit() {
   }
 
@@ -40,10 +41,12 @@ export class LoginClientePage implements OnInit {
     await alert.present();
 
 }
-subsUser(id){
-  this.api.getUser(id).subscribe((res)=>{
+subsUser(){
+  this.api.getUsers().subscribe((res)=>{
     if (res){
       this.usuario = res;
+      this.bd.agregarUsuario(this.usuario.id,this.usuario.nombre,this.usuario.clave,this.usuario.correo,this.usuario.id_rol);
+
       
     }
   })
