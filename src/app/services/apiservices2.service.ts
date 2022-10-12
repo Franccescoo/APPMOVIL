@@ -3,12 +3,11 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from
   '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
-
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class Apiservices2Service {
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -55,4 +54,4 @@ export class ApiService {
       retry(3)
     );
   }
-} 
+}
