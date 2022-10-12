@@ -9,6 +9,7 @@ import { TabInicioClienteComponent } from '../components/tab-inicio-cliente/tab-
 import { TabMapaClienteComponent } from '../components/tab-mapa-cliente/tab-mapa-cliente.component';
 import { TabPerfilClienteComponent } from '../components/tab-perfil-cliente/tab-perfil-cliente.component';
 
+
 @NgModule({
   imports: [
     CommonModule,

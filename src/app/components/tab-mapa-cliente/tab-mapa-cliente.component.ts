@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core';
+import { Component, OnInit } from '@angular/core';
 import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
+import { ToastController } from '@ionic/angular';
 
 
 declare let google;
@@ -21,10 +20,10 @@ interface Marker {
 export class TabMapaClienteComponent implements OnInit {
   map: any;
   locationService: any;
-  latitude: any;
-  longitude: any;
+  public latitude;
+  public longitude;
 
-  constructor(public geolocation: Geolocation) { }
+  constructor(public geolocation: Geolocation,public toastController: ToastController) { }
 
   ngAfterViewInit() {
     this.geolocationNative();
@@ -37,18 +36,20 @@ export class TabMapaClienteComponent implements OnInit {
 
   geolocationNative() {
     this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+      this.latitude = geposition.coords.latitude
+      this.longitude = geposition.coords.longitude
 
       console.log(geposition);
     })
   }
 
-  Coord(pos){
-      var lng = pos.coords.longitude;
-      var lat = pos.coords.latitude;
-      const msg = 'You appear to be at longitude: ' + lng + ' and latitude: ' + lat;
-
-    }
- 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Tus coordenadas son: lat ' + this.latitude + ' y lng: ' + this.longitude,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   loadMap() {
     // create a new map by passing HTMLElement
@@ -61,14 +62,21 @@ export class TabMapaClienteComponent implements OnInit {
       zoom: 13
     });
 
+    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+      this.latitude = geposition.coords.latitude
+      this.longitude = geposition.coords.longitude
+
+      console.log(geposition);
+    })
+
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
       const market = {
         position: {
-          lat: -33.36326318588252,
-          lng: -70.67801166481883,
+          lat: this.latitude,
+          lng: this.longitude
         },
-        title: 'Duoc UC: Sede Plaza Norte'
+        title: 'Tu ubicación'
       };
       this.addMarker(market);
     });

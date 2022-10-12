@@ -11,11 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, Camera, Geolocation],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, Camera, Geolocation, NativeStorage],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
