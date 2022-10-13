@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Auto } from './auto';
 import { Comuna } from './comuna';
@@ -58,7 +58,7 @@ export class DbservicioService {
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
-  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController,public storage: Storage) {
+  constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController,private toastController: ToastController) {
     this.crearBD();
    }
 
@@ -107,7 +107,6 @@ export class DbservicioService {
       await this.database.executeSql(this.TablaComuna7,[])
       await this.database.executeSql(this.tablaRolCon,[])
       await this.database.executeSql(this.tablaRolPas,[])
-
       await this.database.executeSql(this.tablaViajeComuna,[]);
       await this.database.executeSql(this.tablaAuto,[]);
       await this.database.executeSql(this.tablaComuna,[]);
@@ -115,16 +114,19 @@ export class DbservicioService {
       await this.database.executeSql(this.tablaRol,[]);
       await this.database.executeSql(this.tablaUsuario,[]);
       await this.database.executeSql(this.tablaViaje,[]);
+    
 
 
       //puedo mostrar mensaje de tablas creadas
       this.presentAlert("Tablas Creadas","Creación de Tablas");
       //llamar a metodo para traer todos los registros de la tabla
       this.buscarViaje();
+      this.buscarUsuario();
+      this.buscarComuna();
       //manipular observable de la bd lista
       this.isDBReady.next(true);
     }catch(e){
-      this.presentAlert(e,"Creación de Tablas");
+      this.presentAlert("Error al crear base de datos",e);
     }
   }
 
@@ -164,7 +166,7 @@ export class DbservicioService {
           
         }
       }
-      this.listaViaje.next(items);
+      this.listaUsuario.next(items);
 
     })
   }
@@ -182,7 +184,7 @@ export class DbservicioService {
           
         }
       }
-      this.listaViaje.next(items);
+      this.listaComuna.next(items);
 
     })
   }
@@ -233,7 +235,7 @@ export class DbservicioService {
   agregarUsuario(idUsuario, nombre,clave,Rol){
     let data = [idUsuario, nombre,clave,Rol];
     return this.database.executeSql('INSERT INTO viaje(idUsuario, nombre,clave,FK_ID_ROL) VALUES(?,?,?,?)',data).then(res=>{
-      this.buscarViaje ();
+      this.buscarUsuario ();
     });
 
   }
@@ -258,8 +260,7 @@ export class DbservicioService {
             });
 
           }
-          this.storage.set('logeado', nombre)
-          this.storage.get('logeado')
+          
 
 
           return true;
@@ -270,6 +271,14 @@ export class DbservicioService {
           return false;
         }
       })
+  }
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+
+    });
+    toast.present();
   }
 
 }
