@@ -17,12 +17,14 @@ import { ViajeComuna } from './viajecomuna';
 export class DbservicioService {
 //variable para guardar y manipular la BD
   public database: SQLiteObject;
+  //observable para validar si la BD esta disponible o no
+  private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   
 //variables para crear tablas e insertar registros por defecto en tablas
   //tablaAuto:         string = "CREATE TABLE IF NOT EXISTS Auto(patente VARCHAR(10) NOT NULL, color VARCHAR(20) NOT NULL, modelo VARCHAR(100) NOT NULL, annio INTEGER NOT NULL);";
   //tablaViaje:        string = "CREATE TABLE IF NOT EXISTS viaje(id_viaje INTEGER PRIMARY KEY autoincrement, fechaViaje VARCHAR(20) NOT NULL, horaSalida INTEGER NOT NULL, asientos INTEGER NOT NULL, monto INTEGER NOT NULL);";
-  tablaUsuario:      string = "CREATE TABLE IF NOT EXISTS Usuario(idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL,clave VARCHAR(100) NOT NULL;";
+  tablaUsuario:      string = "CREATE TABLE IF NOT EXISTS Usuario(idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(100) NOT NULL,clave VARCHAR(100) NOT NULL);";
   // tablaViajeComuna:  string = "CREATE TABLE IF NOT EXISTS ViajeComuna(idViajeComuna INTEGER PRIMARY KEY autoincrement);";
   // tablaDetalleViaje: string = "CREATE TABLE IF NOT EXISTS DetalleViaje(idDetalle INTEGER PRIMARY KEY autoincrement, status VARCHAR(100) NOT NULL);";
   // tablaComuna:       string = "CREATE TABLE IF NOT EXISTS Comuna(idComuna INTEGER PRIMARY KEY autoincrement, nombreComuna VARCHAR(50) NOT NULL);";
@@ -58,13 +60,15 @@ export class DbservicioService {
   // listaComuna =       new BehaviorSubject([]);
   
 
-//observable para validar si la BD esta disponible o no
-  private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
 
 
   constructor(private sqlite: SQLite, private platform: Platform, private alertController: AlertController,private toastController: ToastController,public storage: Storage) {
     this.crearBD();
    }
+   dbState(){
+    return this.isDBReady.asObservable();
+  }
    
 
 
@@ -90,10 +94,7 @@ export class DbservicioService {
       }).then((Database: SQLiteObject)=>{
         this.database = Database;
         this.crearTablas();
-      }).catch(e=>{
-        this.presentAlert(e,"Creación de BD");
-      })
-
+      }).catch(e => this.presentAlert("error de secuencia", e));
     })
   }
 
@@ -116,10 +117,10 @@ export class DbservicioService {
       // await this.database.executeSql(this.tablaComuna,[]);
       // await this.database.executeSql(this.tablaDetalleViaje,[]);
       // await this.database.executeSql(this.tablaRol,[]);
-      await this.database.executeSql(this.tablaUsuario,[]);
-      await this.database.executeSql(this.usuario1,[]);
-      await this.database.executeSql(this.usuario2,[]);
-      await this.database.executeSql(this.usuario3,[]);
+      await this.database.executeSql(this.tablaUsuario, []);
+      await this.database.executeSql(this.usuario1, []);
+      await this.database.executeSql(this.usuario2, []);
+      await this.database.executeSql(this.usuario3, []);
       // await this.database.executeSql(this.tablaViaje,[]);
       
     
@@ -162,7 +163,7 @@ export class DbservicioService {
   // }
   buscarUsuario(){
     //realizamos la consulta a la BD
-    return this.database.executeSql('SELECT * FROM usuario',[]).then(res=>{
+    return this.database.executeSql('SELECT * FROM Usuario', []).then(res=>{
       //variable para guardar los registros en una coleccion de datos de la clase noticia
       let items: Usuario[] = [];
       if(res.rows.length > 0){
@@ -170,7 +171,7 @@ export class DbservicioService {
           items.push({
             idUsuario : res.rows.item(i).id_usuario,
             nombre : res.rows.item(i).nombre,
-            clave: res.rows.item(i).clave,
+            clave: res.rows.item(i).clave
           });
           
         }
@@ -199,9 +200,7 @@ export class DbservicioService {
   // }
   
 
-  dbState(){
-    return this.isDBReady.asObservable();
-  }
+  
 
   // fetchViaje(): Observable<Viaje[]>{
   //   return this.listaViaje.asObservable();
@@ -257,7 +256,7 @@ export class DbservicioService {
   // }
   login(nombre, clave) {
     let log = [nombre, clave]
-    return this.database.executeSql("SELECT * FROM usuario WHERE nombre=? AND clave=?", [log[0], log[1]])
+    return this.database.executeSql("SELECT * FROM Usuario WHERE nombre=? AND clave=?", [log[0], log[1]])
       .then(res => {
         let items: Usuario[] = [];
         if (res.rows.length > 0) {
@@ -265,11 +264,12 @@ export class DbservicioService {
             items.push({
               idUsuario: res.rows.item(i).id,
               nombre: res.rows.item(i).nombre,
-              clave: res.rows.item(i).clave,
+              clave: res.rows.item(i).clave
             });
 
           }
-          
+          this.storage.set('logeado', nombre)
+          this.storage.get('logeado')
 
 
           return true;
