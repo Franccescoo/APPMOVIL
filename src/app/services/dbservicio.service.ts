@@ -33,7 +33,9 @@ export class DbservicioService {
  tablaRolCon: string ="INSERT INTO or IGNORE Rol(idRol, nombreRol) VALUES (1, 'Conductor');";
  tablaRolPas: string = "INSERT INTO or IGNORE Rol(idRol, nombreRol) VALUES (2, 'Pasajero');";
 
-
+ usuario1: string = "INSERT INTO or IGNORE usuario(idUsuario, nombre,clave,FK_ID_ROL) VALUES (1, 'v.rosendo','J.12mm8',1);";
+ usuario2: string = "INSERT INTO or IGNORE usuario(idUsuario, nombre,clave,FK_ID_ROL) VALUES (2, 'j.baez','B.34vf8',2);";
+ usuario3: string = "INSERT INTO or IGNORE usuario(idUsuario, nombre,clave,FK_ID_ROL) VALUES (3, 'a.diaz','C.54yt78',2);";
 
  TablaComuna1: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (1, 'Quilicura');";
  TablaComuna2: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (2, 'Conchali');";
@@ -99,6 +101,7 @@ export class DbservicioService {
   async crearTablas(){
     try{
       await this.database.executeSql(this.TablaComuna1,[])
+      
       await this.database.executeSql(this.TablaComuna2,[])
       await this.database.executeSql(this.TablaComuna3,[])
       await this.database.executeSql(this.TablaComuna4,[])
@@ -115,6 +118,7 @@ export class DbservicioService {
       await this.database.executeSql(this.tablaUsuario,[]);
       await this.database.executeSql(this.tablaViaje,[]);
     
+    
 
 
       //puedo mostrar mensaje de tablas creadas
@@ -128,6 +132,7 @@ export class DbservicioService {
     }catch(e){
       this.presentAlert("Error al crear base de datos",e);
     }
+    
   }
 
   buscarViaje(){

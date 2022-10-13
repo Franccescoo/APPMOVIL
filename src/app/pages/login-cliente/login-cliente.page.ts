@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { Apiservices2Service } from 'src/app/services/apiservices2.service';
 
 import { DbservicioService } from 'src/app/services/dbservicio.service';
@@ -34,9 +35,12 @@ export class LoginClientePage implements OnInit {
   //  }
   //}
 
-  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService) {
-  
-    this.subsUsuario();
+  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage) {
+    if (this.router.getCurrentNavigation().extras.state) {
+      this.ingreso.nombre = this.router.getCurrentNavigation().extras.state.log0;
+      this.ingreso.clave = this.router.getCurrentNavigation().extras.state.log1;
+   }
+    
 
 
   }
@@ -71,16 +75,9 @@ export class LoginClientePage implements OnInit {
 
   async ingresar() {
     const response = await this.bd.login(this.ingreso.nombre, this.ingreso.clave)
-    response ? this.User() : this.bd.presentToast("Credenciales incorrectar Compruebe su Rut y/o contraseña")
+    response ? this.User() : this.bd.presentToast("Credenciales incorrectar Compruebe su nombre y/o clave")
   }
-  subsUsuario() {
-    this.api.getUsers().subscribe((res) => {
-      if (res) {
-        this.usuario = res;
-        this.bd.agregarUsuario(this.usuario.id, this.usuario.nombre, this.usuario.clave, this.usuario.idRol);
-      }
-    })
-  }
+  
 
 
 }
