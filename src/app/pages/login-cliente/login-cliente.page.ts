@@ -13,12 +13,6 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   styleUrls: ['./login-cliente.page.scss'],
 })
 export class LoginClientePage implements OnInit {
-  usuario: any = {
-    id: '',
-    nombre: '',
-    clave: '',
-    idRol: ''
-  };
 
   ingreso: any = {
     nombre: '',
@@ -45,27 +39,10 @@ export class LoginClientePage implements OnInit {
 
   }
   ngOnInit() {
-    this.bd.dbState().subscribe((res) => {
-      if (res) {
-        this.bd.fetchUsuario().subscribe((item) => {
-          this.usuario = item;
-        })
-      }
-    });
   }
 
 
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Alerta',
-      subHeader: 'Contraseña y/o Usuario',
-      message: 'INCORRECTA',
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
   User() {
     let navigationExtras: NavigationExtras = {
       state: { log0: this.ingreso.nombre, log1: this.ingreso.clave }
