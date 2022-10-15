@@ -30,86 +30,74 @@ export class DbservicioService {
     this.crearBD();
   }
 
+  //método para mostrar mensajes mediante alertas
+    async presentAlert(msj: string, lugar: string) {
+      const alert = await this.alertController.create({
+        header: lugar,
+        message: msj,
+        buttons: ['OK'],
+      });
+
+      await alert.present();
+    }
+
+  crearBD() {
+      this.storage.create()
+      this.platform.ready().then(() => {
+        this.sqlite.create({
+          name: 'miautos.db',
+          location: 'default'
+
+        }).then((Database: SQLiteObject) => {
+          this.database = Database;
+          this.crearTablas();
+        }).catch(e => {
+          this.presentAlert(e,"Creación de BD");
+        })
+      })
+    }
+
+  async crearTablas() {
+      try {
+        await this.database.executeSql(this.tablaUsuario, []);
+        await this.database.executeSql(this.user1, []);
+        
+        this.presentAlert("Tablas Creadas","Creación de Tablas");
+
+        this.listarUser();
+
+        this.isDbReady.next(true);
+      } catch (e) {
+        this.presentAlert(e,"Creación de Tablas");
+      }
+    }
+
+    listarUser() {
+      return this.database.executeSql('SELECT * FROM usuario', []).then(res => {
+        let items: Usuario[] = [];
+        if (res.rows.length > 0) {
+          for (var i = 0; i < res.row.length; i++) {
+            items.push({
+              idUsuario: res.rows.item(i).id_usuario,
+              nombre: res.rows.item(i).nombre,
+              clave: res.rows.item(i).clave
+            });
+
+          }
+        }
+        this.ListaUsuarios.next(items);
+      });
+    }
+
+
+
   dbState() {
     return this.isDbReady.asObservable();
   }
-  
-
-  crearBD() {
-    this.storage.create()
-    this.platform.ready().then(() => {
-      this.sqlite.create({
-        name: 'miautos.db',
-        location: 'default'
-
-      }).then((Database: SQLiteObject) => {
-        this.database = Database;
-        this.crearTablas();
-      }).catch(e => {
-        this.presentAlert(e, "Error Creación de BD");
-      })
-    })
-  }
-
-  async crearTablas() {
-    try {
-      await this.database.executeSql(this.tablaUsuario, []);
-      await this.database.executeSql(this.user1, []);
-      
-      this.presentAlert("Tablas Creadas","Creación de Tablas");
-
-      this.listarUser();
-
-      this.isDbReady.next(true);
-    } catch (e) {
-      this.presentAlert(e,"Creación de Tablas");
-    }
-  }
-
-
-  listarUser() {
-    return this.database.executeSql('SELECT * FROM usuario', []).then(res => {
-      let items: Usuario[] = [];
-      if (res.rows.length > 0) {
-        for (var i = 0; i < res.row.length; i++) {
-          items.push({
-            idUsuario: res.rows.item(i).id_usuario,
-            nombre: res.rows.item(i).nombre,
-            clave: res.rows.item(i).clave
-          });
-
-        }
-      }
-      this.ListaUsuarios.next(items);
-    });
-  }
-
-
-  //método para mostrar mensajes mediante alertas
-  async presentAlert(msj: string, lugar: string) {
-    const alert = await this.alertController.create({
-      header: lugar,
-      message: msj,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
-  async presentToast(mensaje: string) {
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: 2000
-
-    });
-    toast.present();
-  }
-  
 
   fetchUser(): Observable<Usuario[]> {
     return this.ListaUsuarios.asObservable();
   }
-
-
 
   login(usuario, clave) {
     let log = [usuario, clave]
