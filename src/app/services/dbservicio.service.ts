@@ -18,9 +18,9 @@ export class DbservicioService {
   public database: SQLiteObject;
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
   //variable para crear tablas e insertar registros por defecto en tablas
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario(idUsuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(50) NOT NULL, clave VARCHAR(50))";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS Usuario(id_usuario INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(50) NOT NULL, clave VARCHAR(50))";
   //insersion registros
-  user1: string = "INSERT or IGNORE INTO Usuario(idUsuario,nombre,clave) VALUES (1,'v.rosendo','victor123')";
+  user1: string = "INSERT or IGNORE INTO Usuario(id_usuario ,nombre,clave) VALUES (1,'v.rosendo','victor123')";
 
   //observable para manipular los registros de una tabla
   Usuarios = new BehaviorSubject([]);
@@ -49,11 +49,16 @@ export class DbservicioService {
       })
     })
   }
+
   async crearTablas() {
     try {
       await this.database.executeSql(this.tablaUsuario, []);
       await this.database.executeSql(this.user1, []);
+      
+      this.presentAlert("Tablas Creadas","Creación de Tablas");
+
       this.listarUser();
+
       this.isDbReady.next(true);
     } catch (e) {
       this.presentAlert("Error al crear base de datos", e);
