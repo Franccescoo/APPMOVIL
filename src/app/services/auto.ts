@@ -1,6 +1,9 @@
 export class Auto {
     patente: string;
-    color: string;
     modelo: string;
+    marca: string;
+    puestos: string;
     annio: number;
+    iduser: number;
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Apiservices2Service } from 'src/app/services/apiservices2.service';
 
@@ -20,41 +20,58 @@ export class LoginClientePage implements OnInit {
   };
 
 
-  //validarpass() {
-  //if (this.usuario.nombre == this.login.nombre && this.usuario.clave == this.login.contra) {
-  //    this.router.navigate(['/home']);
-  //  }
-  //  else {
-  //    this.presentAlert();
-  //  }
-  //}
-
-  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage) {
-    if (this.router.getCurrentNavigation().extras.state) {
-      this.ingreso.nombre = this.router.getCurrentNavigation().extras.state.log0;
-      this.ingreso.clave = this.router.getCurrentNavigation().extras.state.log1;
-   }
+  user:any[] =[]
+  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
+   
     
 
 
   }
   ngOnInit() {
+    this.bd.dbState().subscribe((res) => {
+      if (res){
+        this.bd.fetchUser().subscribe(item => {
+          this.user = item;
+        })
+      }
+    })
   }
 
-
-
-  User() {
-    let navigationExtras: NavigationExtras = {
-      state: { log0: this.ingreso.nombre, log1: this.ingreso.clave }
-    }
-    this.router.navigate(['/home'], navigationExtras)
-  }
-
-  async ingresar() {
-    const response = await this.bd.login(this.ingreso.nombre, this.ingreso.clave)
-    response ? this.User() : this.bd.presentToast("Credenciales incorrectar Compruebe su nombre y/o clave")
-  }
   
+  async iniciarSesion(){
+    await this.bd.login(this.ingreso.nombre, this.ingreso.clave);
+    if (this.ingreso.nombre.length == 0) {
+        this.presentToast("Por favor Ingrese su nombre de Usuario");
+    }
+    else if(this.ingreso.clave == 0){
+      this.presentToast("Ingrese Su Contraseña");
+    }
+    else if(this.user.length == 0){
+      this.presentToast("Usuario y/o Contraseña incorrecta");
+    }else{
+      this.router.navigate(['/home']);
+      // if (this.user[0].fk_id_tipousuario == 2) {
+      //   this.router.navigate(['/home']);
+      //   this.presentToast("Bienvenido "+ this.ingreso.nombre);
+      // } else {
+      //   if (this.user[0].fk_id_tipousuario == 1) {
+      //     this.router.navigate(['/home']);
+      //     this.presentToast("Bienvenido "+ this.ingreso.nombre);
+      //   }
+      
+  
+      // }
+    
+  
+    }
+  }
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
 
+    });
+    toast.present();
+  }
 
 }
