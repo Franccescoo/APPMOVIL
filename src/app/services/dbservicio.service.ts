@@ -50,6 +50,7 @@ export class DbservicioService {
     this.CrearBD();
   }
 
+
   //Estado base de datos //
   dbState() {
     return this.isDbReady.asObservable();
@@ -242,3 +243,4 @@ export class DbservicioService {
     await alert.present();
   }
 }
+
