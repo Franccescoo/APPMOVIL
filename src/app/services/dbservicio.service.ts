@@ -94,10 +94,23 @@ export class DbservicioService {
   dbState() {
     return this.isDbReady.asObservable();
   }
-
+  
   fetchUser(): Observable<Usuario[]> {
     return this.ListaUsuarios.asObservable();
   }
+
+
+
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+
+    });
+    toast.present();
+  }
+  
+
 
   login(usuario, clave) {
     let log = [usuario, clave]
