@@ -22,6 +22,7 @@ export class TabMapaClienteComponent implements OnInit {
   locationService: any;
   public latitude;
   public longitude;
+  nativeStorage: any;
 
   constructor(public geolocation: Geolocation,public toastController: ToastController) { }
 

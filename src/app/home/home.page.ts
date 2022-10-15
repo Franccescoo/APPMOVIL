@@ -18,6 +18,12 @@ export class HomePage {
     this.router.navigate(['home/inicio']);
   }
 
+  ngOnInit() {
+    this.nativeStorage.setItem('lat', this.latitude);
+    this.nativeStorage.setItem('lng', this.longitude);
+    }
+
+
   Ubicacion() {
     this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
       this.latitude = geposition.coords.latitude
