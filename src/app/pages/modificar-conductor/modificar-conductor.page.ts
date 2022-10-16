@@ -8,7 +8,7 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   styleUrls: ['./modificar-conductor.page.scss'],
 })
 export class ModificarConductorPage implements OnInit {
-  foto: any;
+  fotocon: any;
 
   constructor(private bd: DbservicioService,private api: CameraService) { 
 
@@ -16,7 +16,7 @@ export class ModificarConductorPage implements OnInit {
 
   ngOnInit() {
     this.api.getfoto().subscribe(item => {
-      this.foto = item;
+      this.fotocon = item;
     })
 
   }

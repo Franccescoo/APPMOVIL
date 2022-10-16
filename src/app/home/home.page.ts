@@ -10,44 +10,44 @@ import { DbservicioService } from '../services/dbservicio.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  user:any[] =[]
+  // user:any[] =[]
   // public latitude;
   // public longitude;
-  id: any;
+  // id: any;
 
 
   constructor(public nativeStorage: NativeStorage,private router: Router,public geolocation: Geolocation, private activedRouter: ActivatedRoute, private bd: DbservicioService) {
 
-    this.activedRouter.queryParams.subscribe(param=>{
-      if(this.router.getCurrentNavigation().extras.state){
-        this.id = this.router.getCurrentNavigation().extras.state.idEnviado;
+    // this.activedRouter.queryParams.subscribe(param=>{
+    //   if(this.router.getCurrentNavigation().extras.state){
+    //     this.id = this.router.getCurrentNavigation().extras.state.idEnviado;
         
-      }
-    })
+    //   }
+    // })
     //this.Ubicacion();
     // this.router.navigate(['home/inicio']);
   }
   ngOnInit() {
-    this.bd.dbState().subscribe((res) => {
-      if (res){
-        this.bd.fetchUser().subscribe(item => {
-          this.user = item;
-        })
-      }
+    // this.bd.dbState().subscribe((res) => {
+    //   if (res){
+    //     this.bd.fetchUser().subscribe(item => {
+    //       this.user = item;
+    //     })
+    //   }
       
-    })
+    // })
     
   }
 
-  perfiluser(){
-    let navigationsExtras: NavigationExtras = {
-      state: {
-        id:this.id
+  // perfiluser(){
+  //   let navigationsExtras: NavigationExtras = {
+  //     state: {
+  //       id:this.id
 
-      }
-    }
-    this.router.navigate(['/modificar-cliente'],navigationsExtras);
-  }
+  //     }
+  //   }
+  //   this.router.navigate(['/modificar-cliente'],navigationsExtras);
+  // }
 
 
   
