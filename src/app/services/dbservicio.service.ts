@@ -21,15 +21,19 @@ export class DbservicioService {
   public database: SQLiteObject;
 
 
-  tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(idrol INTEGER PRIMARY KEY , nombrerol VARCHAR (30) NOT NULL);";
+  tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(idrol INTEGER PRIMARY KEY , nombrerol VARCHAR (30));";
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30), username VARCHAR(50), apellido VARCHAR(50) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
   tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR(30) PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(idusuario)) ;";
   tablaViaje: string = "CREATE TABLE IF NOT EXISTS viaje(idviaje INTEGER PRIMARY KEY , inicio VARCHAR (50) , destino VARCHAR (50)  , asientos INTEGER , costo_viaje INTEGER  , fecha_viaje VARCHAR(30)  , hora_partida INTEGER , hora_llegada INTEGER , fk_patente INTEGER , fk_idusuario INTEGER );";
+
   tablaComen: string = "CREATE TABLE IF NOT EXISTS comentario(idComentario INTEGER PRIMARY KEY autoincrement, comentario VARCHAR(500), fk_iduser INTEGER, FOREIGN KEY(fk_iduser) REFERENCES usuario(idusuario));";
+
+  tablaComuna: string = "CREATE TABLE IF NOT EXISTS Comuna(idComuna INTEGER PRIMARY KEY , nombreComuna VARCHAR(50) );";
+
 
 
   // INSERTS //
-  
+
   usuario1: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, username, fk_id_rol) VALUES (1, 'v.rosendo','J.12mm8','Victor', 1);";
   usuario2: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (2, 'j.baez','B.34vf8', 2);";
   usuario3: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (3, 'a.diaz','C.54yt78', 2);";
@@ -41,8 +45,16 @@ export class DbservicioService {
 
   conductor: string = "INSERT or IGNORE INTO rol(idrol, nombrerol) VALUES (1, 'Conductor');";
   pasajero: string = "INSERT or IGNORE INTO rol(idrol, nombrerol) VALUES (2, 'Pasajero');";
-  //OBSERVABLES //
 
+  TablaComuna1: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (1, 'Quilicura');";
+  TablaComuna2: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (2, 'Conchali');";
+  TablaComuna3: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (3, 'Huechuraba');";
+  TablaComuna4: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (4, 'Las Condes');";
+  TablaComuna5: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (5, 'La Cisterna');";
+  TablaComuna6: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (6, 'Recoleta');";
+  TablaComuna7: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (7, 'Independencia');";
+
+  //OBSERVABLES //
   listausuario = new BehaviorSubject([]);
 
   listauto = new BehaviorSubject([]);
@@ -51,8 +63,9 @@ export class DbservicioService {
 
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+  listaComuna = new BehaviorSubject([]);
 
-  constructor(public NativeStorage : NativeStorage ,private sqlite: SQLite, private platform: Platform, public alertController:AlertController,public Storage: Storage) {
+  constructor(public NativeStorage: NativeStorage, private sqlite: SQLite, private platform: Platform, public alertController: AlertController, public Storage: Storage) {
     //Crear base de datos//
     this.CrearBD();
   }
@@ -109,15 +122,16 @@ export class DbservicioService {
       //this.presentAlert("error tabla 11")
       await this.database.executeSql(this.tablaComen,[]);
 
+
       this.buscarUsuario();
-      
-      this.login('','');
-      
+
+      this.login('', '');
+
       this.buscarAuto();
-      
+
       this.isDbReady.next(true);
     } catch (e) {
-      this.presentAlert("error al crear tablas"  + e);
+      this.presentAlert("error al crear tablas" + e);
 
     }
 
@@ -147,7 +161,7 @@ export class DbservicioService {
 
   login(nombre, clave) {
     let data = [nombre, clave]
-    return this.database.executeSql('SELECT * FROM usuario WHERE nombre=? AND clave=? ', [data[0],data[1]]).then(res => {
+    return this.database.executeSql('SELECT * FROM usuario WHERE nombre=? AND clave=? ', [data[0], data[1]]).then(res => {
       let items: Usuario[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
@@ -167,34 +181,38 @@ export class DbservicioService {
       this.listausuario.next(items);
     });
   }
-    
 
+  //USER
   fetchUser(): Observable<Usuario[]> {
     return this.listausuario.asObservable();
   }
 
+
   fetchComen(): Observable<Usuario[]> {
     return this.listaComen.asObservable();
   }
+
 
   deleteUsuario(idusuario) {
     return this.database.executeSql('DELETE FROM usuario WHERE idusuario = ?', [idusuario]).then(res => {
       this.buscarUsuario();
     });
   }
-  agregarUsuario(idusuario,nombre, clave,foto,fk_id_rol) {
-    let data = [idusuario,nombre, clave,foto,fk_id_rol];
+  agregarUsuario(idusuario, nombre, clave, foto, fk_id_rol) {
+    let data = [idusuario, nombre, clave, foto, fk_id_rol];
     return this.database.executeSql('INSERT INTO usuario (idusuario,nombre , clave, foto, fk_id_rol) VALUES (?, ?, ?, ?, ?)', data).then(res => {
       this.buscarUsuario();
     });
   }
-  updateUsuario(idusuario,nombre,foto,fk_id_rol ) {
-    let data = [idusuario,nombre,foto ,fk_id_rol];
+  updateUsuario(idusuario, nombre, foto, fk_id_rol) {
+    let data = [idusuario, nombre, foto, fk_id_rol];
     return this.database.executeSql('UPDATE usuario SET nombre = ? , clave = ? ,foto = ? ,fk_id_rol  = ? where = idusuario ', data).then(res => {
       this.buscarUsuario();
     });
 
   }
+
+  //AUTO
   buscarAuto() {
     return this.database.executeSql('SELECT * FROM auto', []).then(res => {
       let items: Auto[] = [];
@@ -204,8 +222,8 @@ export class DbservicioService {
             patente: res.rows.item(i).patente,
             modelo: res.rows.item(i).modelo,
             marca: res.rows.item(i).marca,
-            puestos: res.rows.item(i).puestos,          
-            annio: res.rows.item(i).annio,                                                                                                                                                                                                                 
+            puestos: res.rows.item(i).puestos,
+            annio: res.rows.item(i).annio,
             iduser: res.rows.item(i).fk_idusuario
           });
         }
@@ -213,6 +231,7 @@ export class DbservicioService {
       this.listauto.next(items);
     });
   }
+
 
   fetchauto(): Observable<Auto[]> {
     return this.listauto.asObservable();
@@ -223,14 +242,14 @@ export class DbservicioService {
     });
   }
 
-  agregarAuto(patente, modelo, marca , puestos , fk_idusuario) {
-    let data = [patente , modelo , marca, puestos , fk_idusuario];
+  agregarAuto(patente, modelo, marca, puestos, fk_idusuario) {
+    let data = [patente, modelo, marca, puestos, fk_idusuario];
     return this.database.executeSql('INSERT INTO auto (  patente , modelo , marca , puestos , fk_idusuario) VALUES (? , ? , ? , ? , ?)', data).then(res => {
       this.buscarAuto();
     });
   }
-  updateAuto( patente ,  modelo,  marca , puestos,  fk_idusuario) {
-    let data = [ patente,   modelo ,  marca ,puestos,  fk_idusuario];
+  updateAuto(patente, modelo, marca, puestos, fk_idusuario) {
+    let data = [patente, modelo, marca, puestos, fk_idusuario];
     return this.database.executeSql('UPDATE auto  SET    modelo = ? ,  marca = ? , puestos = ?, fk_idusuario = ?  where = patente ', data).then(res => {
       this.buscarAuto();
     });
@@ -239,7 +258,7 @@ export class DbservicioService {
 
   id(idusuario) {
     let data = [idusuario]
-    return this.database.executeSql('SELECT * FROM usuario WHERE idusuario = ? ', [data[0],data[1]]).then(res => {
+    return this.database.executeSql('SELECT * FROM usuario WHERE idusuario = ? ', [data[0], data[1]]).then(res => {
       let items: Usuario[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
@@ -258,56 +277,76 @@ export class DbservicioService {
       this.listausuario.next(items);
     });
   }
-
-  buscarComen(){
+  //comuna
+  fetchComuna(): Observable<Comuna[]> {
+    return this.listaComuna.asObservable();
+  }
+  buscarComuna() {
     //realizamos la consulta a la BD
-    return this.database.executeSql('SELECT * FROM comentario',[]).then(res=>{
+    return this.database.executeSql('SELECT * FROM comuna', []).then(res => {
       //variable para guardar los registros en una coleccion de datos de la clase noticia
-      let items: Comentario[] = [];
-      if(res.rows.length > 0){
-        for(var i=0; i < res.rows.length; i++){
+      let items: Comuna[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            idComentario : res.rows.item(i).idComentario,
-            comentario : res.rows.item(i).comentario,
-            iduser : res.rows.item(i).fk_iduser
+            idComuna: res.rows.item(i).id_comuna,
+            nombreComuna: res.rows.item(i).nombreComuna
           });
-
         }
       }
-      this.listaComen.next(items);
-
-    })
+    }
   }
 
 
-  agregarComen(comentario){
-    let data = [comentario];
-    return this.database.executeSql('INSERT INTO comentario(comentario) VALUES(?)',data).then(res=>{
-      this.buscarComen();
-    });
+buscarComen(){
+  //realizamos la consulta a la BD
+  return this.database.executeSql('SELECT * FROM comentario',[]).then(res=>{
+    //variable para guardar los registros en una coleccion de datos de la clase noticia
+    let items: Comentario[] = [];
+    if(res.rows.length > 0){
+      for(var i=0; i < res.rows.length; i++){
+        items.push({
+          idComentario : res.rows.item(i).idComentario,
+          comentario : res.rows.item(i).comentario,
+          iduser : res.rows.item(i).fk_iduser
+        });
 
-  }
+      }
+    }
+    this.listaComen.next(items);
+
+  })
+}
+
+
+agregarComen(comentario){
+  let data = [comentario];
+  return this.database.executeSql('INSERT INTO comentario(comentario) VALUES(?)',data).then(res=>{
+    this.buscarComen();
+  });
+
+}
 
 
 
-  //ALERTAS //
-  async presentAlert(msj: string) {
-    const alert = await this.alertController.create({
-      message: msj,
-      buttons: ['OK'],
-    });
+//ALERTAS //
+async presentAlert(msj: string) {
+  const alert = await this.alertController.create({
+    message: msj,
+    buttons: ['OK'],
+  });
 
-    await alert.present();
-  }
+  await alert.present();
+}
 
-  async presentAlert1(msj: string,men: string) {
-    const alert = await this.alertController.create({
-      header: men,
-      message: msj,
-      buttons: ['OK'],
-    });
+async presentAlert1(msj: string,men: string) {
+  const alert = await this.alertController.create({
+    header: men,
+    message: msj,
+    buttons: ['OK'],
+  });
 
-    await alert.present();
-  }
+  await alert.present();
+}
 }
 

@@ -12,14 +12,21 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 export class ModificarClientePage implements OnInit {
   foto: any;
 
-  constructor(private bd: DbservicioService,private api: CameraService) { 
-
+  user:any[] =[]
+  id: any;
+  constructor(private bd: DbservicioService,private api: CameraService,private router: Router,private activedRouter: ActivatedRoute) { 
+    this.activedRouter.queryParams.subscribe(param=>{
+      if(this.router.getCurrentNavigation().extras.state){
+        this.id = this.router.getCurrentNavigation().extras.state.idEnviado;
+      }
+    })
   }
 
   ngOnInit() {
     this.api.getfoto().subscribe(item => {
       this.foto = item;
     })
+    
 
   }
 

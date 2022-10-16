@@ -40,13 +40,16 @@ export class LoginClientePage implements OnInit {
       if (res){
         this.bd.fetchUser().subscribe(item => {
           this.user = item;
+          this.ListaDatos = item;
         })
       }
+      
     })
+    
   }
 
   
-  async iniciarSesion(x){
+  async iniciarSesion(){
     await this.bd.login(this.ingreso.nombre, this.ingreso.clave);
     if (this.ingreso.nombre.length == 0) {
         this.presentToast("Ingrese usuario");
@@ -57,16 +60,14 @@ export class LoginClientePage implements OnInit {
     else if(this.user.length == 0){
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }else{
-      //let navigationsExtras: NavigationExtras ={
-      //  state: {
-      //    idEnviado: x.idUsuario,
-      //    nombreEnviado: x.nombre,
-      //    usernameEnviado: x.username
-      //  }
-      //}
-      //this.router.navigate(['/home'], navigationsExtras);
+      let navigationsExtras: NavigationExtras ={
+       state: {
+         idEnviado: this.user[0].iduser
+       }
+      }
+      this.router.navigate(['/home-inicio'], navigationsExtras);
 
-      this.router.navigate(['/home']);
+      // this.router.navigate(['/home']);
 
       // if (this.user[0].fk_id_tipousuario == 2) {
       //   this.router.navigate(['/home']);
@@ -91,5 +92,16 @@ export class LoginClientePage implements OnInit {
     });
     toast.present();
   }
+
+  // editar(x){
+  //   let navigationsExtras: NavigationExtras ={
+  //     state:{
+  //       idEnviado2: x.id2,
+  //       nombreenviado: x.nombre,
+  //       usernameneviado: x.username
+  //     }
+  //   }
+  //   this.router.navigate(['/modificar-cliente'],navigationsExtras);
+  // }
 
 }
