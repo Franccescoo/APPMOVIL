@@ -30,6 +30,8 @@ export class HomePage {
 
   }
 
+  
+
   segmentChanged($event){
     const direccion = $event.detail.value;
     this.router.navigate(['home/' + direccion]);

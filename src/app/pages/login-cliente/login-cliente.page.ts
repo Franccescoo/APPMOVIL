@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Apiservices2Service } from 'src/app/services/apiservices2.service';
@@ -21,9 +22,7 @@ export class LoginClientePage implements OnInit {
 
 
   user:any[] =[]
-  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
-   
-    
+  constructor(public nativeStorage: NativeStorage,private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
 
 
   }
@@ -37,6 +36,10 @@ export class LoginClientePage implements OnInit {
     })
   }
 
+  TomarDatos() {
+    this.nativeStorage.setItem('nombre1', this.ingreso.nombre);
+    this.nativeStorage.setItem('clave1', this.ingreso.clave);
+  }
   
   async iniciarSesion(){
     await this.bd.login(this.ingreso.nombre, this.ingreso.clave);
@@ -50,6 +53,7 @@ export class LoginClientePage implements OnInit {
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }else{
       this.router.navigate(['/home']);
+
       // if (this.user[0].fk_id_tipousuario == 2) {
       //   this.router.navigate(['/home']);
       //   this.presentToast("Bienvenido "+ this.ingreso.nombre);
@@ -61,10 +65,11 @@ export class LoginClientePage implements OnInit {
       
   
       // }
-    
-  
+      
     }
   }
+
+
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,

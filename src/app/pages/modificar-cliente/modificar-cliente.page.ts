@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CameraService } from 'src/app/services/camera.service';
 
 
 @Component({
@@ -7,21 +8,20 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./modificar-cliente.page.scss'],
 })
 export class ModificarClientePage implements OnInit {
-  listaUsuarios: any;
+  foto: any;
 
 
-  constructor() {
-   }
+  constructor(private api: CameraService) { }
 
   ngOnInit() {
+    this.api.getfoto().subscribe(item => {
+      this.foto = item;
+    })
   }
 
-  su
-
-
-
-
-
+  AbrirCamara() {
+    this.api.TakePicture();
+  }
 
 
 }
