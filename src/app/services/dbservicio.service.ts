@@ -261,7 +261,7 @@ export class DbservicioService {
 
   buscarComen(){
     //realizamos la consulta a la BD
-    return this.database.executeSql('SELECT * FROM comentario ',[]).then(res=>{
+    return this.database.executeSql('SELECT * FROM comentario',[]).then(res=>{
       //variable para guardar los registros en una coleccion de datos de la clase noticia
       let items: Comentario[] = [];
       if(res.rows.length > 0){
