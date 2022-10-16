@@ -158,12 +158,7 @@ export class DbservicioService {
 
           });
         }
-        this.Storage.set('logeado', nombre)
-        this.Storage.get('logeado')
-        return true;
-      }
-      else{
-        return false;
+
       }
       
     });

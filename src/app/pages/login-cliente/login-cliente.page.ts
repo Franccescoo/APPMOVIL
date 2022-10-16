@@ -23,7 +23,7 @@ export class LoginClientePage implements OnInit {
   user:any[] =[]
   constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
    
-    
+
 
 
   }
