@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { CameraService } from 'src/app/services/camera.service';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -12,15 +12,20 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 export class ModificarClientePage implements OnInit {
   foto: any;
   user:any[] =[]
-
-  listausuario: any = [
-    {
-      username: ''
-    }
-  ]
+  username: "";
 
 
-  constructor(private bd: DbservicioService,private api: CameraService,  private router: Router) { }
+
+  constructor(private bd: DbservicioService,private api: CameraService,  private router: Router,private activedRouter: ActivatedRoute) { 
+
+    this.activedRouter.queryParams.subscribe(param=>{
+      if(this.router.getCurrentNavigation().extras.state){
+        this.username = this.router.getCurrentNavigation().extras.state.username;
+
+      }
+    })
+
+  }
 
   ngOnInit() {
     this.api.getfoto().subscribe(item => {

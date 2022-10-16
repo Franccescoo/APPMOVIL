@@ -19,6 +19,14 @@ export class LoginClientePage implements OnInit {
     clave: ''
   };
 
+  ListaDatos: any = [
+    {
+      idUsuario: '',
+      nombre: '',
+      username: '',
+    }
+  ]
+
 
   user:any[] =[]
   constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
@@ -38,7 +46,7 @@ export class LoginClientePage implements OnInit {
   }
 
   
-  async iniciarSesion(){
+  async iniciarSesion(x){
     await this.bd.login(this.ingreso.nombre, this.ingreso.clave);
     if (this.ingreso.nombre.length == 0) {
         this.presentToast("Por favor Ingrese su nombre de Usuario");
@@ -49,7 +57,14 @@ export class LoginClientePage implements OnInit {
     else if(this.user.length == 0){
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }else{
-      this.router.navigate(['/home']);
+      let navigationsExtras: NavigationExtras ={
+        state: {
+          idEnviado: x.idUsuario,
+          nombreEnviado: x.nombre,
+          usernameEnviado: x.username
+        }
+      }
+      this.router.navigate(['/home'], navigationsExtras);
       // if (this.user[0].fk_id_tipousuario == 2) {
       //   this.router.navigate(['/home']);
       //   this.presentToast("Bienvenido "+ this.ingreso.nombre);
