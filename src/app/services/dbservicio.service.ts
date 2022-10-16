@@ -281,6 +281,8 @@ export class DbservicioService {
   fetchComuna(): Observable<Comuna[]> {
     return this.listaComuna.asObservable();
   }
+
+
   buscarComuna() {
     //realizamos la consulta a la BD
     return this.database.executeSql('SELECT * FROM comuna', []).then(res => {
@@ -294,7 +296,8 @@ export class DbservicioService {
           });
         }
       }
-    }
+      this.listaComen.next(items);
+    })
   }
 
 
