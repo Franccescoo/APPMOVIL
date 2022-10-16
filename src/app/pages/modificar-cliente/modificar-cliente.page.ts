@@ -11,19 +11,8 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class ModificarClientePage implements OnInit {
   foto: any;
-  user:any[] =[]
-  username: "";
 
-
-
-  constructor(private bd: DbservicioService,private api: CameraService,  private router: Router,private activedRouter: ActivatedRoute) { 
-
-    this.activedRouter.queryParams.subscribe(param=>{
-      if(this.router.getCurrentNavigation().extras.state){
-        this.username = this.router.getCurrentNavigation().extras.state.username;
-
-      }
-    })
+  constructor(private bd: DbservicioService,private api: CameraService) { 
 
   }
 
@@ -32,27 +21,10 @@ export class ModificarClientePage implements OnInit {
       this.foto = item;
     })
 
-    this.bd.dbState().subscribe((res) => {
-      if (res){
-        this.bd.fetchUser().subscribe(item => {
-          this.user = item;
-        })
-      }
-    })
   }
 
   AbrirCamara() {
     this.api.TakePicture();
   }
-
-  Datos(x){
-
-    let navigationsExtras: NavigationExtras ={
-      state: {
-        nombre: x.username,
-      }
-    }
-  }
-
 
 }

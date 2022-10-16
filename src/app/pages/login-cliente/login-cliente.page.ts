@@ -57,14 +57,17 @@ export class LoginClientePage implements OnInit {
     else if(this.user.length == 0){
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }else{
-      let navigationsExtras: NavigationExtras ={
-        state: {
-          idEnviado: x.idUsuario,
-          nombreEnviado: x.nombre,
-          usernameEnviado: x.username
-        }
-      }
-      this.router.navigate(['/home'], navigationsExtras);
+      //let navigationsExtras: NavigationExtras ={
+      //  state: {
+      //    idEnviado: x.idUsuario,
+      //    nombreEnviado: x.nombre,
+      //    usernameEnviado: x.username
+      //  }
+      //}
+      //this.router.navigate(['/home'], navigationsExtras);
+
+      this.router.navigate(['/home']);
+
       // if (this.user[0].fk_id_tipousuario == 2) {
       //   this.router.navigate(['/home']);
       //   this.presentToast("Bienvenido "+ this.ingreso.nombre);
