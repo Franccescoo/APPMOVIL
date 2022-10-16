@@ -3,6 +3,6 @@ export class Usuario {
     nombre: string;
     clave: string;
     foto: string;
-    idrol: number;
+    fk_id_rol: number;
     
 }

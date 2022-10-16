@@ -130,7 +130,7 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            idrol: res.rows.item(i).rol,
+            fk_id_rol: res.rows.item(i).fk_id_rol,
           });
         }
       }
@@ -150,7 +150,7 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            idrol: res.rows.item(i).fk_id_tipousuario
+            fk_id_rol: res.rows.item(i).fk_id_rol
           });
         }
         this.Storage.set('logeado', nombre)
@@ -240,7 +240,7 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            idrol: res.rows.item(i).rol
+            fk_id_rol: res.rows.item(i).fk_id_rol
           });
         }
       }
