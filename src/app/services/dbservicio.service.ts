@@ -83,27 +83,27 @@ export class DbservicioService {
     try {
       //Tipos Usuario Crear e Insertar//
       await this.database.executeSql(this.tablaRol,[]);  
-      //this.presentAlert("error tabla 1")
+      this.presentAlert("error tabla 1")
       await this.database.executeSql(this.pasajero,[]);
-      //this.presentAlert("error tabla 2")
+      this.presentAlert("error tabla 2")
       await this.database.executeSql(this.conductor,[]);
-      //this.presentAlert("error tabla 3")
+      this.presentAlert("error tabla 3")
       await this.database.executeSql(this.tablaUsuario,[]);   
-      //this.presentAlert("error tabla 4")
+      this.presentAlert("error tabla 4")
       await this.database.executeSql(this.usuario1,[]);
-      //this.presentAlert("error tabla 5")
+      this.presentAlert("error tabla 5")
       await this.database.executeSql(this.usuario2,[]);
-      //this.presentAlert("error tabla 6")
+      this.presentAlert("error tabla 6")
       await this.database.executeSql(this.usuario3,[]);
-      //this.presentAlert("error tabla 7")
+      this.presentAlert("error tabla 7")
       await this.database.executeSql(this.tablaAuto,[]);
-      //this.presentAlert("error tabla 8")
+      this.presentAlert("error tabla 8")
       await this.database.executeSql(this.auto1,[]);
-      //this.presentAlert("error tabla 9")
+      this.presentAlert("error tabla 9")
       await this.database.executeSql(this.auto2,[]);
-      //this.presentAlert("error tabla 10")
+      this.presentAlert("error tabla 10")
       await this.database.executeSql(this.tablaViaje,[]);
-      //this.presentAlert("error tabla 11")
+      this.presentAlert("error tabla 11")
 
       this.buscarUsuario();
       

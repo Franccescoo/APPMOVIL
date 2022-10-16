@@ -49,7 +49,7 @@ export class LoginClientePage implements OnInit {
   async iniciarSesion(x){
     await this.bd.login(this.ingreso.nombre, this.ingreso.clave);
     if (this.ingreso.nombre.length == 0) {
-        this.presentToast("Por favor Ingrese su nombre de Usuario");
+        this.presentToast("Ingrese usuario");
     }
     else if(this.ingreso.clave == 0){
       this.presentToast("Ingrese Su Contraseña");
