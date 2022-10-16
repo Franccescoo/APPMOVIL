@@ -13,14 +13,14 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 export class LoginConductorPage implements OnInit {
 
   
-  ingreso: any = {
+  ingresoC: any = {
     nombre: '',
     clave: ''
   };
 
 
   user:any[];
-  constructor(private alertController: AlertController, private router: Router, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
+  constructor(private alertController: AlertController, private router: Router, private bd: DbservicioService,private toastController: ToastController) {
    
     
 
@@ -38,11 +38,11 @@ export class LoginConductorPage implements OnInit {
 
   
   async iniciarSesion(){
-    await this.bd.login(this.ingreso.nombre, this.ingreso.clave);
-    if (this.ingreso.nombre.length == 0) {
+    await this.bd.login(this.ingresoC.nombre, this.ingresoC.clave);
+    if (this.ingresoC.nombre.length == 0) {
         this.presentToast("Por favor Ingrese su nombre de Usuario");
     }
-    else if(this.ingreso.clave == 0){
+    else if(this.ingresoC.clave == 0){
       this.presentToast("Ingrese Su Contraseña");
     }
     else if(this.user.length == 0){
