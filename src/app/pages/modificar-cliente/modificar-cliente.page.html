@@ -11,13 +11,22 @@
 
       <!-- fab placed to the top end -->
       <ion-fab vertical="top" horizontal="end" slot="fixed">
-        <ion-fab-button>
+        <ion-fab-button (click)="AbrirCamara()" >
           <mat-icon>create</mat-icon>
         </ion-fab-button>
       </ion-fab>
 
-    <img src="./assets/img/aca.jpg" width="50%" style="border-radius: 50%;border: black 1px solid;margin-left: 50px;margin-top: 10px;">
-
+      <ion-item *ngFor="let x of listaNoticias">
+        <ion-avatar slot="start">
+          <img alt=" " [src]="foto" *ngIf="foto" />
+        </ion-avatar>
+        <ion-label>
+          {{x.user}}
+        </ion-label>
+      </ion-item>
+<!--
+    <img [src]="foto" *ngIf="foto" width="50%" height="50%" style="border-radius: 50%;border: black 1px solid;margin-left: 50px;margin-top: 10px;">
+-->
 
     <ion-card-content>
 

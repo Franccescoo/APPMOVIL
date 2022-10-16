@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { CameraService } from 'src/app/services/camera.service';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 
 @Component({
@@ -7,21 +10,42 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./modificar-cliente.page.scss'],
 })
 export class ModificarClientePage implements OnInit {
-  listaUsuarios: any;
+  foto: any;
+  user:any[] =[]
+
+  listaNoticias: any = [
+    {
+      user: ''
+    }
+  ]
 
 
-  constructor() {
-   }
+  constructor(private bd: DbservicioService,private api: CameraService,  private router: Router) { }
 
   ngOnInit() {
+    this.api.getfoto().subscribe(item => {
+      this.foto = item;
+    })
+
+    this.bd.dbState().subscribe((res) => {
+      if (res){
+        this.bd.fetchUser().subscribe(item => {
+          this.user = item;
+        })
+      }
+    })
   }
 
-  su
+  AbrirCamara() {
+    this.api.TakePicture();
+  }
 
-
-
-
-
+  Datos(){
+    this.bd.id(1)
+    state: {
+      user: this.bd.usuario1
+    }
+  }
 
 
 }

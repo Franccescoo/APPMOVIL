@@ -133,6 +133,11 @@ const routes: Routes = [
     path: 'test',
     loadChildren: () => import('./pages/test/test.module').then( m => m.TestPageModule)
   },
+  {
+    path: 'comentario-conductor',
+    loadChildren: () => import('./pages/comentario-conductor/comentario-conductor.module').then( m => m.ComentarioConductorPageModule)
+  },
+
 
 
 ];
