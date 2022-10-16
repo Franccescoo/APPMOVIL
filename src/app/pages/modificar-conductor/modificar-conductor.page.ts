@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CameraService } from 'src/app/services/camera.service';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
   selector: 'app-modificar-conductor',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modificar-conductor.page.scss'],
 })
 export class ModificarConductorPage implements OnInit {
+  foto: any;
 
-  constructor() { }
+  constructor(private bd: DbservicioService,private api: CameraService) { 
+
+  }
 
   ngOnInit() {
+    this.api.getfoto().subscribe(item => {
+      this.foto = item;
+    })
+
+  }
+
+  AbrirCamara() {
+    this.api.TakePicture();
   }
 
 }

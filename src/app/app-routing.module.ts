@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-conductor',
+    redirectTo: 'home-conductor',
     pathMatch: 'full'
   },
   {

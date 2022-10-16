@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="success">
-    <ion-title>Viaje Pagado</ion-title>
+    <ion-title>Viaje Finalizado</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +16,6 @@
       Desde : DuocUC Plaza Norte<br>
         Hasta : Mall Plaza de Quilicura<br>
         Acompañantes : Ninguno<br>
-        Celular : 979066489<br>
         Monto a pagar : $5.000<br>
     </ion-card-content>
 
@@ -54,14 +53,6 @@
       </ion-modal>
         </ion-item>
 
-
-    <ion-item>
-      <span slot="start" class="material-icons">qr_code</span>
-      <ion-label style="font-size: 15px;">Codigo QR</ion-label>
-      <ion-button disabled="true"  fill="outline" slot="end" [routerLink]="['/qrconductor']">Generar</ion-button>
-    </ion-item>
-
-
     <ion-item>
       <mat-icon slot="start">cancel</mat-icon>
       <ion-label style="font-size: 14px;">Finalizar Viaje</ion-label>
@@ -69,5 +60,26 @@
     </ion-item>
   
   </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Añadir Comentario:</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-input type="text" placeholder="Ej: Muy buen viaje!!"></ion-input>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-item>
+      <mat-icon slot="start">chat</mat-icon>
+      <ion-label style="font-size: 13px;">Enviar Comentario</ion-label>
+      <ion-button fill="outline" slot="end" color="success" (click)="presentAlert12()" >Enviar</ion-button>
+    </ion-item>
+
+  </ion-card>
+
+
   
 </ion-content>

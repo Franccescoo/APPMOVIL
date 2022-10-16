@@ -8,7 +8,10 @@ import { OverlayEventDetail } from '@ionic/core/components';
   styleUrls: ['./finalizar-viaje-cliente.page.scss'],
 })
 export class FinalizarViajeClientePage implements OnInit {
+  
   @ViewChild(IonModal) modal: IonModal;
+
+
   ngOnInit() {
   }
 
@@ -19,6 +22,15 @@ export class FinalizarViajeClientePage implements OnInit {
       header: 'Viaje Finalizado!',
       subHeader: 'Viaje finalizado correctamente',
       message: '¡Cuidado al volver a casa!',
+      buttons: ['Listo'],
+    });
+
+    await alert.present();
+  }
+
+  async presentAlert12() {
+    const alert = await this.alertController.create({
+      header: 'Comentario Enviado!',
       buttons: ['Listo'],
     });
 

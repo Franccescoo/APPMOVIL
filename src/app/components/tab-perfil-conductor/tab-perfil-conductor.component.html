@@ -10,17 +10,32 @@
   </ion-list-header>
 
   
-  <a [routerLink]="['/modificar-cliente']" style="text-decoration: none;" expand="block" >
+  <a [routerLink]="['/modificar-conductor']" style="text-decoration: none;" expand="block" >
     <ion-item>
       <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Modificar Perfil</ion-label>
     </ion-item>
   </a>
-    
-  <a [routerLink]="['/ayuda-cliente']" style="text-decoration: none;" expand="block">
-    <ion-item>
-      <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Ayuda</ion-label>
-    </ion-item>
-  </a>
+
+
+  <ion-card-content>
+
+    <ion-grid style="padding-top: 10px; padding-left: unset; padding-right: unset;">
+
+      <ion-row>
+        <ion-col><center><h3 style="font-size: 15px; font-weight: 600;">Estado del Conductor</h3></center></ion-col>
+      </ion-row>
+
+      <ion-row style="border-bottom: black 1px solid;">
+        <ion-col size="2"><ion-input type="text" style="font-size: 15px; font-weight: 600;" placeholder="">Inactivo</ion-input></ion-col>
+        <ion-col size="8"><ion-toggle [checked]="true" style="padding-left: 60px;"></ion-toggle></ion-col>
+        <ion-col size="2"><ion-input type="text" style="font-size: 15px; font-weight: 600;" placeholder="">Activo</ion-input></ion-col>
+      </ion-row>
+      
+    </ion-grid>
+
+  </ion-card-content>
+
+
 
   <ion-button [routerLink]="['/login-conductor']" style="margin-top: 150px;
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Fascinate&family=IBM+Plex+Mono:wght@500&family=Inconsolata:wght@200&family=Pacifico&family=Poppins:ital@1&display=swap');

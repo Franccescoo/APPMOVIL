@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="cuenta-cliente"></ion-back-button>
     </ion-buttons>
-  <ion-title >Modificar Perfil </ion-title>
+  <ion-title >Modificar Conductor </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,12 +11,17 @@
 
       <!-- fab placed to the top end -->
       <ion-fab vertical="top" horizontal="end" slot="fixed">
-        <ion-fab-button>
+        <ion-fab-button (click)="AbrirCamara()" >
           <mat-icon>create</mat-icon>
         </ion-fab-button>
       </ion-fab>
 
-    <img src="./assets/img/aca.jpg" width="50%" style="border-radius: 50%;border: black 1px solid;margin-left: 50px;margin-top: 10px;">
+      <center>
+        <ion-avatar slot="start">
+          <img alt=" " [src]="foto" *ngIf="foto" />
+        </ion-avatar>
+      </center>
+     
 
 
     <ion-card-content>
@@ -33,20 +38,12 @@
           <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
         </ion-row>
 
-        <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
-          <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Número de télefono"></ion-input></ion-col>
-          <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
-        </ion-row>
 
-        <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
-          <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Correo electrónico"></ion-input></ion-col>
-          <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
-        </ion-row>
         
       </ion-grid>
 
       <center>
-        <ion-button shape="round">CONFIRMAR</ion-button>
+        <ion-button shape="round" [routerLink]="['/home-conductor']">CONFIRMAR</ion-button>
       </center>
 
     </ion-card-content>
