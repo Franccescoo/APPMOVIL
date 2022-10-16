@@ -160,7 +160,7 @@ export class DbservicioService {
         }
 
       }
-      
+      this.listausuario.next(items);
     });
   }
     
