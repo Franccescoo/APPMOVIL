@@ -21,7 +21,7 @@ export class DbservicioService {
 
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(idrol INTEGER PRIMARY KEY , nombrerol VARCHAR (30) NOT NULL);";
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30), username VARCHAR(50) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
   tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR(30) PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(idusuario)) ;";
   tablaViaje: string = "CREATE TABLE IF NOT EXISTS viaje(idviaje INTEGER PRIMARY KEY , inicio VARCHAR (50) , destino VARCHAR (50)  , asientos INTEGER , costo_viaje INTEGER  , fecha_viaje VARCHAR(30)  , hora_partida INTEGER , hora_llegada INTEGER , fk_patente INTEGER , fk_idusuario INTEGER );";
   
@@ -29,7 +29,7 @@ export class DbservicioService {
 
   // INSERTS //
   
-  usuario1: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (1, 'v.rosendo','J.12mm8', 1);";
+  usuario1: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, username, fk_id_rol) VALUES (1, 'v.rosendo','J.12mm8','Victor', 1);";
   usuario2: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (2, 'j.baez','B.34vf8', 2);";
   usuario3: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (3, 'a.diaz','C.54yt78', 2);";
 
@@ -131,6 +131,8 @@ export class DbservicioService {
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
             idrol: res.rows.item(i).rol,
+            username: res.rows.item(i).username,
+            apellido: res.rows.item(i).apellido,
           });
         }
       }
@@ -150,7 +152,9 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            idrol: res.rows.item(i).fk_id_tipousuario
+            idrol: res.rows.item(i).fk_id_tipousuario,
+            username: res.rows.item(i).username,
+            apellido: res.rows.item(i).apellido,
           });
         }
         this.Storage.set('logeado', nombre)
@@ -240,7 +244,9 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            idrol: res.rows.item(i).rol
+            idrol: res.rows.item(i).rol,
+            username: res.rows.item(i).username,
+            apellido: res.rows.item(i).apellido,
           });
         }
       }

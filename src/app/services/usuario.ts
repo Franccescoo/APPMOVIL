@@ -4,5 +4,7 @@ export class Usuario {
     clave: string;
     foto: string;
     idrol: number;
+    username: string;
+    apellido: string;
     
 }
