@@ -20,22 +20,26 @@ export class DbservicioService {
   public database: SQLiteObject;
 
 
-  tablaTipoUsuario: string = "CREATE TABLE IF NOT EXISTS tipo_usuario(id_tipousuario INTEGER PRIMARY KEY  , tipo_nombre VARCHAR (30) NOT NULL);";
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(id_usuario INTEGER PRIMARY KEY  , username VARCHAR (20)  , clave VARCHAR (15)  , correo  VARCHAR (30)  , telefono INTEGER , foto VARCHAR(30) , estado VARCHAR(20) , fk_id_tipousuario INTEGER ,FOREIGN KEY(fk_id_tipousuario) REFERENCES tipo_usuario(id_tipousuario));";
-  tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(id_usuario)) ;";
-  tablaViaje: string = "CREATE TABLE IF NOT EXISTS viaje(id_viaje INTEGER PRIMARY KEY , inicio VARCHAR (50) , destino VARCHAR (50)  , asientos INTEGER , costo_viaje INTEGER  , fecha_viaje VARCHAR(30)  , hora_partida INTEGER , hora_llegada INTEGER , fk_patente INTEGER , fk_id_usuario INTEGER );";
+  tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(idrol INTEGER PRIMARY KEY , nombrerol VARCHAR (30) NOT NULL);";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
+  tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR(30) PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(idusuario)) ;";
+  tablaViaje: string = "CREATE TABLE IF NOT EXISTS viaje(idviaje INTEGER PRIMARY KEY , inicio VARCHAR (50) , destino VARCHAR (50)  , asientos INTEGER , costo_viaje INTEGER  , fecha_viaje VARCHAR(30)  , hora_partida INTEGER , hora_llegada INTEGER , fk_patente INTEGER , fk_idusuario INTEGER );";
   
 
 
-  // USUARIO INSERTAR TIPO //
+  // INSERTS //
   
-  registro1: string = "INSERT or IGNORE INTO usuario(id_usuario, username, clave, fk_id_tipousuario) VALUES (1, 'v.rosendo','J.12mm8', 1);";
-  registro2: string = "INSERT or IGNORE INTO usuario(id_usuario, username, clave, fk_id_tipousuario) VALUES (2, 'j.baez','B.34vf8', 2);";
-  registro3: string = "INSERT or IGNORE INTO usuario(id_usuario, username, clave, fk_id_tipousuario) VALUES (3, 'a.diaz','C.54yt78', 2);";
-  registroauto1: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('FF-HH-22','Audi',1);";
-  registroauto2: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('GG-11-RR','BMW',1);";
-  TipoUsuarioC: string = "INSERT or IGNORE INTO tipo_usuario(id_tipousuario, tipo_nombre) VALUES (1, 'Conductor');";
-  TipoUsuarioP: string = "INSERT or IGNORE INTO tipo_usuario(id_tipousuario, tipo_nombre) VALUES (2, 'Pasajero');";
+  usuario1: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (1, 'v.rosendo','J.12mm8', 1);";
+  usuario2: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (2, 'j.baez','B.34vf8', 2);";
+  usuario3: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (3, 'a.diaz','C.54yt78', 2);";
+
+
+  auto1: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('FF-HH-22','Audi',1);";
+  auto2: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('GG-11-RR','BMW',1);";
+
+
+  conductor: string = "INSERT or IGNORE INTO rol(idrol, nombrerol) VALUES (1, 'Conductor');";
+  pasajero: string = "INSERT or IGNORE INTO rol(idrol, nombrerol) VALUES (2, 'Pasajero');";
   //OBSERVABLES //
 
   listausuario = new BehaviorSubject([]);
@@ -45,7 +49,7 @@ export class DbservicioService {
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
-  constructor(public NativeStorage : NativeStorage ,private sqlite: SQLite, private platform: Platform, public alertController:AlertController) {
+  constructor(public NativeStorage : NativeStorage ,private sqlite: SQLite, private platform: Platform, public alertController:AlertController,public Storage: Storage) {
     //Crear base de datos//
     this.CrearBD();
   }
@@ -61,7 +65,7 @@ export class DbservicioService {
     this.platform.ready().then(() => {
       //creación de la BD
       this.sqlite.create({
-        name: 'usuario.db',
+        name: 'miauto.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
@@ -78,29 +82,28 @@ export class DbservicioService {
   async crearTablas() {
     try {
       //Tipos Usuario Crear e Insertar//
-      await this.database.executeSql(this.tablaTipoUsuario,[]);
-      
-      await this.database.executeSql(this.TipoUsuarioP,[]);
-      
-      await this.database.executeSql(this.TipoUsuarioC,[]);
-      
-      await this.database.executeSql(this.tablaUsuario,[]);
-
-      
-      await this.database.executeSql(this.registro1,[]);
-
-      await this.database.executeSql(this.registro2,[]);
-
-      await this.database.executeSql(this.registro3,[]);
-     
+      await this.database.executeSql(this.tablaRol,[]);  
+      //this.presentAlert("error tabla 1")
+      await this.database.executeSql(this.pasajero,[]);
+      //this.presentAlert("error tabla 2")
+      await this.database.executeSql(this.conductor,[]);
+      //this.presentAlert("error tabla 3")
+      await this.database.executeSql(this.tablaUsuario,[]);   
+      //this.presentAlert("error tabla 4")
+      await this.database.executeSql(this.usuario1,[]);
+      //this.presentAlert("error tabla 5")
+      await this.database.executeSql(this.usuario2,[]);
+      //this.presentAlert("error tabla 6")
+      await this.database.executeSql(this.usuario3,[]);
+      //this.presentAlert("error tabla 7")
       await this.database.executeSql(this.tablaAuto,[]);
-
-      await this.database.executeSql(this.registroauto1,[]);
-
-      await this.database.executeSql(this.registroauto2,[]);
-      
+      //this.presentAlert("error tabla 8")
+      await this.database.executeSql(this.auto1,[]);
+      //this.presentAlert("error tabla 9")
+      await this.database.executeSql(this.auto2,[]);
+      //this.presentAlert("error tabla 10")
       await this.database.executeSql(this.tablaViaje,[]);
-      
+      //this.presentAlert("error tabla 11")
 
       this.buscarUsuario();
       
@@ -109,8 +112,8 @@ export class DbservicioService {
       this.buscarAuto();
       
       this.isDbReady.next(true);
-    } catch (err) {
-      this.presentAlert("error al crear tablas"  + err);
+    } catch (e) {
+      this.presentAlert("error al crear tablas"  + e);
 
     }
 
@@ -123,14 +126,11 @@ export class DbservicioService {
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            idUsuario: res.rows.item(i).id_usuario,
-            username: res.rows.item(i).username,
-            clave: res.rows.item(i).clave,
-            correo: res.rows.item(i).correo,
-            telefono: res.rows.item(i).telefono,
-            foto: res.rows.item(i).foto,
+            idUsuario: res.rows.item(i).idusuario,
             nombre: res.rows.item(i).nombre,
-            tipouser: res.rows.item(i).fk_id_tipousuario
+            clave: res.rows.item(i).clave,
+            foto: res.rows.item(i).foto,
+            idrol: res.rows.item(i).rol,
           });
         }
       }
@@ -139,25 +139,28 @@ export class DbservicioService {
   }
 
 
-  login(VfUsuario, VfContra) {
-    let data = [VfUsuario, VfContra]
-    return this.database.executeSql('SELECT * FROM usuario WHERE username=? AND clave=? ', [data[0],data[1]]).then(res => {
+  login(nombre, clave) {
+    let data = [nombre, clave]
+    return this.database.executeSql('SELECT * FROM usuario WHERE nombre=? AND clave=? ', [data[0],data[1]]).then(res => {
       let items: Usuario[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            idUsuario: res.rows.item(i).id_usuario,
-            username: res.rows.item(i).username,
-            clave: res.rows.item(i).clave,
-            correo: res.rows.item(i).correo,
-            telefono: res.rows.item(i).telefono,
-            foto: res.rows.item(i).foto,
+            idUsuario: res.rows.item(i).idusuario,
             nombre: res.rows.item(i).nombre,
-            tipouser: res.rows.item(i).fk_id_tipousuario
+            clave: res.rows.item(i).clave,
+            foto: res.rows.item(i).foto,
+            idrol: res.rows.item(i).fk_id_tipousuario
           });
         }
+        this.Storage.set('logeado', nombre)
+        this.Storage.get('logeado')
+        return true;
       }
-      this.listausuario.next(items);
+      else{
+        return false;
+      }
+      
     });
   }
     
@@ -166,20 +169,20 @@ export class DbservicioService {
     return this.listausuario.asObservable();
   }
 
-  deleteUsuario(id_usuario) {
-    return this.database.executeSql('DELETE FROM usuario WHERE id_usuario = ?', [id_usuario]).then(res => {
+  deleteUsuario(idusuario) {
+    return this.database.executeSql('DELETE FROM usuario WHERE idusuario = ?', [idusuario]).then(res => {
       this.buscarUsuario();
     });
   }
-  agregarUsuario(id_usuario,username, clave, correo, telefono, foto , estado , fk_id_tipousuario) {
-    let data = [id_usuario,username, clave, correo, telefono, foto , estado , fk_id_tipousuario];
-    return this.database.executeSql('INSERT INTO usuario (id_usuario,username , clave , correo , telefono , foto , estado , fk_id_tipousuario) VALUES (? , ?, ?, ?, ?, ? , ? , ?)', data).then(res => {
+  agregarUsuario(idusuario,nombre, clave,foto,fk_id_rol) {
+    let data = [idusuario,nombre, clave,foto,fk_id_rol];
+    return this.database.executeSql('INSERT INTO usuario (idusuario,nombre , clave, foto, fk_id_rol) VALUES (?, ?, ?, ?, ?)', data).then(res => {
       this.buscarUsuario();
     });
   }
-  updateUsuario(id_usuario,username, clave, correo, telefono , foto , estado , fk_id_tipousuario ) {
-    let data = [id_usuario,username, clave, correo, telefono , foto , estado , fk_id_tipousuario];
-    return this.database.executeSql('UPDATE usuario SET username = ? , clave = ? , correo = ? , telefono = ? , foto = ? , estado = ? , fk_id_tipousuario  = ? where = id_usuario ', data).then(res => {
+  updateUsuario(idusuario,nombre,foto,fk_id_rol ) {
+    let data = [idusuario,nombre,foto ,fk_id_rol];
+    return this.database.executeSql('UPDATE usuario SET nombre = ? , clave = ? ,foto = ? ,fk_id_rol  = ? where = idusuario ', data).then(res => {
       this.buscarUsuario();
     });
 
@@ -195,7 +198,7 @@ export class DbservicioService {
             marca: res.rows.item(i).marca,
             puestos: res.rows.item(i).puestos,          
             annio: res.rows.item(i).annio,                                                                                                                                                                                                                 
-            iduser: res.rows.item(i).fk_id_usuario
+            iduser: res.rows.item(i).fk_idusuario
           });
         }
       }
@@ -212,21 +215,38 @@ export class DbservicioService {
     });
   }
 
-  agregarAuto(patente, modelo, marca , puestos , estado , fk_id_usuario) {
-    let data = [patente , modelo , marca, puestos , estado , fk_id_usuario];
-    return this.database.executeSql('INSERT INTO auto (  patente , modelo , marca , puestos , estado , fk_id_usuario) VALUES (? , ? , ? , ? , ? , ?)', data).then(res => {
+  agregarAuto(patente, modelo, marca , puestos , fk_idusuario) {
+    let data = [patente , modelo , marca, puestos , fk_idusuario];
+    return this.database.executeSql('INSERT INTO auto (  patente , modelo , marca , puestos , fk_idusuario) VALUES (? , ? , ? , ? , ?)', data).then(res => {
       this.buscarAuto();
     });
   }
-  updateAuto( patente ,  modelo,  marca , puestos, estado , fk_id_usuario) {
-    let data = [ patente,   modelo ,  marca ,puestos, estado , fk_id_usuario];
-    return this.database.executeSql('UPDATE auto  SET    modelo = ? ,  marca = ? , puestos = ?, estado = ? ,fk_id_usuario = ?  where = patente ', data).then(res => {
+  updateAuto( patente ,  modelo,  marca , puestos,  fk_idusuario) {
+    let data = [ patente,   modelo ,  marca ,puestos,  fk_idusuario];
+    return this.database.executeSql('UPDATE auto  SET    modelo = ? ,  marca = ? , puestos = ?, fk_idusuario = ?  where = patente ', data).then(res => {
       this.buscarAuto();
     });
 
   }
 
-
+  id(idusuario) {
+    let data = [idusuario]
+    return this.database.executeSql('SELECT * FROM usuario WHERE idusuario = ? ', [data[0],data[1]]).then(res => {
+      let items: Usuario[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
+          items.push({
+            idUsuario: res.rows.item(i).idusuario,
+            nombre: res.rows.item(i).nombre,
+            clave: res.rows.item(i).clave,
+            foto: res.rows.item(i).foto,
+            idrol: res.rows.item(i).rol
+          });
+        }
+      }
+      this.listausuario.next(items);
+    });
+  }
 
 
 
