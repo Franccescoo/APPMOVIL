@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
@@ -14,7 +14,15 @@ export class ComentarioConductorPage implements OnInit {
     }
   ]
 
-  constructor(private conexionBD: DbservicioService, private router: Router) { }
+  texto="";
+
+  constructor(private activedRouter: ActivatedRoute,private conexionBD: DbservicioService, private router: Router) {
+    this.activedRouter.queryParams.subscribe(param=>{
+      if(this.router.getCurrentNavigation().extras.state){
+        this.texto = this.router.getCurrentNavigation().extras.state.textoEnviado;
+      }
+    })
+   }
 
   ngOnInit() {
     //me subscribo al servicio
@@ -28,6 +36,6 @@ export class ComentarioConductorPage implements OnInit {
     })
   }
 
-  
+
 
 }

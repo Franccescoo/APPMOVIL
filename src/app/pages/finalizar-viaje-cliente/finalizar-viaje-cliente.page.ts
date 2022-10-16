@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AlertController, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
@@ -16,14 +16,27 @@ export class FinalizarViajeClientePage implements OnInit {
   name: string;
   texto: "";
 
+  listaNoticias: any = [
+    {
+      texto: ''
+    }
+  ]
+
   constructor(private router: Router,private bd: DbservicioService,private alertController: AlertController) {}
   ngOnInit() {
   }
 
   guardar(){
     this.bd.agregarComen(this.texto);
-    this.bd.presentAlert1("Noticia Agregada", "Tabla Noticia");
-    this.router.navigate(['/home']);
+    this.bd.presentAlert1("Comentario Agregado", "Tabla Comentario");
+    let navigationsExtras: NavigationExtras ={
+      state: {
+        textoEnviado: this.listaNoticias.texto
+      }
+    }
+    this.router.navigate(['/comentario-conductor'], navigationsExtras);
+    
+    //this.router.navigate(['/home']);
   }
 
   async presentAlert() {
