@@ -16,12 +16,12 @@
         </ion-fab-button>
       </ion-fab>
 
-      <ion-item *ngFor="let x of listaNoticias">
+      <ion-item *ngFor="let x of listausuario">
         <ion-avatar slot="start">
           <img alt=" " [src]="foto" *ngIf="foto" />
         </ion-avatar>
         <ion-label>
-          {{x.user}}
+          {{x.username}}
         </ion-label>
       </ion-item>
 <!--

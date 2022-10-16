@@ -13,9 +13,9 @@ export class ModificarClientePage implements OnInit {
   foto: any;
   user:any[] =[]
 
-  listaNoticias: any = [
+  listausuario: any = [
     {
-      user: ''
+      username: ''
     }
   ]
 
@@ -40,10 +40,12 @@ export class ModificarClientePage implements OnInit {
     this.api.TakePicture();
   }
 
-  Datos(){
-    this.bd.id(1)
-    state: {
-      user: this.bd.usuario1
+  Datos(x){
+
+    let navigationsExtras: NavigationExtras ={
+      state: {
+        nombre: x.username,
+      }
     }
   }
 
