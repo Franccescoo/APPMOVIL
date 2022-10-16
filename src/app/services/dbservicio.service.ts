@@ -5,6 +5,7 @@ import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Auto } from './auto';
+import { Comentario } from './comentario';
 import { Comuna } from './comuna';
 import { DetalleViaje } from './detalleviaje';
 import { Rol } from './rol';
@@ -24,7 +25,7 @@ export class DbservicioService {
   tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30), username VARCHAR(50), apellido VARCHAR(50) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
   tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR(30) PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(idusuario)) ;";
   tablaViaje: string = "CREATE TABLE IF NOT EXISTS viaje(idviaje INTEGER PRIMARY KEY , inicio VARCHAR (50) , destino VARCHAR (50)  , asientos INTEGER , costo_viaje INTEGER  , fecha_viaje VARCHAR(30)  , hora_partida INTEGER , hora_llegada INTEGER , fk_patente INTEGER , fk_idusuario INTEGER );";
-  
+  tablaComen: string = "CREATE TABLE IF NOT EXISTS comentario(idComentario INTEGER PRIMARY KEY autoincrement, comentario VARCHAR(500), fk_iduser INTEGER, FOREIGN KEY(fk_iduser) REFERENCES usuario(idusuario));";
 
 
   // INSERTS //
@@ -45,6 +46,8 @@ export class DbservicioService {
   listausuario = new BehaviorSubject([]);
 
   listauto = new BehaviorSubject([]);
+
+  listaComen = new BehaviorSubject([]);
 
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -83,27 +86,28 @@ export class DbservicioService {
     try {
       //Tipos Usuario Crear e Insertar//
       await this.database.executeSql(this.tablaRol,[]);  
-      this.presentAlert("error tabla 1")
+      //this.presentAlert("error tabla 1")
       await this.database.executeSql(this.pasajero,[]);
-      this.presentAlert("error tabla 2")
+      //this.presentAlert("error tabla 2")
       await this.database.executeSql(this.conductor,[]);
-      this.presentAlert("error tabla 3")
+      //this.presentAlert("error tabla 3")
       await this.database.executeSql(this.tablaUsuario,[]);   
-      this.presentAlert("error tabla 4")
+      //this.presentAlert("error tabla 4")
       await this.database.executeSql(this.usuario1,[]);
-      this.presentAlert("error tabla 5")
+      //this.presentAlert("error tabla 5")
       await this.database.executeSql(this.usuario2,[]);
-      this.presentAlert("error tabla 6")
+      //this.presentAlert("error tabla 6")
       await this.database.executeSql(this.usuario3,[]);
-      this.presentAlert("error tabla 7")
+      //this.presentAlert("error tabla 7")
       await this.database.executeSql(this.tablaAuto,[]);
-      this.presentAlert("error tabla 8")
+      //this.presentAlert("error tabla 8")
       await this.database.executeSql(this.auto1,[]);
-      this.presentAlert("error tabla 9")
+      //this.presentAlert("error tabla 9")
       await this.database.executeSql(this.auto2,[]);
-      this.presentAlert("error tabla 10")
+      //this.presentAlert("error tabla 10")
       await this.database.executeSql(this.tablaViaje,[]);
-      this.presentAlert("error tabla 11")
+      //this.presentAlert("error tabla 11")
+      await this.database.executeSql(this.tablaComen,[]);
 
       this.buscarUsuario();
       
@@ -167,6 +171,10 @@ export class DbservicioService {
 
   fetchUser(): Observable<Usuario[]> {
     return this.listausuario.asObservable();
+  }
+
+  fetchComen(): Observable<Usuario[]> {
+    return this.listaComen.asObservable();
   }
 
   deleteUsuario(idusuario) {
@@ -251,14 +259,50 @@ export class DbservicioService {
     });
   }
 
+  buscarComen(){
+    //realizamos la consulta a la BD
+    return this.database.executeSql('SELECT * FROM comentario ',[]).then(res=>{
+      //variable para guardar los registros en una coleccion de datos de la clase noticia
+      let items: Comentario[] = [];
+      if(res.rows.length > 0){
+        for(var i=0; i < res.rows.length; i++){
+          items.push({
+            idComentario : res.rows.item(i).idComentario,
+            comentario : res.rows.item(i).comentario,
+            iduser : res.rows.item(i).fk_iduser
+          });
+
+        }
+      }
+      this.listaComen.next(items);
+
+    })
+  }
 
 
+  agregarComen(comentario){
+    let data = [comentario];
+    return this.database.executeSql('INSERT INTO comentario(comentario) VALUES(?)',data).then(res=>{
+      this.buscarComen();
+    });
+
+  }
 
 
 
   //ALERTAS //
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
+      message: msj,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async presentAlert1(msj: string,men: string) {
+    const alert = await this.alertController.create({
+      header: men,
       message: msj,
       buttons: ['OK'],
     });

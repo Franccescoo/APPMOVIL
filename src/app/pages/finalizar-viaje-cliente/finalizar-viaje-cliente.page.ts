@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController, IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
   selector: 'app-finalizar-viaje-cliente',
@@ -8,14 +10,21 @@ import { OverlayEventDetail } from '@ionic/core/components';
   styleUrls: ['./finalizar-viaje-cliente.page.scss'],
 })
 export class FinalizarViajeClientePage implements OnInit {
-  
   @ViewChild(IonModal) modal: IonModal;
 
+  message = '';
+  name: string;
+  texto: "";
 
+  constructor(private router: Router,private bd: DbservicioService,private alertController: AlertController) {}
   ngOnInit() {
   }
 
-  constructor(private alertController: AlertController) {}
+  guardar(){
+    this.bd.agregarComen(this.texto);
+    this.bd.presentAlert1("Noticia Agregada", "Tabla Noticia");
+    this.router.navigate(['/home']);
+  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -37,8 +46,6 @@ export class FinalizarViajeClientePage implements OnInit {
     await alert.present();
   }
 
-  message = '';
-  name: string;
 
   cancel() {
     this.modal.dismiss(null, 'cancel');
