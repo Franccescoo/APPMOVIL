@@ -26,6 +26,7 @@ export class HomePage {
     // })
     //this.Ubicacion();
     // this.router.navigate(['home/inicio']);
+    this.router.navigate(['home/inicio']);
   }
   ngOnInit() {
     // this.bd.dbState().subscribe((res) => {
