@@ -14,14 +14,12 @@ export class HomePage {
   // public latitude;
   // public longitude;
   // id: any;
-
-
+a
   constructor(public nativeStorage: NativeStorage,private router: Router,public geolocation: Geolocation, private activedRouter: ActivatedRoute, private bd: DbservicioService) {
 
     // this.activedRouter.queryParams.subscribe(param=>{
     //   if(this.router.getCurrentNavigation().extras.state){
     //     this.id = this.router.getCurrentNavigation().extras.state.idEnviado;
-        
     //   }
     // })
     //this.Ubicacion();
