@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
-import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
-import { DbservicioService } from '../services/dbservicio.service';
+import {Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
   // user:any[] =[]
   // public latitude;
   // public longitude;
   // id: any;
-a
-  constructor(public nativeStorage: NativeStorage,private router: Router,public geolocation: Geolocation, private activedRouter: ActivatedRoute, private bd: DbservicioService) {
+
+  constructor(private router: Router) {
 
     // this.activedRouter.queryParams.subscribe(param=>{
     //   if(this.router.getCurrentNavigation().extras.state){

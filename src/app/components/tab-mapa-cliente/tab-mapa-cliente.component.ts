@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
 import { ToastController } from '@ionic/angular';
 
-
 declare let google;
 
 interface Marker {
@@ -12,6 +11,7 @@ interface Marker {
   };
   title: string;
 }
+
 @Component({
   selector: 'app-tab-mapa-cliente',
   templateUrl: './tab-mapa-cliente.component.html',

@@ -9,73 +9,44 @@
 
 <ion-content>
 
-      <!-- fab placed to the top end -->
-      <ion-fab vertical="top" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="AbrirCamara()" >
-          <mat-icon>create</mat-icon>
-        </ion-fab-button>
-      </ion-fab>
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="AbrirCamara()" >
+      <mat-icon>create</mat-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-      <center>
-        <ion-avatar slot="start">
-          <img alt=" " [src]="foto" *ngIf="foto" />
-        </ion-avatar>
-      </center>
-     
-
-
-    <!-- <ion-card-content>
-
-      <ion-grid style="padding-top: 10px; padding-left: unset; padding-right: unset;">
-
-        <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
-          <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Nombre"></ion-input></ion-col>
-          <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
-        </ion-row>
-
-        <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
-          <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Apellido"></ion-input></ion-col>
-          <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
-        </ion-row>
+  <center>
+    <ion-avatar slot="start">
+      <img alt=" " [src]="foto" *ngIf="foto" />
+    </ion-avatar>
+  </center>
+ 
 
 
-        
-      </ion-grid>
+<ion-card-content>
 
-      <center>
-        <ion-button shape="round" [routerLink]="['/home']">CONFIRMAR</ion-button>
-      </center>
+  <ion-grid style="padding-top: 10px; padding-left: unset; padding-right: unset;">
 
-    </ion-card-content> 
+    <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+      <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Nombre"></ion-input></ion-col>
+      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+    </ion-row>
 
-    <ion-item>
-      <ion-label position="floating">id</ion-label>
-      <ion-input type="text" [(ngModel)]="id"></ion-input>
-    </ion-item>
-  -->
-    <ion-list>
-      <ion-item>
-        <ion-label position="stacked">Nombre:</ion-label>
-      <ion-input [clearInput]="true" placeholder="Julio" value="Default value"></ion-input>
-    </ion-item>
+    <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+      <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Apellido"></ion-input></ion-col>
+      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+    </ion-row>
 
-    <ion-list>
-      <ion-item>
-        <ion-label position="stacked">Apellido:</ion-label>
-      <ion-input [clearInput]="true" placeholder="Baez" value="Default value"></ion-input>
-    </ion-item>
-    <!--
-    <ion-item>
-      <ion-label position="floating">nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="nombre1" >{{nombre1}}</ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
-      <ion-input type="text" [(ngModel)]="apellido1">{{apellido1}}</ion-input>
-    </ion-item>-->
-  
-    <ion-button shape="block">Guardar Cambios</ion-button>
+    
+  </ion-grid>
+
+  <center>
+    <ion-button shape="round" [routerLink]="['/home-conductor']">CONFIRMAR</ion-button>
+  </center>
+
+</ion-card-content>
 
 
 </ion-content>

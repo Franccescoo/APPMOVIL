@@ -23,7 +23,6 @@
   <a [routerLink]="['/comentario-conductor']" style="text-decoration: none;" expand="block">
     <ion-item>
       <ion-label><ion-icon name="chevron-forward-outline"></ion-icon>Tus Comentarios</ion-label>
-
     </ion-item>
   </a>
 
@@ -34,22 +33,5 @@
   </ion-button>
 
 
-  <ion-list *ngFor="let x of user">
-    <ion-list *ngIf="x.idusuario == id">
-      <ion-item>
-        <ion-label>nombre: {{x.nombre}}</ion-label>
-      </ion-item>
 
-      <ion-item>
-        <ion-label>username: {{x.username}}</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>clave: {{x.clave}}</ion-label>
-      </ion-item>
-
-
-      <Ion-Button color="success" expand="full" (click)="perfiluser()">Perfil</Ion-Button>
-    </ion-list>
-  </ion-list>
 </ion-content>
