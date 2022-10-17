@@ -4,6 +4,7 @@ import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { reduce } from 'rxjs/operators';
 import { Auto } from './auto';
 import { Comentario } from './comentario';
 import { Comuna } from './comuna';
@@ -351,5 +352,8 @@ async presentAlert1(msj: string,men: string) {
 
   await alert.present();
 }
+
+
+
 }
 

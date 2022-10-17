@@ -65,9 +65,9 @@ export class LoginClientePage implements OnInit {
          idEnviado: this.user[0].iduser
        }
       }
-      this.router.navigate(['/home'], navigationsExtras);
+      //this.router.navigate(['/home'], navigationsExtras);
 
-      // this.router.navigate(['/home']);
+       this.router.navigate(['/home'], navigationsExtras);
 
       // if (this.user[0].fk_id_tipousuario == 2) {
       //   this.router.navigate(['/home']);

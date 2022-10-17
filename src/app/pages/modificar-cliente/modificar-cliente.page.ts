@@ -11,6 +11,8 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class ModificarClientePage implements OnInit {
   foto: any;
+  nombre1:"Julio";
+  apellido1:"Baez";
 
   user:any[] =[]
   id: any;

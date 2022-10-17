@@ -46,22 +46,34 @@
         <ion-button shape="round" [routerLink]="['/home']">CONFIRMAR</ion-button>
       </center>
 
-    </ion-card-content> -->
+    </ion-card-content> 
 
     <ion-item>
       <ion-label position="floating">id</ion-label>
       <ion-input type="text" [(ngModel)]="id"></ion-input>
     </ion-item>
-  
+  -->
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nombre:</ion-label>
+      <ion-input [clearInput]="true" placeholder="Julio" value="Default value"></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Apellido:</ion-label>
+      <ion-input [clearInput]="true" placeholder="Baez" value="Default value"></ion-input>
+    </ion-item>
+    <!--
     <ion-item>
       <ion-label position="floating">nombre</ion-label>
-      <ion-input type="text" [(ngModel)]="nombre1"></ion-input>
+      <ion-input type="text" [(ngModel)]="nombre1" >{{nombre1}}</ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">username</ion-label>
-      <ion-input type="text" [(ngModel)]="username1"></ion-input>
-    </ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="apellido1">{{apellido1}}</ion-input>
+    </ion-item>-->
   
     <ion-button shape="block">Guardar Cambios</ion-button>
 
