@@ -18,7 +18,7 @@ interface Marker {
   styleUrls: ['./tab-mapa-conductor.component.scss'],
 })
 export class TabMapaConductorComponent implements OnInit {
-  map: any;
+  map: null;
   locationService: any;
   public latitude;
   public longitude;
