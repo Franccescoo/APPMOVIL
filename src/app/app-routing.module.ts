@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-cliente',
+    redirectTo: 'inicio-cliente',
     pathMatch: 'full'
   },
   {
@@ -79,13 +79,6 @@ const routes: Routes = [
   {
     path: 'paginainicio',
     loadChildren: () => import('./pagesConductor/paginainicio/paginainicio.module').then( m => m.PaginainicioPageModule)
-  },  {
-    path: 'inicio',
-    loadChildren: () => import('./pagesCliente/inicio/inicio.module').then( m => m.InicioPageModule)
-  },
-  {
-    path: 'inicio',
-    loadChildren: () => import('./pagesConductor/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
     path: 'inicio-cliente',
@@ -93,7 +86,7 @@ const routes: Routes = [
   },
   {
     path: 'inicio-conductor',
-    loadChildren: () => import('./pagesCliente/inicio-conductor/inicio-conductor.module').then( m => m.InicioConductorPageModule)
+    loadChildren: () => import('./pagesConductor/inicio-conductor/inicio-conductor.module').then( m => m.InicioConductorPageModule)
   },
   {
     path: 'inicio-conductor',
