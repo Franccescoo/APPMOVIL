@@ -79,7 +79,35 @@ const routes: Routes = [
   {
     path: 'paginainicio',
     loadChildren: () => import('./pagesConductor/paginainicio/paginainicio.module').then( m => m.PaginainicioPageModule)
+  },  {
+    path: 'inicio',
+    loadChildren: () => import('./pagesCliente/inicio/inicio.module').then( m => m.InicioPageModule)
   },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./pagesConductor/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+  {
+    path: 'inicio-cliente',
+    loadChildren: () => import('./pagesCliente/inicio-cliente/inicio-cliente.module').then( m => m.InicioClientePageModule)
+  },
+  {
+    path: 'inicio-conductor',
+    loadChildren: () => import('./pagesCliente/inicio-conductor/inicio-conductor.module').then( m => m.InicioConductorPageModule)
+  },
+  {
+    path: 'inicio-conductor',
+    loadChildren: () => import('./pagesConductor/inicio-conductor/inicio-conductor.module').then( m => m.InicioConductorPageModule)
+  },
+  {
+    path: 'perfil-cliente',
+    loadChildren: () => import('./pagesCliente/perfil-cliente/perfil-cliente.module').then( m => m.PerfilClientePageModule)
+  },
+  {
+    path: 'perfil-conductor',
+    loadChildren: () => import('./pagesConductor/perfil-conductor/perfil-conductor.module').then( m => m.PerfilConductorPageModule)
+  },
+
 
 
 
