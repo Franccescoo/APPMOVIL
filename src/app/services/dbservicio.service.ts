@@ -35,13 +35,13 @@ export class DbservicioService {
 
   // INSERTS //
 
-  usuario1: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, username, fk_id_rol) VALUES (1, 'v.rosendo','J.12mm8','Victor', 1);";
-  usuario2: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (2, 'j.baez','B.34vf8', 2);";
-  usuario3: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (3, 'a.diaz','C.54yt78', 2);";
+  // usuario1: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, username, fk_id_rol) VALUES (1, 'v.rosendo','J.12mm8','Victor', 1);";
+  // usuario2: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (2, 'j.baez','B.34vf8', 2);";
+  // usuario3: string = "INSERT or IGNORE INTO usuario(idusuario, nombre, clave, fk_id_rol) VALUES (3, 'a.diaz','C.54yt78', 2);";
 
 
-  auto1: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('FF-HH-22','Audi',1);";
-  auto2: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('GG-11-RR','BMW',1);";
+  // auto1: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('FF-HH-22','Audi',1);";
+  // auto2: string = "INSERT or IGNORE INTO auto(patente, marca ,fk_id_usuario) VALUES ('GG-11-RR','BMW',1);";
 
 
   conductor: string = "INSERT or IGNORE INTO rol(idrol, nombrerol) VALUES (1, 'Conductor');";
@@ -107,18 +107,8 @@ export class DbservicioService {
       //this.presentAlert("error tabla 3")
       await this.database.executeSql(this.tablaUsuario,[]);   
       //this.presentAlert("error tabla 4")
-      await this.database.executeSql(this.usuario1,[]);
-      //this.presentAlert("error tabla 5")
-      await this.database.executeSql(this.usuario2,[]);
-      //this.presentAlert("error tabla 6")
-      await this.database.executeSql(this.usuario3,[]);
-      //this.presentAlert("error tabla 7")
       await this.database.executeSql(this.tablaAuto,[]);
       //this.presentAlert("error tabla 8")
-      await this.database.executeSql(this.auto1,[]);
-      //this.presentAlert("error tabla 9")
-      await this.database.executeSql(this.auto2,[]);
-      //this.presentAlert("error tabla 10")
       await this.database.executeSql(this.tablaViaje,[]);
       //this.presentAlert("error tabla 11")
       await this.database.executeSql(this.tablaComen,[]);
@@ -199,9 +189,9 @@ export class DbservicioService {
       this.buscarUsuario();
     });
   }
-  agregarUsuario(idusuario, nombre, clave, foto, fk_id_rol) {
-    let data = [idusuario, nombre, clave, foto, fk_id_rol];
-    return this.database.executeSql('INSERT INTO usuario (idusuario,nombre , clave, foto, fk_id_rol) VALUES (?, ?, ?, ?, ?)', data).then(res => {
+  agregarUsuario(idusuario, nombre, clave,  fk_id_rol) {
+    let data = [idusuario, nombre, clave, fk_id_rol];
+    return this.database.executeSql('INSERT INTO usuario (idusuario,nombre , clave,fk_id_rol) VALUES (?, ?,?, ?)', data).then(res => {
       this.buscarUsuario();
     });
   }

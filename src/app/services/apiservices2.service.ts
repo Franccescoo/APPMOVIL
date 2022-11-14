@@ -17,17 +17,12 @@ export class Apiservices2Service {
   // Se establece la base url del API a consumir
   apiURL = 'https://my-json-server.typicode.com/victorrosendo/repoUsuariosRamos';
   // Se declara la variable http de tipo HttpClient
-  constructor(private http: HttpClient) { }
 
-  
-  getUsers(): Observable<any> {
-    return this.http.get(this.apiURL + '/users/').pipe(
-      retry(3)
-    );
-  }
+  constructor(private http:HttpClient) { }
 
-  getUser(id): Observable<any> {
-    return this.http.get(this.apiURL + '/users/' + id).pipe(
+
+  getUsuarios():Observable<any>{
+    return this.http.get(this.apiURL+'/users/').pipe(
       retry(3)
     );
   }

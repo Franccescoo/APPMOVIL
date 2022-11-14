@@ -28,7 +28,12 @@ export class LoginClientePage implements OnInit {
   ]
 
 
-  user:any[] =[]
+  usuarios: any=[{
+    id: '',
+    nombre:'',
+    clave:'',
+    id_rol:''
+  }];
   constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
    
 
@@ -36,16 +41,18 @@ export class LoginClientePage implements OnInit {
 
   }
   ngOnInit() {
-    this.bd.dbState().subscribe((res) => {
-      if (res){
-        this.bd.fetchUser().subscribe(item => {
-          this.user = item;
-          this.ListaDatos = item;
-        })
+    this.api.getUsuarios().subscribe((res)=>{
+      this.usuarios = res;
+      //console.log(res)
+      for(let x of this.usuarios){
+        //this.servicioBD.presentAlert(x.nombre);
+        this.bd.agregarUsuario(x.id, x.nombre,x.clave, x.id_rol);
       }
-      
-    })
-    
+     
+    });
+
+     
+
   }
 
   
@@ -57,17 +64,11 @@ export class LoginClientePage implements OnInit {
     else if(this.ingreso.clave == 0){
       this.presentToast("Ingrese Su Contraseña");
     }
-    else if(this.user.length == 0){
+    else if(this.usuarios.length == 0){
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }else{
-      let navigationsExtras: NavigationExtras ={
-       state: {
-         idEnviado: this.user[0].iduser
-       }
-      }
-      //this.router.navigate(['/home'], navigationsExtras);
-
-       this.router.navigate(['/home'], navigationsExtras);
+      localStorage.setItem('usuario',this.usuarios)
+      this.router.navigate(['/modificar-cliente']);
 
       // if (this.user[0].fk_id_tipousuario == 2) {
       //   this.router.navigate(['/home']);

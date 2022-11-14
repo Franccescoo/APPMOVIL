@@ -11,22 +11,22 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class ModificarClientePage implements OnInit {
   foto: any;
-  nombre1:"Julio";
-  apellido1:"Baez";
 
-  user:any[] =[]
-  id: any;
-  constructor(private bd: DbservicioService,private api: CameraService,private router: Router,private activedRouter: ActivatedRoute) { 
-    this.activedRouter.queryParams.subscribe(param=>{
-      if(this.router.getCurrentNavigation().extras.state){
-        this.id = this.router.getCurrentNavigation().extras.state.idEnviado;
-      }
-    })
-  }
+
+  usuarios: any=[{
+    id: '',
+    nombre:'',
+    clave:'',
+    id_rol:''
+  }];
+  usuario = localStorage.getItem("usuario");
+
+  constructor(private bd: DbservicioService,private api: CameraService,private router: Router,private activedRouter: ActivatedRoute) {}
 
   ngOnInit() {
     this.api.getfoto().subscribe(item => {
       this.foto = item;
+      console.log("usuario: ", this.usuarios)
     })
     
 
