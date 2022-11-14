@@ -3,7 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Apiservices2Service } from 'src/app/services/apiservices2.service';
-
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 
@@ -34,7 +34,8 @@ export class LoginClientePage implements OnInit {
     clave:'',
     id_rol:''
   }];
-  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
+  user: any[]
+  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController,public nativeStorage: NativeStorage) {
    
 
 
@@ -45,7 +46,7 @@ export class LoginClientePage implements OnInit {
       this.usuarios = res;
       //console.log(res)
       for(let x of this.usuarios){
-        //this.servicioBD.presentAlert(x.nombre);
+        this.presentToast(x.nombre);
         this.bd.agregarUsuario(x.id, x.nombre,x.clave, x.id_rol);
       }
      
@@ -67,7 +68,10 @@ export class LoginClientePage implements OnInit {
     else if(this.usuarios.length == 0){
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }else{
-      localStorage.setItem('usuario',this.usuarios)
+      this.nativeStorage.setItem('id',this.usuarios[0].id)
+      this.nativeStorage.setItem('nombre',this.usuarios[0].nombre)
+      this.nativeStorage.setItem('clave',this.usuarios[0].clave)
+      this.nativeStorage.setItem('idrol',this.usuarios[0].idrol)
       this.router.navigate(['/modificar-cliente']);
 
       // if (this.user[0].fk_id_tipousuario == 2) {
