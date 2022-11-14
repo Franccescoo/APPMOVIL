@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, MenuController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Apiservices2Service } from 'src/app/services/apiservices2.service';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
@@ -34,10 +34,9 @@ export class LoginClientePage implements OnInit {
     clave:'',
     id_rol:''
   }];
-  user: any[]
-  constructor(private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController,public nativeStorage: NativeStorage) {
-   
 
+  constructor(private menuController: MenuController,private nativeStorage: NativeStorage,private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
+    menuController.enable(false , "first")
 
 
   }
@@ -82,11 +81,7 @@ export class LoginClientePage implements OnInit {
       //     this.router.navigate(['/home']);
       //     this.presentToast("Bienvenido "+ this.ingreso.nombre);
       //   }
-      
-  
       // }
-    
-  
     }
   }
   async presentToast(mensaje: string) {
