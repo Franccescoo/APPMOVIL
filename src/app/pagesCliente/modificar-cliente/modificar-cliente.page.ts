@@ -4,6 +4,8 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { LoadingController } from '@ionic/angular';
 import { CameraService } from 'src/app/services/camera.service';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
+import { Storage } from '@ionic/storage';
+
 
 
 @Component({
@@ -12,6 +14,7 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   styleUrls: ['./modificar-cliente.page.scss'],
 })
 export class ModificarClientePage implements OnInit {
+
   foto: any;
   id: any=[];
   nombre: any=[];
@@ -24,7 +27,7 @@ export class ModificarClientePage implements OnInit {
     id_rol:''
   }];
 
-  constructor(private bd: DbservicioService,private api: CameraService,private router: Router,private activedRouter: ActivatedRoute,public nativeStorage: NativeStorage) {
+  constructor(private storage: Storage,private bd: DbservicioService,private api: CameraService,private router: Router,private activedRouter: ActivatedRoute,public nativeStorage: NativeStorage) {
     this.guardarid();
     this.guardarnombre();
     this.guardarclave();
@@ -64,6 +67,11 @@ export class ModificarClientePage implements OnInit {
 
   AbrirCamara() {
     this.api.TakePicture();
+  }
+
+  nombreUsuario;
+  getNombreUsuario(){
+    this.nombreUsuario = this.storage.get('nombre_usuario');
   }
 
 }

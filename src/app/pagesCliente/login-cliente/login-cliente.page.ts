@@ -50,9 +50,6 @@ export class LoginClientePage implements OnInit {
       }
      
     });
-
-     
-
   }
 
   
@@ -67,6 +64,7 @@ export class LoginClientePage implements OnInit {
     else if(this.usuarios.length == 0){
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }else{
+      this.storage.set('nombre_usuario', this.usuarios[0].nombre)
       this.nativeStorage.setItem('id',this.usuarios[0].id)
       this.nativeStorage.setItem('nombre',this.usuarios[0].nombre)
       this.nativeStorage.setItem('clave',this.usuarios[0].clave)
