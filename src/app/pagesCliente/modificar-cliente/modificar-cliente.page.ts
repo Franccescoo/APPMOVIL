@@ -20,26 +20,33 @@ export class ModificarClientePage implements OnInit {
   nombre: any=[];
   clave: any=[];
   idrol: any=[];
-  usuarios: any=[{
-    id: '',
-    nombre:'',
-    clave:'',
-    id_rol:''
-  }];
-
+  // usuarios: any=[{
+  //   id: '',
+  //   nombre:'',
+  //   clave:'',
+  //   id_rol:''
+  // }];
+  Usuario: any[]=[]
   constructor(private storage: Storage,private bd: DbservicioService,private api: CameraService,private router: Router,private activedRouter: ActivatedRoute,public nativeStorage: NativeStorage) {
-    this.guardarid();
-    this.guardarnombre();
-    this.guardarclave();
-    this.guardaridrol();
+    this.guardarid()
+    this.guardarnombre()
+    this.guardarclave()
+    this.guardaridrol()
   }
 
   ngOnInit() {
     this.api.getfoto().subscribe(item => {
       this.foto = item;
+      
     
     })
-    
+    this.bd.dbState().subscribe((res)=>{
+      if(res){
+        this.bd.fetchUser().subscribe(item => {
+          this.Usuario = item;
+        })
+      }
+    })
   }
 
   guardarid(){
@@ -69,9 +76,9 @@ export class ModificarClientePage implements OnInit {
     this.api.TakePicture();
   }
 
-  nombreUsuario;
-  getNombreUsuario(){
-    this.nombreUsuario = this.storage.get('nombre_usuario');
-  }
+  // nombreUsuario;
+  // getNombreUsuario(){
+  //   this.nombreUsuario = this.storage.get('nombre_usuario');
+  // }
 
 }

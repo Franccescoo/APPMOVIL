@@ -23,8 +23,8 @@ export class DbservicioService {
 
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(idrol INTEGER PRIMARY KEY , nombrerol VARCHAR (30));";
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30), username VARCHAR(50), apellido VARCHAR(50) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
-  tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR(30) PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(idusuario)) ;";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
+  tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR(30) PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(idusuario));";
   tablaViaje: string = "CREATE TABLE IF NOT EXISTS viaje(idviaje INTEGER PRIMARY KEY , inicio VARCHAR (50) , destino VARCHAR (50)  , asientos INTEGER , costo_viaje INTEGER  , fecha_viaje VARCHAR(30)  , hora_partida INTEGER , hora_llegada INTEGER , fk_patente INTEGER , fk_idusuario INTEGER );";
 
   tablaComen: string = "CREATE TABLE IF NOT EXISTS comentario(idComentario INTEGER PRIMARY KEY autoincrement, comentario VARCHAR(500), fk_iduser INTEGER, FOREIGN KEY(fk_iduser) REFERENCES usuario(idusuario));";
@@ -100,19 +100,19 @@ export class DbservicioService {
     try {
       //Tipos Usuario Crear e Insertar//
       await this.database.executeSql(this.tablaRol,[]);  
-      //this.presentAlert("error tabla 1")
+      this.presentAlert("error tabla 1")
       await this.database.executeSql(this.pasajero,[]);
-      //this.presentAlert("error tabla 2")
+      this.presentAlert("error tabla 2")
       await this.database.executeSql(this.conductor,[]);
-      //this.presentAlert("error tabla 3")
+      this.presentAlert("error tabla 3")
       await this.database.executeSql(this.tablaUsuario,[]);   
-      //this.presentAlert("error tabla 4")
+      this.presentAlert("error tabla 4")
       await this.database.executeSql(this.tablaAuto,[]);
-      //this.presentAlert("error tabla 8")
+      this.presentAlert("error tabla 8")
       await this.database.executeSql(this.tablaViaje,[]);
-      //this.presentAlert("error tabla 11")
+      this.presentAlert("error tabla 11")
       await this.database.executeSql(this.tablaComen,[]);
-
+      this.presentAlert("error tabla 11")
 
       this.buscarUsuario();
 
@@ -139,9 +139,8 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            fk_id_rol: res.rows.item(i).fk_id_rol,
-            username: res.rows.item(i).username,
-            apellido: res.rows.item(i).apellido,
+            fk_id_rol: res.rows.item(i).fk_id_rol
+
           });
         }
       }
@@ -161,10 +160,7 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            fk_id_rol: res.rows.item(i).fk_id_rol,
-            username: res.rows.item(i).username,
-            apellido: res.rows.item(i).apellido,
-
+            fk_id_rol: res.rows.item(i).fk_id_rol
           });
         }
 
@@ -258,9 +254,7 @@ export class DbservicioService {
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
-            fk_id_rol: res.rows.item(i).fk_id_rol,
-            username: res.rows.item(i).username,
-            apellido: res.rows.item(i).apellido,
+            fk_id_rol: res.rows.item(i).fk_id_rol
 
           });
         }

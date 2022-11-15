@@ -4,8 +4,7 @@ export class Usuario {
     clave: string;
     foto: string;
     fk_id_rol: number;
-    username: string;
-    apellido: string;
+
 
     
 }
