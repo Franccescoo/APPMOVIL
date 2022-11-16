@@ -35,9 +35,9 @@ export class LoginClientePage implements OnInit {
     this.bd.presentAlert("1");
     this.api.getUsuarios().subscribe((res) => {
       this.bd.presentAlert("2");
-      this.usuarios = res;
+      this.Usuario = res;
       console.log(res)
-      for (let x of this.usuarios) {
+      for (let x of this.Usuario) {
         this.bd.presentAlert(x.nombre);
         this.bd.agregarUsuario(x.id, x.nombre, x.clave, x.id_rol);
       }
