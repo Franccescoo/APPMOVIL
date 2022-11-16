@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from
   '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,12 +19,23 @@ export class Apiservices2Service {
   apiURL = 'https://my-json-server.typicode.com/victorrosendo/repoUsuariosRamos';
   // Se declara la variable http de tipo HttpClient
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private alertController:AlertController) { }
 
 
   getUsuarios():Observable<any>{
+    this.presentAlert("Entra al json");
     return this.http.get(this.apiURL+'/users/').pipe(
       retry(3)
     );
+  }
+
+
+  async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      message: msj,
+      buttons: ['OK'],
+    });
+  
+    await alert.present();
   }
 }

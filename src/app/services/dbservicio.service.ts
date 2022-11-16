@@ -23,7 +23,7 @@ export class DbservicioService {
 
 
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(idrol INTEGER PRIMARY KEY , nombrerol VARCHAR (30));";
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idusuario INTEGER PRIMARY KEY autoincrement  , nombre VARCHAR (20)  , clave VARCHAR (15), foto VARCHAR(30) ,fk_id_rol INTEGER ,FOREIGN KEY(fk_id_rol) REFERENCES rol(idrol));";
   tablaAuto: string = "CREATE TABLE IF NOT EXISTS auto( patente VARCHAR(30) PRIMARY KEY   , marca VARCHAR (20) ,  modelo VARCHAR (30)  , puesto INTEGER  ,fk_id_usuario INTEGER ,FOREIGN KEY(fk_id_usuario) REFERENCES usuario(idusuario));";
   tablaViaje: string = "CREATE TABLE IF NOT EXISTS viaje(idviaje INTEGER PRIMARY KEY , inicio VARCHAR (50) , destino VARCHAR (50)  , asientos INTEGER , costo_viaje INTEGER  , fecha_viaje VARCHAR(30)  , hora_partida INTEGER , hora_llegada INTEGER , fk_patente INTEGER , fk_idusuario INTEGER );";
 
@@ -47,13 +47,13 @@ export class DbservicioService {
   conductor: string = "INSERT or IGNORE INTO rol(idrol, nombrerol) VALUES (1, 'Conductor');";
   pasajero: string = "INSERT or IGNORE INTO rol(idrol, nombrerol) VALUES (2, 'Pasajero');";
 
-  TablaComuna1: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (1, 'Quilicura');";
-  TablaComuna2: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (2, 'Conchali');";
-  TablaComuna3: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (3, 'Huechuraba');";
-  TablaComuna4: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (4, 'Las Condes');";
-  TablaComuna5: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (5, 'La Cisterna');";
-  TablaComuna6: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (6, 'Recoleta');";
-  TablaComuna7: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (7, 'Independencia');";
+  //TablaComuna1: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (1, 'Quilicura');";
+  //TablaComuna2: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (2, 'Conchali');";
+  //TablaComuna3: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (3, 'Huechuraba');";
+  //TablaComuna4: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (4, 'Las Condes');";
+  //TablaComuna5: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (5, 'La Cisterna');";
+  //TablaComuna6: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (6, 'Recoleta');";
+  //TablaComuna7: string = "INSERT INTO or IGNORE comuna (idComuna, nombreComuna) VALUES (7, 'Independencia');";
 
   //OBSERVABLES //
   listausuario = new BehaviorSubject([]);
@@ -82,7 +82,7 @@ export class DbservicioService {
     this.platform.ready().then(() => {
       //creación de la BD
       this.sqlite.create({
-        name: 'miauto.db',
+        name: 'miautoo.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
@@ -100,23 +100,24 @@ export class DbservicioService {
     try {
       //Tipos Usuario Crear e Insertar//
       await this.database.executeSql(this.tablaRol,[]);  
-      this.presentAlert("error tabla 1")
+      //this.presentAlert("error tabla 1")
       await this.database.executeSql(this.pasajero,[]);
-      this.presentAlert("error tabla 2")
+      //this.presentAlert("error tabla 2")
       await this.database.executeSql(this.conductor,[]);
-      this.presentAlert("error tabla 3")
+      //this.presentAlert("error tabla 3")
       await this.database.executeSql(this.tablaUsuario,[]);   
-      this.presentAlert("error tabla 4")
+      //this.presentAlert("error tabla 4")
       await this.database.executeSql(this.tablaAuto,[]);
-      this.presentAlert("error tabla 8")
+      //this.presentAlert("error tabla 5")
       await this.database.executeSql(this.tablaViaje,[]);
-      this.presentAlert("error tabla 11")
+      //this.presentAlert("error tabla 6")
       await this.database.executeSql(this.tablaComen,[]);
-      this.presentAlert("error tabla 11")
+      //this.presentAlert("error tabla 7")
 
       this.buscarUsuario();
 
-      this.login('', '');
+      
+      //this.login('', '');
 
       this.buscarAuto();
 
@@ -151,7 +152,7 @@ export class DbservicioService {
 
   login(nombre, clave) {
     let data = [nombre, clave]
-    return this.database.executeSql('SELECT * FROM usuario WHERE nombre=? AND clave=? ', [data[0], data[1]]).then(res => {
+    return this.database.executeSql('SELECT * FROM usuario WHERE nombre=? AND clave=? ', data).then(res => {
       let items: Usuario[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
@@ -187,8 +188,9 @@ export class DbservicioService {
   }
   agregarUsuario(idusuario, nombre, clave,  fk_id_rol) {
     let data = [idusuario, nombre, clave, fk_id_rol];
-    return this.database.executeSql('INSERT INTO usuario (idusuario, nombre, clave, fk_id_rol) VALUES (?, ?, ?, ?)', data).then(res => {
+    return this.database.executeSql('INSERT or IGNORE INTO  usuario (idusuario, nombre, clave, fk_id_rol) VALUES (?, ?, ?, ?)', data).then(res => {
       this.buscarUsuario();
+      this.presentAlert("dato ingresado");
     });
   }
   updateUsuario(idusuario, nombre, foto, fk_id_rol) {

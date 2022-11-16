@@ -32,14 +32,16 @@ export class LoginClientePage implements OnInit {
 
   }
   ngOnInit() {
+    this.bd.presentAlert("1");
     this.api.getUsuarios().subscribe((res) => {
-      this.Usuario = res;
-      //console.log(res)
-      for (let x of this.Usuario) {
-        this.presentToast(x.nombre);
+      this.bd.presentAlert("2");
+      this.usuarios = res;
+      console.log(res)
+      for (let x of this.usuarios) {
+        this.bd.presentAlert(x.nombre);
         this.bd.agregarUsuario(x.id, x.nombre, x.clave, x.id_rol);
       }
-
+      
     });
   }
 
@@ -57,19 +59,17 @@ export class LoginClientePage implements OnInit {
     }
     else {
       if (this.Usuario[0].fk_id_rol == 2) {
-        this.router.navigate(['/inicio-conductor']);
+        this.router.navigate(['/inicio-cliente']);
         this.nativeStorage.setItem('id', this.Usuario[0].idusuario)
         this.nativeStorage.setItem('nombre', this.Usuario[0].nombre)
-        this.nativeStorage.setItem('clave', this.Usuario[0].clave)
         this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_rol)
         this.presentToast("Bienvenido " + this.ingreso.nombre);
 
       } else {
         if (this.Usuario[0].fk_id_rol == 1) {
-          this.router.navigate(['/inicio-cliente']);
+          this.router.navigate(['/inicio-conductor']);
           this.nativeStorage.setItem('id', this.Usuario[0].id_usuario)
           this.nativeStorage.setItem('nombre', this.Usuario[0].username)
-          this.nativeStorage.setItem('clave', this.Usuario[0].clave)
           this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_tipousuario)
           this.presentToast("Bienvenido " + this.ingreso.nombre);
         }
