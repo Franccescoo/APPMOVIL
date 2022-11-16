@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
 
 declare let google;
 interface Marker {
@@ -14,13 +16,37 @@ interface Marker {
   styleUrls: ['./mapa-cliente.page.scss'],
 })
 export class MapaClientePage implements OnInit {
+  map: any;
+  locationService: any;
+  public latitude;
+  public longitude;
 
-  map = null;
+  constructor(public geolocation: Geolocation,public toastController: ToastController) { }
 
-  constructor() {}
+  ngAfterViewInit() {
+    this.geolocationNative();
+  }
 
   ngOnInit(){
       this.loadMap();
+      
+  }
+
+  geolocationNative() {
+    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+      this.latitude = geposition.coords.latitude
+      this.longitude = geposition.coords.longitude
+
+      console.log(geposition);
+    })
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Tus coordenadas son: lat ' + this.latitude + ' y lng: ' + this.longitude,
+      duration: 2000
+    });
+    toast.present();
   }
 
   loadMap() {
@@ -34,14 +60,21 @@ export class MapaClientePage implements OnInit {
       zoom: 13
     });
 
+    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+      this.latitude = geposition.coords.latitude
+      this.longitude = geposition.coords.longitude
+
+      console.log(geposition);
+    })
+
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
       const market = {
         position: {
-          lat: -33.36326318588252,
-          lng: -70.67801166481883,
+          lat: this.latitude,
+          lng: this.longitude
         },
-        title: 'Duoc UC: Sede Plaza Norte'
+        title: 'Tu ubicación'
       };
       this.addMarker(market);
     });
@@ -54,4 +87,6 @@ export class MapaClientePage implements OnInit {
       title: marker.title
     });
   }
+  
 }
+
