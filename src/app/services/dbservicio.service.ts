@@ -247,7 +247,7 @@ export class DbservicioService {
 
   id(idusuario) {
     let data = [idusuario]
-    return this.database.executeSql('SELECT * FROM usuario WHERE idusuario = ? ', [data[0], data[1]]).then(res => {
+    return this.database.executeSql('SELECT * FROM usuario WHERE idusuario = ? ', data).then(res => {
       let items: Usuario[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
