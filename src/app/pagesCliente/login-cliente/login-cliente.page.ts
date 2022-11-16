@@ -18,59 +18,63 @@ export class LoginClientePage implements OnInit {
     nombre: '',
     clave: ''
   };
+  usuarios: any = [{
+    id: '',
+    nombre: '',
+    clave: '',
+    id_rol: ''
+  }];
+  Usuario: any[] = []
 
-  Usuario: any[]=[]
-
-  constructor(private menuController: MenuController,private nativeStorage: NativeStorage,private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService,public storage: Storage,private toastController: ToastController) {
-    menuController.enable(false , "first")
+  constructor(private menuController: MenuController, private nativeStorage: NativeStorage, private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService, public storage: Storage, private toastController: ToastController) {
+    menuController.enable(false, "first")
 
 
   }
   ngOnInit() {
-    this.api.getUsuarios().subscribe((res)=>{
+    this.api.getUsuarios().subscribe((res) => {
       this.Usuario = res;
       //console.log(res)
-      for(let x of this.Usuario){
+      for (let x of this.Usuario) {
         this.presentToast(x.nombre);
-        this.bd.agregarUsuario(x.id, x.nombre,x.clave, x.id_rol);
+        this.bd.agregarUsuario(x.id, x.nombre, x.clave, x.id_rol);
       }
-     
+
     });
   }
 
-  
-  async iniciarSesion(){
+
+  async iniciarSesion() {
     await this.bd.login(this.ingreso.nombre, this.ingreso.clave);
     if (this.ingreso.nombre.length == 0) {
-        this.presentToast("Por favor Ingrese su nombre de Usuario");
+      this.presentToast("Por favor Ingrese su nombre de Usuario");
     }
-    else if(this.ingreso.clave.length == 0){
+    else if (this.ingreso.clave.length == 0) {
       this.presentToast("Ingrese Su Contraseña");
     }
-    else if(this.Usuario.length == 0){
+    else if (this.Usuario.length == 0) {
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }
-    else{
+    else {
       if (this.Usuario[0].fk_id_rol == 2) {
         this.router.navigate(['/inicio-conductor']);
-        this.nativeStorage.setItem('id',this.Usuario[0].idusuario)
-        this.nativeStorage.setItem('nombre',this.Usuario[0].nombre)
-        this.nativeStorage.setItem('clave',this.Usuario[0].clave)
-        this.nativeStorage.setItem('idrol',this.Usuario[0].fk_id_rol)
-        this.presentToast("Bienvenido "+ this.ingreso.nombre);
-  
+        this.nativeStorage.setItem('id', this.Usuario[0].idusuario)
+        this.nativeStorage.setItem('nombre', this.Usuario[0].nombre)
+        this.nativeStorage.setItem('clave', this.Usuario[0].clave)
+        this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_rol)
+        this.presentToast("Bienvenido " + this.ingreso.nombre);
+
       } else {
         if (this.Usuario[0].fk_id_rol == 1) {
           this.router.navigate(['/inicio-cliente']);
-          this.nativeStorage.setItem('id',this.Usuario[0].id_usuario)
-          this.nativeStorage.setItem('nombre',this.Usuario[0].username)
-          this.nativeStorage.setItem('clave',this.Usuario[0].clave)
-          this.nativeStorage.setItem('idrol',this.Usuario[0].fk_id_tipousuario)
-          localStorage.setItem('Usuario',(this.Usuario[0]))
-          this.presentToast("Bienvenido "+ this.ingreso.nombre);
+          this.nativeStorage.setItem('id', this.Usuario[0].id_usuario)
+          this.nativeStorage.setItem('nombre', this.Usuario[0].username)
+          this.nativeStorage.setItem('clave', this.Usuario[0].clave)
+          this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_tipousuario)
+          this.presentToast("Bienvenido " + this.ingreso.nombre);
         }
-          } 
-        }
+      }
+    }
   }
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({

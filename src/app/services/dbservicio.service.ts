@@ -187,7 +187,7 @@ export class DbservicioService {
   }
   agregarUsuario(idusuario, nombre, clave,  fk_id_rol) {
     let data = [idusuario, nombre, clave, fk_id_rol];
-    return this.database.executeSql('INSERT INTO usuario (idusuario,nombre , clave,fk_id_rol) VALUES (?, ?,?, ?)', data).then(res => {
+    return this.database.executeSql('INSERT INTO usuario (idusuario, nombre, clave, fk_id_rol) VALUES (?, ?, ?, ?)', data).then(res => {
       this.buscarUsuario();
     });
   }
