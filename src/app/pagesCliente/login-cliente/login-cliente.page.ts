@@ -57,29 +57,25 @@ export class LoginClientePage implements OnInit {
     else if (this.Usuario.length == 0) {
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }
-    this.router.navigate(['/inicio-conductor']);
+  
+    else {
+      if (this.Usuario[0].id_rol == 2) {
+        this.router.navigate(['/inicio-cliente']);
+        this.nativeStorage.setItem('id', this.Usuario[0].idusuario)
+        this.nativeStorage.setItem('nombre', this.Usuario[0].nombre)
+        this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_rol)
+        this.presentToast("Bienvenido " + this.ingreso.nombre);
+
+      } else {
+        if (this.Usuario[0].id_rol == 1) {
+          this.router.navigate(['/inicio-conductor']);
           this.nativeStorage.setItem('id', this.Usuario[0].id_usuario)
           this.nativeStorage.setItem('nombre', this.Usuario[0].username)
           this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_tipousuario)
           this.presentToast("Bienvenido " + this.ingreso.nombre);
-    // else {
-    //   if (this.Usuario[0].fk_id_rol == 2) {
-    //     this.router.navigate(['/inicio-cliente']);
-    //     this.nativeStorage.setItem('id', this.Usuario[0].idusuario)
-    //     this.nativeStorage.setItem('nombre', this.Usuario[0].nombre)
-    //     this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_rol)
-    //     this.presentToast("Bienvenido " + this.ingreso.nombre);
-
-    //   } else {
-    //     if (this.Usuario[0].fk_id_rol == 1) {
-    //       this.router.navigate(['/inicio-conductor']);
-    //       this.nativeStorage.setItem('id', this.Usuario[0].id_usuario)
-    //       this.nativeStorage.setItem('nombre', this.Usuario[0].username)
-    //       this.nativeStorage.setItem('idrol', this.Usuario[0].fk_id_tipousuario)
-    //       this.presentToast("Bienvenido " + this.ingreso.nombre);
-    //     }
-    //   }
-    // }
+        }
+      }
+    }
   }
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
