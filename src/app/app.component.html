@@ -12,14 +12,14 @@
             <ion-item [routerLink]="'/inicio-cliente'">INICIO</ion-item>
             <ion-item [routerLink]="'/mapa-cliente'">MAPA</ion-item>
             <ion-item [routerLink]="'/modificar-cliente'">PERFIL</ion-item>
-            <ion-item>VIAJES</ion-item>
+            <ion-item [routerLink]="'/viajes-disponible">VIAJES</ion-item>
           </div>
 
           <div *ngIf="idrol === 1"> <!--ID 2 ES EL CONDUCTOR-->
             <ion-item [routerLink]="'/inicio-conductor'">INICIO</ion-item>
             <ion-item [routerLink]="'/mapa-conductor'">MAPA</ion-item>
             <ion-item [routerLink]="'/modificar-conductor'">PERFIL</ion-item>
-            <ion-item>VIAJES</ion-item>
+            <ion-item [routerLink]="'/solicitud-viaje">VIAJES</ion-item>
           </div>
       </ion-list>
     </ion-content>
