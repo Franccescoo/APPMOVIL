@@ -16,49 +16,63 @@ import { subscribeOn } from 'rxjs/operators';
 })
 export class ModificarClientePage implements OnInit {
 
+
   // foto: any;
-  id='';
-  nombre='';
-  clave='';
-  idrol='';
+  id = '';
+  nombre = '';
+  clave = '';
+  idrol = '';
+
   // usuarios: any=[{
   //   id: '',
   //   nombre:'',
   //   clave:'',
   //   id_rol:''
   // }];
-  Usuario: any[]=[]
-  constructor(private bd: DbservicioService,private api: CameraService,private router: Router,public nativeStorage: NativeStorage) {
+
+  Usuario: any[] = []
+
+  constructor(private bd: DbservicioService, private api: CameraService, private router: Router, public nativeStorage: NativeStorage) {
+
     this.guardarid()
     this.guardarnombre()
     this.guardaridrol()
   }
-   // this.api.getfoto().subscribe(item => {
-    //   this.foto = item;    
-    // })
+  // this.api.getfoto().subscribe(item => {
+  //   this.foto = item;    
+  // })
   ngOnInit() {
-    this.bd.dbState().subscribe((res)=>{
-      if(res){
+    this.bd.dbState().subscribe((res) => {
+      if (res) {
         this.bd.fetchUser().subscribe(item => {
           this.Usuario = item;
-        
+
         })
       }
     })
   }
 
-  guardarid(){
-    this.nativeStorage.getItem('id').then((data)=>{
+  guardarid() {
+    this.nativeStorage.getItem('id').then((data) => {
       this.id = data
     })
   }
-  guardarnombre(){
-    this.nativeStorage.getItem('nombre').then((data2)=>{
+
+  guardarnombre() {
+    this.nativeStorage.getItem('nombre').then((data2) => {
       this.nombre = data2
     })
   }
-  guardaridrol(){
-    this.nativeStorage.getItem('idrol').then((data4)=>{
+
+  guardarclave(){
+    this.nativeStorage.getItem('clave').then((data3)=>{
+      this.clave = data3
+    })
+  }
+
+
+  guardaridrol() {
+    this.nativeStorage.getItem('idrol').then((data4) => {
       this.idrol = data4
     })
   }
@@ -67,9 +81,11 @@ export class ModificarClientePage implements OnInit {
 
 
 
+
   // AbrirCamara() {
   //   this.api.TakePicture();
   // }
+
 
   // nombreUsuario;
   // getNombreUsuario(){

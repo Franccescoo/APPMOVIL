@@ -24,11 +24,11 @@ export class LoginClientePage implements OnInit {
     clave: '',
     id_rol: ''
   }];
+
   Usuario: any[] = []
 
   constructor(private menuController: MenuController, private nativeStorage: NativeStorage, private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService, public storage: Storage, private toastController: ToastController) {
     menuController.enable(false, "first")
-
 
   }
   ngOnInit() {
@@ -41,7 +41,6 @@ export class LoginClientePage implements OnInit {
         this.bd.presentAlert(x.nombre);
         this.bd.agregarUsuario(x.id, x.nombre, x.clave, x.id_rol);
       }
-      
     });
   }
 
@@ -57,7 +56,6 @@ export class LoginClientePage implements OnInit {
     else if (this.Usuario.length == 0) {
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }
-  
     else {
       if (this.Usuario[0].id_rol == 2) {
         this.router.navigate(['/modificar-cliente']);
@@ -77,6 +75,7 @@ export class LoginClientePage implements OnInit {
       }
     }
   }
+
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
