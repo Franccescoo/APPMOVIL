@@ -61,7 +61,7 @@ export class AppComponent implements OnInit{
       this.router.navigate(['/perfil-conductor']);
     } else {
       if (this.idrol == "2") {
-        this.router.navigate(['/pefil-cliente']);
+        this.router.navigate(['/perfil-cliente']);
       }
 
     }

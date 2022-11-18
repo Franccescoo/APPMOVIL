@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
+import { ToastController } from '@ionic/angular';
 
 declare let google;
 interface Marker {
@@ -15,13 +17,40 @@ interface Marker {
 })
 export class MapaConductorPage implements OnInit {
 
-  map = null;
+  map: any;
+  locationService: any;
 
-  constructor() {}
+  public latitude;
+  public longitude;
+
+  constructor(public geolocation: Geolocation,public toastController: ToastController) {
+
+  }
+  ngAfterViewInit() {
+    this.geolocationNative();
+  }
 
   ngOnInit(){
       this.loadMap();
   }
+
+  geolocationNative() {
+    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+      this.latitude = geposition.coords.latitude
+      this.longitude = geposition.coords.longitude
+
+      console.log(geposition);
+    })
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Tus coordenadas son: lat ' + this.latitude + ' y lng: ' + this.longitude,
+      duration: 2000
+    });
+    toast.present();
+  }
+
 
   loadMap() {
     // create a new map by passing HTMLElement
@@ -33,6 +62,13 @@ export class MapaConductorPage implements OnInit {
       center: myLatLng,
       zoom: 13
     });
+
+    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+      this.latitude = geposition.coords.latitude
+      this.longitude = geposition.coords.longitude
+
+      console.log(geposition);
+    })
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
