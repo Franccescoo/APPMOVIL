@@ -58,7 +58,7 @@ export class MapaClientePage implements OnInit {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
-    const myLatLng = {lat: -33.36326318588252, lng: -70.67801166481883};
+    const myLatLng = {lat: this.latitude, lng: -this.longitude};
     // create map
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
