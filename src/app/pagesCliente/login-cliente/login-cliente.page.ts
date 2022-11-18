@@ -66,7 +66,7 @@ export class LoginClientePage implements OnInit {
 
       } else {
         if (this.Usuario[0].id_rol == 1) {
-          this.router.navigate(['/inicio-cliente']);
+          this.router.navigate(['/inicio-conductor']);
           this.nativeStorage.setItem('id', this.Usuario[0].id_usuario)
           this.nativeStorage.setItem('nombre', this.Usuario[0].username)
           this.nativeStorage.setItem('idrol', this.Usuario[0].id_rol)

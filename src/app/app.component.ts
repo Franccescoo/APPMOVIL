@@ -16,7 +16,9 @@ export class AppComponent implements OnInit{
   constructor(public nativeStorage: NativeStorage,private bd: DbservicioService,private router: Router) {
 
     this.guardaridrol()
-
+    this.inicio
+    this.mapa
+    this.perfil
   }
 
   ngOnInit() {
