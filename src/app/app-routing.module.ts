@@ -16,10 +16,6 @@ const routes: Routes = [
     loadChildren: () => import('./pagesCliente/login-cliente/login-cliente.module').then( m => m.LoginClientePageModule)
   },
   {
-    path: 'login-conductor',
-    loadChildren: () => import('./pagesConductor/login-conductor/login-conductor.module').then( m => m.LoginConductorPageModule)
-  },
-  {
     path: 'crear-cuenta-cliente',
     loadChildren: () => import('./pagesCliente/crear-cuenta-cliente/crear-cuenta-cliente.module').then( m => m.CrearCuentaClientePageModule)
   },
@@ -100,10 +96,6 @@ const routes: Routes = [
     path: 'perfil-conductor',
     loadChildren: () => import('./pagesConductor/perfil-conductor/perfil-conductor.module').then( m => m.PerfilConductorPageModule)
   },
-
-
-
-
 
 ];
 

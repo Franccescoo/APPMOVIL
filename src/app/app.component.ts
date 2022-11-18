@@ -13,14 +13,17 @@ export class AppComponent implements OnInit{
   idrol='';
   Usuario: any[] = []
 
-  constructor(public nativeStorage: NativeStorage,private bd: DbservicioService,private router: Router) {}
+  constructor(public nativeStorage: NativeStorage,private bd: DbservicioService,private router: Router) {
+
+    this.guardaridrol()
+
+  }
 
   ngOnInit() {
     this.bd.dbState().subscribe((res) => {
       if (res) {
         this.bd.fetchUser().subscribe(item => {
-          this.Usuario = item;
-
+          this.Usuario = item
         })
       }
     })
@@ -52,10 +55,10 @@ export class AppComponent implements OnInit{
     }
   }
   perfil(){
-    if (this.Usuario[0].id_rol == 1) {
+    if (this.idrol == "1") {
       this.router.navigate(['/perfil-conductor']);
     } else {
-      if (this.Usuario[0].id_rol == 2) {
+      if (this.idrol == "2") {
         this.router.navigate(['/pefil-cliente']);
       }
 

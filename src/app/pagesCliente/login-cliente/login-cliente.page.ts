@@ -58,7 +58,7 @@ export class LoginClientePage implements OnInit {
     }
     else {
       if (this.Usuario[0].id_rol == 2) {
-        this.router.navigate(['/modificar-cliente']);
+        this.router.navigate(['/inicio-cliente']);
         this.nativeStorage.setItem('id', this.Usuario[0].idusuario)
         this.nativeStorage.setItem('nombre', this.Usuario[0].nombre)
         this.nativeStorage.setItem('idrol', this.Usuario[0].id_rol)
@@ -66,7 +66,7 @@ export class LoginClientePage implements OnInit {
 
       } else {
         if (this.Usuario[0].id_rol == 1) {
-          this.router.navigate(['/modificar-cliente']);
+          this.router.navigate(['/inicio-cliente']);
           this.nativeStorage.setItem('id', this.Usuario[0].id_usuario)
           this.nativeStorage.setItem('nombre', this.Usuario[0].username)
           this.nativeStorage.setItem('idrol', this.Usuario[0].id_rol)

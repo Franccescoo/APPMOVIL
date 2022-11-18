@@ -16,12 +16,18 @@ interface Marker {
   styleUrls: ['./mapa-cliente.page.scss'],
 })
 export class MapaClientePage implements OnInit {
+
   map: any;
   locationService: any;
+
   public latitude;
   public longitude;
 
-  constructor(public geolocation: Geolocation,public toastController: ToastController) { }
+  constructor(public geolocation: Geolocation,public toastController: ToastController) { 
+
+    this.geolocationNative()
+    this.loadMap()
+  }
 
   ngAfterViewInit() {
     this.geolocationNative();
@@ -29,7 +35,6 @@ export class MapaClientePage implements OnInit {
 
   ngOnInit(){
       this.loadMap();
-      
   }
 
   geolocationNative() {
@@ -88,5 +93,9 @@ export class MapaClientePage implements OnInit {
     });
   }
   
+
+
+  
+
 }
 
