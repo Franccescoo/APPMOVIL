@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
@@ -10,6 +11,7 @@ describe('CrearCuentaConductorPage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CrearCuentaConductorPage ],
+      schemas: [NO_ERRORS_SCHEMA],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

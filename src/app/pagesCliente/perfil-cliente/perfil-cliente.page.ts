@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-cliente',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilClientePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  click(){
+    this.router.navigate(['/escanearqr']);
   }
 
 }

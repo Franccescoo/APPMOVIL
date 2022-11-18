@@ -66,7 +66,7 @@ export class DbservicioService {
 
   listaComuna = new BehaviorSubject([]);
 
-  constructor(public NativeStorage: NativeStorage, private sqlite: SQLite, private platform: Platform, public alertController: AlertController, public Storage: Storage) {
+  constructor(private sqlite: SQLite, private platform: Platform, public alertController: AlertController) {
     //Crear base de datos//
     this.CrearBD();
   }

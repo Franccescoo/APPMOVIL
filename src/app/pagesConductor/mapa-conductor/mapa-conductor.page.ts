@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
 import { ToastController } from '@ionic/angular';
 
-declare let google;
+let google: any
+
 interface Marker {
   position: {
     lat: number;

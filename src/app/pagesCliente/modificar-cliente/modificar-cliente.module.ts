@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ModificarClientePageRoutingModule } from './modificar-cliente-routing.module';
 
 import { ModificarClientePage } from './modificar-cliente.page';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 
 @NgModule({
   imports: [
@@ -14,6 +15,8 @@ import { ModificarClientePage } from './modificar-cliente.page';
     FormsModule,
     IonicModule,
     ModificarClientePageRoutingModule,
+    Geolocation,
+    NativeStorage,
     IonicStorageModule.forRoot()
   ],
   declarations: [ModificarClientePage]
