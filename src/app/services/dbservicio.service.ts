@@ -193,9 +193,10 @@ export class DbservicioService {
       this.presentAlert("dato ingresado");
     });
   }
-  updateUsuario(idusuario, nombre, foto, fk_id_rol) {
-    let data = [idusuario, nombre, foto, fk_id_rol];
-    return this.database.executeSql('UPDATE usuario SET nombre = ? , clave = ? ,foto = ? ,fk_id_rol  = ? where = idusuario ', data).then(res => {
+  updateUsuario(idusuario,nombre) {
+    let data = [nombre,idusuario];
+    
+    return this.database.executeSql('UPDATE usuario SET nombre = ?  WHERE idusuario = ? ', data).then(res => {
       this.buscarUsuario();
     });
 

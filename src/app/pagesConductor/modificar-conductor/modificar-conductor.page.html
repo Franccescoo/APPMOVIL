@@ -40,10 +40,11 @@
         <ion-list *ngFor="let x of Usuario">
           <ion-list *ngIf="x.idusuario == id">
             <ion-item>
-              <ion-label>{{ x.idUsuario }}</ion-label>
+              <ion-label>{{ x.idUsuario }}</ion-label>  
             </ion-item>
             <ion-item>
               <ion-label>{{ x.nombre }}</ion-label>
+              <ion-input [(ngModel)]="nombremod"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label>{{ x.fk_id_rol }}</ion-label>
@@ -57,9 +58,9 @@
         
       <!-- </ion-grid> -->
 
-      <!-- <center>
-        <ion-button shape="round" (click)="editar()">EDITAR</ion-button>
-      </center> -->
+      <center>
+        <ion-button shape="round" (click)="modificar()">EDITAR</ion-button>
+      </center>
 
     <!-- </ion-card-content> -->
 

@@ -10,12 +10,10 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   styleUrls: ['./modificar-conductor.page.scss'],
 })
 export class ModificarConductorPage implements OnInit {
-  // fotocon: any;
+  fotocon: any;
 
 
-  modificar: any = {
-    nombre: ''
-  }
+  nombremod='';
 
   id = '';
   nombre = '';
@@ -28,10 +26,11 @@ export class ModificarConductorPage implements OnInit {
     this.guardarnombre()
     this.guardaridrol()
   }
-  // this.api.getfoto().subscribe(item => {
-  //   this.fotocon = item;
-  // })
+
   ngOnInit() {
+    this.api.getfoto().subscribe(item => {
+      this.fotocon = item;
+    })
     this.bd.dbState().subscribe((res) => {
       if (res) {
         this.bd.fetchUser().subscribe(item => {
@@ -72,4 +71,10 @@ export class ModificarConductorPage implements OnInit {
     this.api.TakePicture();
   }
 
+  modificar(){
+    this.bd.updateUsuario(this.id,this.nombremod);
+    this.bd.presentAlert("modificado usuario")
+    this.router.navigate(['/inicio-conductor'])
+    
+  }
 }
