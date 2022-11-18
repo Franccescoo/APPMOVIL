@@ -17,7 +17,10 @@ import { subscribeOn } from 'rxjs/operators';
 export class ModificarClientePage implements OnInit {
 
 
-  // foto: any;
+  foto: any;
+  modificar: any ={
+    nombre: ''
+  }
   id = '';
   nombre = '';
   clave = '';
@@ -38,10 +41,11 @@ export class ModificarClientePage implements OnInit {
     this.guardarnombre()
     this.guardaridrol()
   }
-  // this.api.getfoto().subscribe(item => {
-  //   this.foto = item;    
-  // })
+  
   ngOnInit() {
+    this.api.getfoto().subscribe(item => {
+      this.foto = item;    
+    })
     this.bd.dbState().subscribe((res) => {
       if (res) {
         this.bd.fetchUser().subscribe(item => {
@@ -77,14 +81,24 @@ export class ModificarClientePage implements OnInit {
     })
   }
 
+  Editar(itemu) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        id:  itemu.id_usuario, 
+        us:  itemu.username,
+        cl:  itemu.clave ,
+        ft:  itemu.foto ,
+        rol: itemu.fk_id_tipousuario}
+    }
+    this.router.navigate(['/modificar-cliente'], navigationExtras);
+  }
 
 
 
 
-
-  // AbrirCamara() {
-  //   this.api.TakePicture();
-  // }
+  AbrirCamara() {
+    this.api.TakePicture();
+  }
 
 
   // nombreUsuario;
