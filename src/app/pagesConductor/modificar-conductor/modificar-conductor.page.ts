@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { CameraService } from 'src/app/services/camera.service';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -8,17 +10,62 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   styleUrls: ['./modificar-conductor.page.scss'],
 })
 export class ModificarConductorPage implements OnInit {
-  fotocon: any;
+  // fotocon: any;
 
-  constructor(private bd: DbservicioService,private api: CameraService) { 
+
+  modificar: any = {
+    nombre: ''
+  }
+
+  id = '';
+  nombre = '';
+  clave = '';
+  idrol = '';
+  Usuario: any[] = []
+
+  constructor(private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
+    this.guardarid()
+    this.guardarnombre()
+    this.guardaridrol()
+  }
+  // this.api.getfoto().subscribe(item => {
+  //   this.fotocon = item;
+  // })
+  ngOnInit() {
+    this.bd.dbState().subscribe((res) => {
+      if (res) {
+        this.bd.fetchUser().subscribe(item => {
+          this.Usuario = item;
+
+        })
+      }
+    })
 
   }
 
-  ngOnInit() {
-    this.api.getfoto().subscribe(item => {
-      this.fotocon = item;
-    })
 
+  guardarid() {
+    this.nativeStorage.getItem('id').then((data) => {
+      this.id = data
+    })
+  }
+  guardarnombre() {
+    this.nativeStorage.getItem('nombre').then((data2) => {
+      this.nombre = data2
+    })
+  }
+
+  guardarclave() {
+    this.nativeStorage.getItem('clave').then((data3) => {
+      this.clave = data3
+    })
+  }
+
+
+  guardaridrol() {
+    this.nativeStorage.getItem('idrol').then((data4) => {
+      this.idrol = data4
+    })
   }
 
   AbrirCamara() {
