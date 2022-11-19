@@ -136,7 +136,7 @@ export class DbservicioService {
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            idUsuario: res.rows.item(i).idusuario,
+            idusuario: res.rows.item(i).idusuario,
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
@@ -157,7 +157,7 @@ export class DbservicioService {
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            idUsuario: res.rows.item(i).idusuario,
+            idusuario: res.rows.item(i).idusuario,
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
@@ -252,7 +252,7 @@ export class DbservicioService {
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            idUsuario: res.rows.item(i).idusuario,
+            idusuario: res.rows.item(i).idusuario,
             nombre: res.rows.item(i).nombre,
             clave: res.rows.item(i).clave,
             foto: res.rows.item(i).foto,
