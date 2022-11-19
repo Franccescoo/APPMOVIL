@@ -14,7 +14,13 @@ export class InicioConductorPage implements OnInit {
 
 
   nombremod='';
+
   idextras='';
+  nombreextras='';
+  claveextras='';
+  fotoextras='';
+  idrolextras='';
+
   id = '';
   nombre = '';
   clave = '';
@@ -25,6 +31,10 @@ export class InicioConductorPage implements OnInit {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation().extras.state){
         this.idextras = this.router.getCurrentNavigation().extras.state.idenviado;
+        this.nombreextras = this.router.getCurrentNavigation().extras.state.nombreenviado;
+        this.claveextras = this.router.getCurrentNavigation().extras.state.claveenviado;
+        this.fotoextras = this.router.getCurrentNavigation().extras.state.fotoenviado;
+        this.idrolextras = this.router.getCurrentNavigation().extras.state.idrolenviado;
       }
     })
     

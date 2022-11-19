@@ -37,25 +37,23 @@
           <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Apellido"></ion-input></ion-col>
           <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
         </ion-row> -->
-  <ion-list *ngFor="let x of Usuario">
-    <ion-list *ngIf="x.idusuario == id1">
+
       <ion-item>
-        <ion-label>{{ x.idusuario }}</ion-label>
+        <ion-label> ID: {{ idextras}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>{{ x.nombre }}</ion-label>
+        <ion-label>NOMBRE: {{ nombreextras }}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>{{ x.fk_id_rol }}</ion-label>
+        <ion-label>CLAVE: {{ claveextras }}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>{{ x.clave }}</ion-label>
+        <ion-label>ID ROL: {{ idrolextras }}</ion-label>
       </ion-item>
       <center>
         <ion-button shape="round" (click)="Editar(x)">EDITAR</ion-button>
       </center>
-    </ion-list>
-  </ion-list>
+
 
 
   <!-- </ion-grid> -->

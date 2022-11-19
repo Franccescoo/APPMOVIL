@@ -11,14 +11,14 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class ModificarConductorPage implements OnInit {
   fotocon: any;
-
-
   nombremod='';
+
   idextras= '';
   nombreextras='';
   claveextras='';
   fotoextras='';
   idrolextras='';
+
   id = '';
   nombre = '';
   clave = '';
@@ -54,7 +54,6 @@ export class ModificarConductorPage implements OnInit {
       if (res) {
         this.bd.fetchUser().subscribe(item => {
           this.Usuario = item;
-          this.nativeStorage.setItem('id1',this.Usuario[0].idusuario)
 
         })
       }
@@ -97,8 +96,12 @@ export class ModificarConductorPage implements OnInit {
     {
       let navigationExtras: NavigationExtras = {
         state: {
-          idenviado:  this.idextras
-          }
+          idenviado: this.Usuario[0].idusuario,
+          nombreenviado: this.Usuario[0].nombre,
+          claveenviado: this.Usuario[0].clave,
+          fotoenviado: this.Usuario[0].foto,
+          idrolenviado: this.Usuario[0].fk_id_rol
+        }
       }
       this.router.navigate(['/inicio-conductor'], navigationExtras);
     }
