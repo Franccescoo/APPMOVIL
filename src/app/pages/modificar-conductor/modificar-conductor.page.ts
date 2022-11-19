@@ -106,8 +106,8 @@ export class ModificarConductorPage implements OnInit {
       }
       this.router.navigate(['/inicio-conductor'], navigationExtras);
     }
-
   }
+
   modificarclave(){
     if(this.clavemod == this.clavemod2){
       this.bd.presentAlert("claves cambiada")
@@ -130,4 +130,5 @@ export class ModificarConductorPage implements OnInit {
     }
 
   }
+
 }
