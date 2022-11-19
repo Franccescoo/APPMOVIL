@@ -105,7 +105,8 @@ export class ModificarConductorPage implements OnInit {
       }
       this.router.navigate(['/inicio-conductor'], navigationExtras);
     }
-
   }
+
+  
   
 }
