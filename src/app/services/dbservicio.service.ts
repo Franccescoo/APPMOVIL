@@ -219,7 +219,7 @@ export class DbservicioService {
             marca: res.rows.item(i).marca,
             puestos: res.rows.item(i).puestos,
             annio: res.rows.item(i).annio,
-            iduser: res.rows.item(i).fk_idusuario
+            fk_id_usuario: res.rows.item(i).fk_idusuario
           });
         }
       }
@@ -237,9 +237,9 @@ export class DbservicioService {
     });
   }
 
-  agregarAuto(patente,fk_idusuario,marca) {
-    let data = [patente, fk_idusuario,marca ];
-    return this.database.executeSql('INSERT or IGNORE INTO auto (  patente , fk_idusuario, marca) VALUES (? , ? , ?)', data).then(res => {
+  agregarAuto(patente,fk_id_usuario,marca) {
+    let data = [patente, fk_id_usuario,marca ];
+    return this.database.executeSql('INSERT or IGNORE INTO auto (  patente , fk_id_usuario, marca) VALUES (? , ? , ?)', data).then(res => {
       this.buscarAuto();
       this.presentAlert("auto guardado")
     });

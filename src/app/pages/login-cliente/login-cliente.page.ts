@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Apiservices2Service } from 'src/app/services/apiservices2.service';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
-import { throws } from 'assert';
+
 
 
 @Component({
@@ -102,7 +102,7 @@ export class LoginClientePage implements OnInit {
               fotoenviado: this.Usuario[0].foto,
               idrolenviado: this.Usuario[0].fk_id_rol,
               patenteenviado: this.Auto[0].patente,
-              fkenviado: this.Auto[0].fk_idusuario,
+              fkenviado: this.Auto[0].fk_id_usuario,
               marcaenviado: this.Auto[0].marca
             }
           }

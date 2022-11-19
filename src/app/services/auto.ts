@@ -4,6 +4,6 @@ export class Auto {
     marca: string;
     puestos: string;
     annio: number;
-    iduser: number;
+    fk_id_usuario: number;
 
 }
