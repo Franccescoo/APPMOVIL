@@ -24,20 +24,25 @@
 
 
   <ion-item>
-    <ion-label>NOMBRE: {{ nombreextras }}</ion-label>
-    <ion-input [(ngModel)]="nombremod"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>CLAVE: {{ claveextras }}</ion-label><br>
-    <ion-input [(ngModel)]="clavemod" placehorled="contranueva"></ion-input><br>
-    <ion-input [(ngModel)]="clavemod2" placeholder="repita contra"></ion-input><br>
+    <ion-label>Nombre: {{ nombreextras }}</ion-label>
   </ion-item>
 
+  <ion-item fill="solid">
+    <ion-label position="floating">Nombre: </ion-label>
+    <ion-input (ngModel)]="nombremod"></ion-input>
+    <ion-note slot="helper">Nombre</ion-note>
+  </ion-item>
+  <!-- <ion-item>
+    <ion-label>CLAVE: {{ claveextras }}</ion-label><br>
+    <ion-input [(ngModel)]="clavemod" placeholder="contranueva"></ion-input><br>
+    <ion-input [(ngModel)]="clavemod2" placeholder="repita contra"></ion-input><br>
+  </ion-item> -->
+
   <center>
-    <ion-button shape="round" (click)="modificar()">Modificar Nombre</ion-button>
+    <ion-button style="margin-top: 10px;"color="success"expand="full" (click)="modificar()">Modificar Nombre</ion-button>
   </center>
-  <center>
+  <!-- <center>
     <ion-button shape="round" (click)="modificarclave()">modificar clave</ion-button>
-  </center>
+  </center> -->
 
 </ion-content>

@@ -71,6 +71,14 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'confirmar-pass',
+    loadChildren: () => import('./pages/confirmar-pass/confirmar-pass.module').then( m => m.ConfirmarPassPageModule)
+  },
+  {
+    path: 'cambiar-pass',
+    loadChildren: () => import('./pages/cambiar-pass/cambiar-pass.module').then( m => m.CambiarPassPageModule)
+  },
 
 
 ];

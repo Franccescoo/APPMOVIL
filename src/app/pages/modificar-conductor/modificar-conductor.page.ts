@@ -94,7 +94,7 @@ export class ModificarConductorPage implements OnInit {
   modificar() {
     if (this.nombremod.length != 0) {
       this.bd.updateUsuario(this.idextras, this.nombremod);
-      this.bd.presentAlert("modificado usuario")
+      this.bd.presentAlert("Usuario Modificado Exitosamente!!")
       {
         let navigationExtras: NavigationExtras = {
           state: {
@@ -108,33 +108,8 @@ export class ModificarConductorPage implements OnInit {
         this.router.navigate(['/inicio-conductor'], navigationExtras);
       }
     }
-    else {(this.bd.presentAlert("nombre vacia"))}
+    else {(this.bd.presentAlert("El nombre no puede estar vacío"))}
   }
 
-  modificarclave() {
-    if (this.clavemod != this.clavemod2 ) {
-      this.bd.presentAlert("claves no iguales ")
-    }
-    else if (this.clavemod.length == 0 && this.clavemod2.length == 0){
-      this.bd.presentAlert("claves no null ")
-    }
-    else if (this.clavemod == this.clavemod2 && this.clavemod.length != 0) {
-      this.bd.presentAlert("claves cambiada")
-      this.bd.updateUsuarioclave(this.idextras, this.clavemod)
-      {
-        let navigationExtras: NavigationExtras = {
-          state: {
-            idenviado: this.Usuario[0].idusuario,
-            nombreenviado: this.Usuario[0].nombre,
-            claveenviado: this.Usuario[0].clave,
-            fotoenviado: this.Usuario[0].foto,
-            idrolenviado: this.Usuario[0].fk_id_rol
-          }
-        }
-        this.router.navigate(['/inicio-conductor'], navigationExtras);
-      }
-    }
-
-  }
 
 }
