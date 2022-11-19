@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Apiservices2Service } from 'src/app/services/apiservices2.service';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
+import { throws } from 'assert';
 
 
 @Component({
@@ -81,13 +82,17 @@ export class LoginClientePage implements OnInit {
     }
     else {
       if (this.Usuario[0].fk_id_rol == 2) {
-        this.presentToast("Bienvenido " + this.ingreso.nombre);
-        this.nativeStorage.setItem('id', this.Usuario[0].idusuario)
-        this.nativeStorage.setItem('nombre', this.Usuario[0].nombre)
-        this.nativeStorage.setItem('idrol', this.Usuario[0].id_rol)
-
-        this.router.navigate(['/inicio-cliente']);
-
+        this.presentToast("Bienvenido" + this.ingreso.nombre);
+        let navigationExtras: NavigationExtras = {
+          state: {
+            idenviado: this.Usuario[0].idusuario,
+            nombreenviado: this.Usuario[0].nombre,
+            claveenviado: this.Usuario[0].clave,
+            fotoenviado: this.Usuario[0].foto,
+            idrolenviado: this.Usuario[0].fk_id_rol
+          }
+        }
+        this.router.navigate(['/inicio-cliente'], navigationExtras);
       } else {
         if (this.Usuario[0].fk_id_rol == 1) {
           this.presentToast("Bienvenido" + this.ingreso.nombre);
@@ -97,7 +102,10 @@ export class LoginClientePage implements OnInit {
               nombreenviado: this.Usuario[0].nombre,
               claveenviado: this.Usuario[0].clave,
               fotoenviado: this.Usuario[0].foto,
-              idrolenviado: this.Usuario[0].fk_id_rol
+              idrolenviado: this.Usuario[0].fk_id_rol,
+              patenteenviado: this.Auto[0].patente,
+              fkenviado: this.Auto[0].fk_idusuario,
+              marcaenviado: this.Auto[0].marca
             }
           }
           this.router.navigate(['/inicio-conductor'], navigationExtras);
