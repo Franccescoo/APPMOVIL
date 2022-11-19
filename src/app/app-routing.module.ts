@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'login-cliente',
-    loadChildren: () => import('./pagesCliente/login-cliente/login-cliente.module').then( m => m.LoginClientePageModule)
+    loadChildren: () => import('./pages/login-cliente/login-cliente.module').then( m => m.LoginClientePageModule)
   },
   {
     path: 'crear-cuenta-cliente',
@@ -28,20 +28,12 @@ const routes: Routes = [
     loadChildren: () => import('./pagesCliente/recuperar-pass-cliente/recuperar-pass-cliente.module').then( m => m.RecuperarPassClientePageModule)
   },
   {
-    path: 'mapa-cliente',
-    loadChildren: () => import('./pagesCliente/mapa-cliente/mapa-cliente.module').then( m => m.MapaClientePageModule)
-  },
-  {
     path: 'mapa-conductor',
-    loadChildren: () => import('./pagesConductor/mapa-conductor/mapa-conductor.module').then( m => m.MapaConductorPageModule)
-  },
-  {
-    path: 'modificar-cliente',
-    loadChildren: () => import('./pagesCliente/modificar-cliente/modificar-cliente.module').then( m => m.ModificarClientePageModule)
+    loadChildren: () => import('./pages/mapa-conductor/mapa-conductor.module').then( m => m.MapaConductorPageModule)
   },
   {
     path: 'modificar-conductor',
-    loadChildren: () => import('./pagesConductor/modificar-conductor/modificar-conductor.module').then( m => m.ModificarConductorPageModule)
+    loadChildren: () => import('./pages/modificar-conductor/modificar-conductor.module').then( m => m.ModificarConductorPageModule)
   },
   {
     path: 'viajes-disponible',
@@ -53,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'finalizar-viaje',
-    loadChildren: () => import('./pages/finalizar-viaje/finalizar-viaje.module').then( m => m.FinalizarViajePageModule)
+    loadChildren: () => import('./pagesCliente/finalizar-viaje/finalizar-viaje.module').then( m => m.FinalizarViajePageModule)
 
   },
   {
@@ -61,20 +53,8 @@ const routes: Routes = [
     loadChildren: () => import('./pagesCliente/finalizar-viaje-cliente/finalizar-viaje-cliente.module').then( m => m.FinalizarViajeClientePageModule)
   },
   {
-    path: 'test',
-    loadChildren: () => import('./pages/test/test.module').then( m => m.TestPageModule)
-  },
-  {
     path: 'comentario-conductor',
     loadChildren: () => import('./pagesConductor/comentario-conductor/comentario-conductor.module').then( m => m.ComentarioConductorPageModule)
-  },
-  {
-    path: 'paginainicio',
-    loadChildren: () => import('./pagesCliente/paginainicio/paginainicio.module').then( m => m.PaginainicioPageModule)
-  },
-  {
-    path: 'paginainicio',
-    loadChildren: () => import('./pagesConductor/paginainicio/paginainicio.module').then( m => m.PaginainicioPageModule)
   },
   {
     path: 'inicio-cliente',
@@ -87,14 +67,6 @@ const routes: Routes = [
   {
     path: 'inicio-conductor',
     loadChildren: () => import('./pagesConductor/inicio-conductor/inicio-conductor.module').then( m => m.InicioConductorPageModule)
-  },
-  {
-    path: 'perfil-cliente',
-    loadChildren: () => import('./pagesCliente/perfil-cliente/perfil-cliente.module').then( m => m.PerfilClientePageModule)
-  },
-  {
-    path: 'perfil-conductor',
-    loadChildren: () => import('./pagesConductor/perfil-conductor/perfil-conductor.module').then( m => m.PerfilConductorPageModule)
   },
 
 ];

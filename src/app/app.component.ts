@@ -51,7 +51,7 @@ export class AppComponent implements OnInit{
       this.router.navigate(['/mapa-conductor']);
     } else {
       if (this.Usuario[0].fk_id_rol== "2") {
-        this.router.navigate(['/mapa-cliente']);
+        this.router.navigate(['/mapa-conductor']);
       }
 
     }
