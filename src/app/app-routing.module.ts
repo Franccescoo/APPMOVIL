@@ -67,7 +67,11 @@ const routes: Routes = [
   {
     path: 'inicio-conductor',
     loadChildren: () => import('./pagesConductor/inicio-conductor/inicio-conductor.module').then( m => m.InicioConductorPageModule)
+  },  {
+    path: 'perfil',
+    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+
 
 ];
 

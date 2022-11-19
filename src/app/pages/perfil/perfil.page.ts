@@ -5,16 +5,16 @@ import { CameraService } from 'src/app/services/camera.service';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
-  selector: 'app-inicio-conductor',
-  templateUrl: './inicio-conductor.page.html',
-  styleUrls: ['./inicio-conductor.page.scss'],
+  selector: 'app-perfil',
+  templateUrl: './perfil.page.html',
+  styleUrls: ['./perfil.page.scss'],
 })
-export class InicioConductorPage implements OnInit {
+export class PerfilPage implements OnInit {
   fotocon: any;
 
 
   nombremod='';
-
+  id1=''
   id = '';
   nombre = '';
   clave = '';
@@ -25,19 +25,19 @@ export class InicioConductorPage implements OnInit {
     this.nativeStorage.getItem('id').then((data) => {
       this.id = data
     })
+    this.nativeStorage.getItem('id1').then((data) => {
+      this.id1 = data
+    })
     this.guardarnombre()
     this.guardaridrol()
   }
 
   ngOnInit() {
-    this.api.getfoto().subscribe(item => {
-      this.fotocon = item;
-    })
     this.bd.dbState().subscribe((res) => {
       if (res) {
         this.bd.fetchUser().subscribe(item => {
           this.Usuario = item;
-
+          this.nativeStorage.setItem('id1',this.Usuario[0].idusuario)
         })
       }
     })
@@ -46,7 +46,9 @@ export class InicioConductorPage implements OnInit {
 
 
   guardarid() {
-    
+    this.nativeStorage.getItem('id').then((data) => {
+      this.id = data
+    })
   }
   guardarnombre() {
     this.nativeStorage.getItem('nombre').then((data2) => {
@@ -72,4 +74,15 @@ export class InicioConductorPage implements OnInit {
   }
 
   
+  Editar(x) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idenviado:  x.idUsuario, 
+        nombreenviado:  x.nombre,
+        claveenviado:  x.clave ,
+        fotoenviado:  x.foto ,
+        idrolenviado: x.fk_id_rol}
+    }
+    this.router.navigate(['/modificar-conductor'], navigationExtras);
+  }
 }

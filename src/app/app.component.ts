@@ -58,10 +58,10 @@ export class AppComponent implements OnInit{
   }
   perfil(){
     if (this.Usuario[0].fk_id_rol == "1") {
-      this.router.navigate(['/modificar-conductor']);
+      this.router.navigate(['/perfil']);
     } else {
       if (this.Usuario[0].fk_id_rol == "2") {
-        this.router.navigate(['/modificar-conductor']);
+        this.router.navigate(['/perfil']);
       }
 
     }
