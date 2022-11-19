@@ -12,7 +12,8 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 export class ModificarConductorPage implements OnInit {
   fotocon: any;
   nombremod='';
-
+  clavemod='';
+  clavemod2='';
   idextras= '';
   nombreextras='';
   claveextras='';
@@ -107,5 +108,26 @@ export class ModificarConductorPage implements OnInit {
     }
 
   }
-  
+  modificarclave(){
+    if(this.clavemod == this.clavemod2){
+      this.bd.presentAlert("claves cambiada")
+      this.bd.updateUsuarioclave(this.idextras,this.clavemod)
+      {
+        let navigationExtras: NavigationExtras = {
+          state: {
+            idenviado: this.Usuario[0].idusuario,
+            nombreenviado: this.Usuario[0].nombre,
+            claveenviado: this.Usuario[0].clave,
+            fotoenviado: this.Usuario[0].foto,
+            idrolenviado: this.Usuario[0].fk_id_rol
+          }
+        }
+        this.router.navigate(['/inicio-conductor'], navigationExtras);
+      }
+    }
+    else if(this.clavemod != this.clavemod2){
+      this.bd.presentAlert("claves no iguales")
+    }
+
+  }
 }

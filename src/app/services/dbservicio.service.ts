@@ -200,6 +200,13 @@ export class DbservicioService {
     });
 
   }
+  updateUsuarioclave(idusuario,clave) {
+    let data = [clave,idusuario];
+    return this.database.executeSql('UPDATE usuario SET clave = ?  WHERE idusuario = ? ', data).then(res => {
+      this.buscarUsuario();
+    });
+
+  }
 
   //AUTO
   buscarAuto() {
