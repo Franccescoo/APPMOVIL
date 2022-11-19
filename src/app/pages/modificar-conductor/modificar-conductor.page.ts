@@ -11,24 +11,24 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class ModificarConductorPage implements OnInit {
   fotocon: any;
-  nombremod='';
-  clavemod='';
-  clavemod2='';
-  idextras= '';
-  nombreextras='';
-  claveextras='';
-  fotoextras='';
-  idrolextras='';
+  nombremod = '';
+  clavemod = '';
+  clavemod2 = '';
+  idextras = '';
+  nombreextras = '';
+  claveextras = '';
+  fotoextras = '';
+  idrolextras = '';
 
   id = '';
   nombre = '';
   clave = '';
   idrol = '';
   Usuario: any[] = []
-  id1=''
-  constructor(private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router,private activedRouter: ActivatedRoute) {
-    this.activedRouter.queryParams.subscribe(param=>{
-      if(this.router.getCurrentNavigation().extras.state){
+  id1 = ''
+  constructor(private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router, private activedRouter: ActivatedRoute) {
+    this.activedRouter.queryParams.subscribe(param => {
+      if (this.router.getCurrentNavigation().extras.state) {
         this.idextras = this.router.getCurrentNavigation().extras.state.idenviado;
         this.nombreextras = this.router.getCurrentNavigation().extras.state.nombreenviado;
         this.claveextras = this.router.getCurrentNavigation().extras.state.claveenviado;
@@ -36,10 +36,10 @@ export class ModificarConductorPage implements OnInit {
         this.idrolextras = this.router.getCurrentNavigation().extras.state.idrolenviado;
       }
     })
-    
-    
-    
-    
+
+
+
+
     this.nativeStorage.getItem('id').then((data) => {
       this.id = data
     })
@@ -91,27 +91,10 @@ export class ModificarConductorPage implements OnInit {
     this.api.TakePicture();
   }
 
-  modificar(){
-    this.bd.updateUsuario(this.idextras,this.nombremod);
-    this.bd.presentAlert("modificado usuario")
-    {
-      let navigationExtras: NavigationExtras = {
-        state: {
-          idenviado: this.Usuario[0].idusuario,
-          nombreenviado: this.Usuario[0].nombre,
-          claveenviado: this.Usuario[0].clave,
-          fotoenviado: this.Usuario[0].foto,
-          idrolenviado: this.Usuario[0].fk_id_rol
-        }
-      }
-      this.router.navigate(['/inicio-conductor'], navigationExtras);
-    }
-  }
-
-  modificarclave(){
-    if(this.clavemod == this.clavemod2){
-      this.bd.presentAlert("claves cambiada")
-      this.bd.updateUsuarioclave(this.idextras,this.clavemod)
+  modificar() {
+    if (this.nombremod.length != 0) {
+      this.bd.updateUsuario(this.idextras, this.nombremod);
+      this.bd.presentAlert("modificado usuario")
       {
         let navigationExtras: NavigationExtras = {
           state: {
@@ -125,8 +108,31 @@ export class ModificarConductorPage implements OnInit {
         this.router.navigate(['/inicio-conductor'], navigationExtras);
       }
     }
-    else if(this.clavemod != this.clavemod2){
-      this.bd.presentAlert("claves no iguales")
+    else {(this.bd.presentAlert("nombre vacia"))}
+  }
+
+  modificarclave() {
+    if (this.clavemod != this.clavemod2 ) {
+      this.bd.presentAlert("claves no iguales ")
+    }
+    else if (this.clavemod.length == 0 && this.clavemod2.length == 0){
+      this.bd.presentAlert("claves no null ")
+    }
+    else if (this.clavemod == this.clavemod2 && this.clavemod.length != 0) {
+      this.bd.presentAlert("claves cambiada")
+      this.bd.updateUsuarioclave(this.idextras, this.clavemod)
+      {
+        let navigationExtras: NavigationExtras = {
+          state: {
+            idenviado: this.Usuario[0].idusuario,
+            nombreenviado: this.Usuario[0].nombre,
+            claveenviado: this.Usuario[0].clave,
+            fotoenviado: this.Usuario[0].foto,
+            idrolenviado: this.Usuario[0].fk_id_rol
+          }
+        }
+        this.router.navigate(['/inicio-conductor'], navigationExtras);
+      }
     }
 
   }
