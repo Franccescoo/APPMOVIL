@@ -17,6 +17,7 @@ export class Apiservices2Service {
   }
   // Se establece la base url del API a consumir
   apiURL = 'https://my-json-server.typicode.com/victorrosendo/repoUsuariosRamos';
+  apiURL2 ='https://my-json-server.typicode.com/victorrosendo/repoListadoAutos';
   // Se declara la variable http de tipo HttpClient
 
   constructor(private http:HttpClient, private alertController:AlertController) { }
@@ -25,6 +26,12 @@ export class Apiservices2Service {
   getUsuarios():Observable<any>{
     this.presentAlert("Entra al json");
     return this.http.get(this.apiURL+'/users/').pipe(
+      retry(3)
+    );
+  }
+  getautos():Observable<any>{
+    this.presentAlert("Entra al json");
+    return this.http.get(this.apiURL2+'/autos/').pipe(
       retry(3)
     );
   }

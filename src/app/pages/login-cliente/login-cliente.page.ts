@@ -26,7 +26,7 @@ export class LoginClientePage implements OnInit {
   }];
 
   Usuario: any[] = []
-
+  Auto: any[] = []
   constructor(private menuController: MenuController, private nativeStorage: NativeStorage, private alertController: AlertController, private router: Router, private api: Apiservices2Service, private bd: DbservicioService, public storage: Storage, private toastController: ToastController) {
     menuController.enable(false, "first")
 
@@ -39,11 +39,26 @@ export class LoginClientePage implements OnInit {
         this.bd.presentAlert(x.nombre);
         this.bd.agregarUsuario(x.id, x.nombre, x.clave, x.id_rol);
       }
+      this.api.getautos().subscribe((res)=>{
+        this.Auto = res;
+        for (let x of this.Auto){
+          this.bd.presentAlert(x.patente);
+          this.bd.agregarAuto(x.patente,x.id_usuario,x.marca);
+        }
+      })
     });
     this.bd.dbState().subscribe((res) => {
       if (res) {
         this.bd.fetchUser().subscribe(item => {
           this.Usuario = item;
+
+        })
+      }
+    })
+    this.bd.dbState().subscribe((res) => {
+      if (res) {
+        this.bd.fetchauto().subscribe(item => {
+          this.Auto = item;
 
         })
       }
