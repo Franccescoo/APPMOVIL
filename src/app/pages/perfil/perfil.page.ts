@@ -17,14 +17,15 @@ export class PerfilPage implements OnInit {
   claveextras='';
   fotoextras='';
   idrolextras='';
-
+  Usuario: any[] = []
+  
   nombremod='';
   id1=''
   id = '';
   nombre = '';
   clave = '';
   idrol = '';
-  Usuario: any[] = []
+
 
   constructor(private activedRouter: ActivatedRoute,private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
     this.activedRouter.queryParams.subscribe(param=>{
@@ -90,7 +91,7 @@ export class PerfilPage implements OnInit {
   }
 
   
-  Editar(x) {
+  Editar() {
     let navigationExtras: NavigationExtras = {
       state: {
         idenviado: this.Usuario[0].idusuario,
@@ -101,5 +102,18 @@ export class PerfilPage implements OnInit {
       }
     }
     this.router.navigate(['/modificar-conductor'], navigationExtras);
+  }
+
+  EditarPass(){
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idenviado: this.Usuario[0].idusuario,
+        nombreenviado: this.Usuario[0].nombre,
+        claveenviado: this.Usuario[0].clave,
+        fotoenviado: this.Usuario[0].foto,
+        idrolenviado: this.Usuario[0].fk_id_rol
+      }
+    }
+    this.router.navigate(['/confirmar-pass'], navigationExtras);
   }
 }
