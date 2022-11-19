@@ -190,7 +190,6 @@ export class DbservicioService {
     let data = [idusuario, nombre, clave, fk_id_rol];
     return this.database.executeSql('INSERT or IGNORE INTO  usuario (idusuario, nombre, clave, fk_id_rol) VALUES (?, ?, ?, ?)', data).then(res => {
       this.buscarUsuario();
-      this.presentAlert("dato ingresado");
     });
   }
   updateUsuario(idusuario,nombre) {

@@ -28,8 +28,8 @@
   </ion-item>
 
   <ion-item fill="solid">
-    <ion-label position="floating">Nombre: </ion-label>
-    <ion-input (ngModel)]="nombremod"></ion-input>
+    <ion-label position="floating">Nombre:</ion-label>
+    <ion-input [(ngModel)]="nombremod"></ion-input>
     <ion-note slot="helper">Nombre</ion-note>
   </ion-item>
   <!-- <ion-item>
@@ -37,10 +37,7 @@
     <ion-input [(ngModel)]="clavemod" placeholder="contranueva"></ion-input><br>
     <ion-input [(ngModel)]="clavemod2" placeholder="repita contra"></ion-input><br>
   </ion-item> -->
-
-  <center>
     <ion-button style="margin-top: 10px;"color="success"expand="full" (click)="modificar()">Modificar Nombre</ion-button>
-  </center>
   <!-- <center>
     <ion-button shape="round" (click)="modificarclave()">modificar clave</ion-button>
   </center> -->

@@ -11,9 +11,12 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class ModificarConductorPage implements OnInit {
   fotocon: any;
+
   nombremod = '';
+
   clavemod = '';
   clavemod2 = '';
+
   idextras = '';
   nombreextras = '';
   claveextras = '';
@@ -26,6 +29,7 @@ export class ModificarConductorPage implements OnInit {
   idrol = '';
   Usuario: any[] = []
   id1 = ''
+
   constructor(private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router, private activedRouter: ActivatedRoute) {
     this.activedRouter.queryParams.subscribe(param => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -108,8 +112,8 @@ export class ModificarConductorPage implements OnInit {
         this.router.navigate(['/inicio-conductor'], navigationExtras);
       }
     }
-    else {(this.bd.presentAlert("El nombre no puede estar vacío"))}
+    else {
+      this.bd.presentAlert("El nombre no puede estar vacío")}
   }
-
 
 }

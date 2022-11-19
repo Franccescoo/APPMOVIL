@@ -32,9 +32,7 @@ export class LoginClientePage implements OnInit {
 
   }
   ngOnInit() {
-    this.bd.presentAlert("1");
     this.api.getUsuarios().subscribe((res) => {
-      this.bd.presentAlert("2");
       this.Usuario = res;
       console.log(res)
       for (let x of this.Usuario) {
