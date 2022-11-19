@@ -79,6 +79,10 @@ const routes: Routes = [
     path: 'cambiar-pass',
     loadChildren: () => import('./pages/cambiar-pass/cambiar-pass.module').then( m => m.CambiarPassPageModule)
   },
+  {
+    path: 'ver-auto',
+    loadChildren: () => import('./pages/ver-auto/ver-auto.module').then( m => m.VerAutoPageModule)
+  },
 
 
 ];

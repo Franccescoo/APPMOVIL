@@ -5,15 +5,11 @@ import { CameraService } from 'src/app/services/camera.service';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
-  selector: 'app-inicio-conductor',
-  templateUrl: './inicio-conductor.page.html',
-  styleUrls: ['./inicio-conductor.page.scss'],
+  selector: 'app-ver-auto',
+  templateUrl: './ver-auto.page.html',
+  styleUrls: ['./ver-auto.page.scss'],
 })
-export class InicioConductorPage implements OnInit {
-  fotocon: any;
-
-
-  nombremod='';
+export class VerAutoPage implements OnInit {
 
   idextras='';
   nombreextras='';
@@ -23,11 +19,6 @@ export class InicioConductorPage implements OnInit {
   patentextras='';
   fkextras='';
   marcaextras='';
-
-  id = '';
-  nombre = '';
-  clave = '';
-  idrol = '';
   Usuario: any[] = []
 
   constructor(private activedRouter: ActivatedRoute,private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
@@ -43,16 +34,9 @@ export class InicioConductorPage implements OnInit {
         this.marcaextras = this.router.getCurrentNavigation().extras.state.marcaenviado;
       }
     })
-    
-    this.guardarid()
-    this.guardarnombre()
-    this.guardaridrol()
-  }
+   }
 
   ngOnInit() {
-    this.api.getfoto().subscribe(item => {
-      this.fotocon = item;
-    })
     this.bd.dbState().subscribe((res) => {
       if (res) {
         this.bd.fetchUser().subscribe(item => {
@@ -61,38 +45,6 @@ export class InicioConductorPage implements OnInit {
         })
       }
     })
-
   }
 
-
-  guardarid() {
-    this.nativeStorage.getItem('id').then((data) => {
-      this.id = data
-    })
-    
-  }
-  guardarnombre() {
-    this.nativeStorage.getItem('nombre').then((data2) => {
-      this.nombre = data2
-    })
-  }
-
-  guardarclave() {
-    this.nativeStorage.getItem('clave').then((data3) => {
-      this.clave = data3
-    })
-  }
-
-
-  guardaridrol() {
-    this.nativeStorage.getItem('idrol').then((data4) => {
-      this.idrol = data4
-    })
-  }
-
-  AbrirCamara() {
-    this.api.TakePicture();
-  }
-
-  
 }
