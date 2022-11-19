@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { CameraService } from 'src/app/services/camera.service';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
@@ -14,17 +14,22 @@ export class InicioConductorPage implements OnInit {
 
 
   nombremod='';
-
+  idextras='';
   id = '';
   nombre = '';
   clave = '';
   idrol = '';
   Usuario: any[] = []
 
-  constructor(private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
-    this.nativeStorage.getItem('id').then((data) => {
-      this.id = data
+  constructor(private activedRouter: ActivatedRoute,private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
+    this.activedRouter.queryParams.subscribe(param=>{
+      if(this.router.getCurrentNavigation().extras.state){
+        this.idextras = this.router.getCurrentNavigation().extras.state.idenviado;
+      }
     })
+    
+    
+    this.guardarid()
     this.guardarnombre()
     this.guardaridrol()
   }
@@ -46,6 +51,9 @@ export class InicioConductorPage implements OnInit {
 
 
   guardarid() {
+    this.nativeStorage.getItem('id').then((data) => {
+      this.id = data
+    })
     
   }
   guardarnombre() {

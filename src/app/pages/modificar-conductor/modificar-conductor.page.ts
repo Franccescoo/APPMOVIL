@@ -94,8 +94,15 @@ export class ModificarConductorPage implements OnInit {
   modificar(){
     this.bd.updateUsuario(this.idextras,this.nombremod);
     this.bd.presentAlert("modificado usuario")
-    
-    this.router.navigate(['/inicio-conductor'])
+    {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          idenviado:  this.idextras
+          }
+      }
+      this.router.navigate(['/inicio-conductor'], navigationExtras);
+    }
+
   }
   
 }
