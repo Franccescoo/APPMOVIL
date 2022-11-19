@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
+import { LocationService } from 'src/app/services/location.service';
 
-let google: any
+declare var google: any
 
 interface Marker {
   position: {
@@ -17,16 +18,22 @@ interface Marker {
   styleUrls: ['./mapa-conductor.page.scss'],
 })
 export class MapaConductorPage implements OnInit {
-
   map: any;
   locationService: any;
 
-  public latitude;
-  public longitude;
+latitude; 
+longitude;
 
-  constructor(public geolocation: Geolocation,public toastController: ToastController) {
+@ViewChild('map', {read: ElementRef, static: false}) mapView: ElementRef;
 
+  constructor(private geolocation: Geolocation,public toastController: ToastController, private locationservice: LocationService,private alertController: AlertController,) {
+    this.locationservice.getPosition()
   }
+
+  ionViewDidEnter() {
+    this.loadMap();
+  }
+
   ngAfterViewInit() {
     this.geolocationNative();
   }
@@ -36,13 +43,13 @@ export class MapaConductorPage implements OnInit {
   }
 
   geolocationNative() {
-    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
+    this.geolocation.getCurrentPosition({ enableHighAccuracy: true}).then((geposition: Geoposition) =>{
       this.latitude = geposition.coords.latitude
       this.longitude = geposition.coords.longitude
-
-      console.log(geposition);
-    })
-  }
+      }).catch((e) => {
+        console.log(e);
+      });
+    }
 
   async presentToast() {
     const toast = await this.toastController.create({
@@ -52,9 +59,8 @@ export class MapaConductorPage implements OnInit {
     toast.present();
   }
 
-
   loadMap() {
-    // create a new map by passing HTMLElement
+    // create a new map by passing HTMLElement  lat: -33.36326318588252, lng: -70.67801166481883};
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
     const myLatLng = {lat: -33.36326318588252, lng: -70.67801166481883};
@@ -64,21 +70,14 @@ export class MapaConductorPage implements OnInit {
       zoom: 13
     });
 
-    this.geolocation.getCurrentPosition().then((geposition: Geoposition) =>{
-      this.latitude = geposition.coords.latitude
-      this.longitude = geposition.coords.longitude
-
-      console.log(geposition);
-    })
-
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
       const market = {
         position: {
-          lat: -33.36326318588252,
-          lng: -70.67801166481883,
+          lat: this.latitude,
+          lng:  this.longitude
         },
-        title: 'Duoc UC: Sede Plaza Norte'
+        title: 'Tu Ubicación'
       };
       this.addMarker(market);
     });
@@ -91,4 +90,14 @@ export class MapaConductorPage implements OnInit {
       title: marker.title
     });
   }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      message: 'Tus coordenadas son: lat ' + this.latitude + ' y lng: ' + this.longitude,
+      buttons: ['OK'],
+    });
+  
+    await alert.present();
+  }
+
 }
