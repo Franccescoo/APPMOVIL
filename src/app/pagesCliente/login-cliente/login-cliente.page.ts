@@ -42,6 +42,14 @@ export class LoginClientePage implements OnInit {
         this.bd.agregarUsuario(x.id, x.nombre, x.clave, x.id_rol);
       }
     });
+    this.bd.dbState().subscribe((res) => {
+      if (res) {
+        this.bd.fetchUser().subscribe(item => {
+          this.Usuario = item;
+
+        })
+      }
+    })
   }
 
 
@@ -57,7 +65,7 @@ export class LoginClientePage implements OnInit {
       this.presentToast("Usuario y/o Contraseña incorrecta");
     }
     else {
-      if (this.Usuario[0].id_rol == 2) {
+      if (this.Usuario[0].fk_id_rol == 2) {
         this.router.navigate(['/inicio-cliente']);
         this.nativeStorage.setItem('id', this.Usuario[0].idusuario)
         this.nativeStorage.setItem('nombre', this.Usuario[0].nombre)
@@ -65,7 +73,7 @@ export class LoginClientePage implements OnInit {
         this.presentToast("Bienvenido " + this.ingreso.nombre);
 
       } else {
-        if (this.Usuario[0].id_rol == 1) {
+        if (this.Usuario[0].fk_id_rol == 1) {
           this.router.navigate(['/inicio-conductor']);
           this.nativeStorage.setItem('id', this.Usuario[0].id_usuario)
           this.nativeStorage.setItem('nombre', this.Usuario[0].username)

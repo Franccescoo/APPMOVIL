@@ -15,36 +15,28 @@ import { subscribeOn } from 'rxjs/operators';
   styleUrls: ['./modificar-cliente.page.scss'],
 })
 export class ModificarClientePage implements OnInit {
+  fotocon: any;
 
 
-  foto: any;
-  modificar: any ={
-    nombre: ''
-  }
+  nombremod='';
+
   id = '';
   nombre = '';
   clave = '';
   idrol = '';
-
-  // usuarios: any=[{
-  //   id: '',
-  //   nombre:'',
-  //   clave:'',
-  //   id_rol:''
-  // }];
-
   Usuario: any[] = []
 
-  constructor(private bd: DbservicioService, private api: CameraService, private router: Router, public nativeStorage: NativeStorage) {
-
-    this.guardarid()
+  constructor(private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
+    this.nativeStorage.getItem('id').then((data) => {
+      this.id = data
+    })
     this.guardarnombre()
     this.guardaridrol()
   }
-  
+
   ngOnInit() {
     this.api.getfoto().subscribe(item => {
-      this.foto = item;    
+      this.fotocon = item;
     })
     this.bd.dbState().subscribe((res) => {
       if (res) {
@@ -54,22 +46,23 @@ export class ModificarClientePage implements OnInit {
         })
       }
     })
+
   }
+
 
   guardarid() {
     this.nativeStorage.getItem('id').then((data) => {
       this.id = data
     })
   }
-
   guardarnombre() {
     this.nativeStorage.getItem('nombre').then((data2) => {
       this.nombre = data2
     })
   }
 
-  guardarclave(){
-    this.nativeStorage.getItem('clave').then((data3)=>{
+  guardarclave() {
+    this.nativeStorage.getItem('clave').then((data3) => {
       this.clave = data3
     })
   }
@@ -81,29 +74,15 @@ export class ModificarClientePage implements OnInit {
     })
   }
 
-  Editar(itemu) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        id:  itemu.id_usuario, 
-        us:  itemu.username,
-        cl:  itemu.clave ,
-        ft:  itemu.foto ,
-        rol: itemu.fk_id_tipousuario}
-    }
-    this.router.navigate(['/modificar-cliente'], navigationExtras);
-  }
-
-
-
-
   AbrirCamara() {
     this.api.TakePicture();
   }
 
-
-  // nombreUsuario;
-  // getNombreUsuario(){
-  //   this.nombreUsuario = this.storage.get('nombre_usuario');
-  // }
+  modificar(){
+    this.bd.updateUsuario(this.id,this.nombremod);
+    this.bd.presentAlert("modificado usuario")
+    this.router.navigate(['/inicio-conductor'])
+    
+  }
 
 }

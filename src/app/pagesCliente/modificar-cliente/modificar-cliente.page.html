@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="inicio-cliente"></ion-back-button>
     </ion-buttons>
-    <ion-title>Modificar Perfil </ion-title>
+    <ion-title>Modificar Perfill </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <!-- fab placed to the top end -->
-<ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button (click)="AbrirCamara()">
       <mat-icon>create</mat-icon>
     </ion-fab-button>
@@ -18,25 +18,25 @@
 
   <center>
     <ion-avatar slot="start">
-      <img alt=" " [src]="foto" *ngIf="foto" />
+      <img alt=" " [src]="fotocon" *ngIf="fotocon" />
     </ion-avatar>
-  </center> 
+  </center>
 
 
 
-  <!-- <ion-card-content> -->
+  <!-- <ion-card-content>
 
-  <!-- <ion-grid style="padding-top: 10px; padding-left: unset; padding-right: unset;">
+      <ion-grid style="padding-top: 10px; padding-left: unset; padding-right: unset;">
 
-      <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
-        <ion-col size="10">
-          <ion-input type="text" style="font-size: 15px;" placeholder="usuario"></ion-input>
-        </ion-col>
-        <ion-col size="2">
-          <ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon>
-        </ion-col>
-      </ion-row> -->
+        <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+          <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Nombre"></ion-input></ion-col>
+          <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+        </ion-row>
 
+        <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
+          <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Apellido"></ion-input></ion-col>
+          <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
+        </ion-row> -->
   <ion-list *ngFor="let x of Usuario">
     <ion-list *ngIf="x.idusuario == id">
       <ion-item>
@@ -44,6 +44,7 @@
       </ion-item>
       <ion-item>
         <ion-label>{{ x.nombre }}</ion-label>
+        <ion-input [(ngModel)]="nombremod"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>{{ x.fk_id_rol }}</ion-label>
@@ -55,17 +56,10 @@
   </ion-list>
 
 
-  <!-- <ion-row style="border-bottom: black 1px solid; background-color: #e2e2e2;">
-      <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Apellido"></ion-input></ion-col>
-      <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
-    </ion-row> -->
-
-
-
   <!-- </ion-grid> -->
 
   <center>
-    <ion-button shape="round" (click)="editar()">EDITAR</ion-button>
+    <ion-button shape="round" (click)="modificar()">EDITAR</ion-button>
   </center>
 
   <!-- </ion-card-content> -->

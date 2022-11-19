@@ -1,30 +1,30 @@
 <ion-header>
   <ion-toolbar color="success">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="cuenta-cliente"></ion-back-button>
+      <ion-back-button defaultHref="inicio-conductor"></ion-back-button>
     </ion-buttons>
-  <ion-title >Modificar Conductor </ion-title>
+    <ion-title>Modificar</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-      <!-- fab placed to the top end -->
-      <ion-fab vertical="top" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="AbrirCamara()" >
-          <mat-icon>create</mat-icon>
-        </ion-fab-button>
-      </ion-fab>
+  <!-- fab placed to the top end -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="AbrirCamara()">
+      <mat-icon>create</mat-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-      <center>
-        <ion-avatar slot="start">
-          <img alt=" " [src]="fotocon" *ngIf="fotocon" />
-        </ion-avatar>
-      </center>
-     
+  <center>
+    <ion-avatar slot="start">
+      <img alt=" " [src]="fotocon" *ngIf="fotocon" />
+    </ion-avatar>
+  </center>
 
 
-    <!-- <ion-card-content>
+
+  <!-- <ion-card-content>
 
       <ion-grid style="padding-top: 10px; padding-left: unset; padding-right: unset;">
 
@@ -37,32 +37,32 @@
           <ion-col size="10"><ion-input type="text" style="font-size: 15px;" placeholder="Apellido"></ion-input></ion-col>
           <ion-col size="2"><ion-icon style="padding-top: 10px;" name="chevron-forward-outline"></ion-icon></ion-col>
         </ion-row> -->
-        <ion-list *ngFor="let x of Usuario">
-          <ion-list *ngIf="x.idusuario == id">
-            <ion-item>
-              <ion-label>{{ x.idUsuario }}</ion-label>  
-            </ion-item>
-            <ion-item>
-              <ion-label>{{ x.nombre }}</ion-label>
-              <ion-input [(ngModel)]="nombremod"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>{{ x.fk_id_rol }}</ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>{{ x.clave }}</ion-label>
-            </ion-item>
-          </ion-list>
-        </ion-list>
+  <ion-list *ngFor="let x of Usuario">
+    <ion-list *ngIf="x.idusuario == id">
+      <ion-item>
+        <ion-label>{{ x.idUsuario }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ x.nombre }}</ion-label>
+        <ion-input [(ngModel)]="nombremod"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ x.fk_id_rol }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ x.clave }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-list>
 
-        
-      <!-- </ion-grid> -->
 
-      <center>
-        <ion-button shape="round" (click)="modificar()">EDITAR</ion-button>
-      </center>
+  <!-- </ion-grid> -->
 
-    <!-- </ion-card-content> -->
+  <center>
+    <ion-button shape="round" (click)="modificar()">EDITAR</ion-button>
+  </center>
+
+  <!-- </ion-card-content> -->
 
 
 </ion-content>

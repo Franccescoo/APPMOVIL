@@ -22,7 +22,9 @@ export class ModificarConductorPage implements OnInit {
   Usuario: any[] = []
 
   constructor(private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
-    this.guardarid()
+    this.nativeStorage.getItem('id').then((data) => {
+      this.id = data
+    })
     this.guardarnombre()
     this.guardaridrol()
   }

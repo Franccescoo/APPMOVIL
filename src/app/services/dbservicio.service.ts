@@ -195,7 +195,6 @@ export class DbservicioService {
   }
   updateUsuario(idusuario,nombre) {
     let data = [nombre,idusuario];
-    
     return this.database.executeSql('UPDATE usuario SET nombre = ?  WHERE idusuario = ? ', data).then(res => {
       this.buscarUsuario();
     });

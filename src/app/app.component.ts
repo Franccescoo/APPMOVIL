@@ -37,31 +37,31 @@ export class AppComponent implements OnInit{
     })
   }
   inicio(){
-    if (this.idrol == "1") {
+    if (this.Usuario[0].fk_id_rol == "1") {
       this.router.navigate(['/inicio-conductor']);
     } else {
-      if (this.idrol == "2") {
+      if (this.Usuario[0].fk_id_rol == "2") {
         this.router.navigate(['/inicio-cliente']);
       }
 
     }
   }
   mapa(){
-    if (this.idrol == "1") {
+    if (this.Usuario[0].fk_id_rol == "1") {
       this.router.navigate(['/mapa-conductor']);
     } else {
-      if (this.idrol == "2") {
+      if (this.Usuario[0].fk_id_rol== "2") {
         this.router.navigate(['/mapa-cliente']);
       }
 
     }
   }
   perfil(){
-    if (this.idrol == "1") {
+    if (this.Usuario[0].fk_id_rol == "1") {
       this.router.navigate(['/modificar-conductor']);
     } else {
-      if (this.idrol == "2") {
-        this.router.navigate(['/modificar-cliente']);
+      if (this.Usuario[0].fk_id_rol == "2") {
+        this.router.navigate(['/modificar-conductor']);
       }
 
     }
