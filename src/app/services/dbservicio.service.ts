@@ -82,7 +82,7 @@ export class DbservicioService {
     this.platform.ready().then(() => {
       //creación de la BD
       this.sqlite.create({
-        name: 'miautoOoo.db',
+        name: 'miautoOo.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
@@ -237,11 +237,11 @@ export class DbservicioService {
     });
   }
 
-  agregarAuto(patente,fk_id_usuario,marca) {
-    let data = [patente, fk_id_usuario,marca ];
-    return this.database.executeSql('INSERT or IGNORE INTO auto (  patente , fk_id_usuario, marca) VALUES (? , ? , ?)', data).then(res => {
+
+  agregarAuto(patente, modelo, marca, puestos, fk_idusuario) {
+    let data = [patente, modelo, marca, puestos, fk_idusuario];
+    return this.database.executeSql('INSERT INTO auto (  patente , modelo , marca , puestos , fk_idusuario) VALUES (? , ? , ? , ? , ?)', data).then(res => {
       this.buscarAuto();
-      this.presentAlert("auto guardado")
     });
   }
   updateAuto(patente, modelo, marca, puestos, fk_idusuario) {
