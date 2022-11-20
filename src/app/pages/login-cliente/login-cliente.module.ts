@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { LoginClientePageRoutingModule } from './login-cliente-routing.module';
 
 import { LoginClientePage } from './login-cliente.page';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginClientePageRoutingModule
+    LoginClientePageRoutingModule,
+    SQLite
   ],
   declarations: [LoginClientePage]
 })

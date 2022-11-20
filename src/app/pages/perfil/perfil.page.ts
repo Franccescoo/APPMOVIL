@@ -37,16 +37,6 @@ export class PerfilPage implements OnInit {
         this.idrolextras = this.router.getCurrentNavigation().extras.state.idrolenviado;
       }
     })
-
-
-    this.nativeStorage.getItem('id').then((data) => {
-      this.id = data
-    })
-    this.nativeStorage.getItem('id1').then((data) => {
-      this.id1 = data
-    })
-    this.guardarnombre()
-    this.guardaridrol()
   }
 
   ngOnInit() {
@@ -62,29 +52,6 @@ export class PerfilPage implements OnInit {
   }
 
 
-  guardarid() {
-    this.nativeStorage.getItem('id').then((data) => {
-      this.id = data
-    })
-  }
-  guardarnombre() {
-    this.nativeStorage.getItem('nombre').then((data2) => {
-      this.nombre = data2
-    })
-  }
-
-  guardarclave() {
-    this.nativeStorage.getItem('clave').then((data3) => {
-      this.clave = data3
-    })
-  }
-
-
-  guardaridrol() {
-    this.nativeStorage.getItem('idrol').then((data4) => {
-      this.idrol = data4
-    })
-  }
 
   AbrirCamara() {
     this.api.TakePicture();

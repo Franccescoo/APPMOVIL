@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 import { CambiarPassPage } from './cambiar-pass.page';
 

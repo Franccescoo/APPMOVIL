@@ -1,16 +1,32 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouteReuseStrategy } from '@angular/router';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { AppRoutingModule } from '../app-routing.module';
 
 import { Apiservices2Service } from './apiservices2.service';
 
 describe('Apiservices2Service', () => {
   let service: Apiservices2Service;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Apiservices2Service);
-  });
+  beforeEach(waitForAsync(async () => {
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+    await TestBed.configureTestingModule({
+      imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,HttpClientModule],
+      providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, Camera, Geolocation, NativeStorage,Storage],
+      schemas: [NO_ERRORS_SCHEMA],
+
+    }).compileComponents();
+
+  }));
+
+  it('should create', () => {
+
   });
 });

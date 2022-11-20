@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { CambiarPassPageRoutingModule } from './cambiar-pass-routing.module';
 
 import { CambiarPassPage } from './cambiar-pass.page';
+import { ActivatedRoute } from '@angular/router';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CambiarPassPageRoutingModule
+    CambiarPassPageRoutingModule,
+    ActivatedRoute,
+    SQLite
   ],
   declarations: [CambiarPassPage]
 })
