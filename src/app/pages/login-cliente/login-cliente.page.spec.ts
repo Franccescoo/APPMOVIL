@@ -12,25 +12,25 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { LoginClientePage } from './login-cliente.page';
 import { Storage } from '@ionic/storage';
-describe('LoginClientePage', () => {
-  let component: LoginClientePage;
-  let fixture: ComponentFixture<LoginClientePage>;
+// describe('LoginClientePage', () => {
+//   let component: LoginClientePage;
+//   let fixture: ComponentFixture<LoginClientePage>;
 
-  beforeEach(waitForAsync(async () => {
+//   beforeEach(waitForAsync(async () => {
 
-    await TestBed.configureTestingModule({
-      imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,HttpClientModule],
-      providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, Camera, Geolocation, NativeStorage,Storage],
-      schemas: [NO_ERRORS_SCHEMA],
+//     await TestBed.configureTestingModule({
+//       imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule,HttpClientModule],
+//       providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, Camera, Geolocation, NativeStorage,Storage],
+//       schemas: [NO_ERRORS_SCHEMA],
 
-    }).compileComponents();
+//     }).compileComponents();
 
-    fixture = TestBed.createComponent(LoginClientePage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+//     fixture = TestBed.createComponent(LoginClientePage);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
