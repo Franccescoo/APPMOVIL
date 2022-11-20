@@ -1,58 +1,41 @@
+import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, waitForAsync } from '@angular/core/testing';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { AlertController, IonicModule, Platform } from '@ionic/angular';
+import { platform } from 'os';
+import { DbservicioService } from './dbservicio.service';
 
-// import { TestBed } from '@angular/core/testing';
-// <<<<<<< HEAD
-// import { waitForAsync } from '@angular/core/testing';
-// import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-// =======
-// >>>>>>> parent of 44bf51b (2 PRUEBAS UNITARIAS LISTAS)
-// import { ComponentFixture, waitForAsync } from '@angular/core/testing';
-// import { IonicModule } from '@ionic/angular';
-// import { DbservicioService } from './dbservicio.service';
+describe('Service: dbservicio', () => {
+  let service: DbservicioService;
 
-// describe('DbservicioService', () => {
-//   let service: DbservicioService;
+  beforeEach(() => {
+    service = new DbservicioService(SQLite as any,Platform as any, AlertController as any);
+  });
 
-//   beforeEach(waitForAsync(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ DbservicioService ],
-//       imports: [IonicModule.forRoot()],
-// <<<<<<< HEAD
-//       providers: [
-//         { provide: SQLite},
-//         { provide: Platform},
-//         { provide: AlertController}
-//       ]
-// =======
-// >>>>>>> parent of 44bf51b (2 PRUEBAS UNITARIAS LISTAS)
-//     }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ DbservicioService ],
+      imports: [IonicModule.forRoot()],
+      providers: [SQLite,Platform,AlertController]
+    }).compileComponents();
 
-//   }));
-// })
+  }));
 
-// <<<<<<< HEAD
-// =======
-//   it('should be created', () => {
-//   });
-// });
-// >>>>>>> parent of 44bf51b (2 PRUEBAS UNITARIAS LISTAS)
-// =======
-// import { TestBed } from '@angular/core/testing';
-// import { ComponentFixture, waitForAsync } from '@angular/core/testing';
-// import { IonicModule } from '@ionic/angular';
-// import { DbservicioService } from './dbservicio.service';
+  // it('#getValue should return real value', () => {
+  //   expect(service.getValue()).toBe('real value');
+  // });
 
-// describe('DbservicioService', () => {
-//   let service: DbservicioService;
+  // it('#getObservableValue should return value from observable', (done: DoneFn) => {
+  //   service.getObservableValue().subscribe((value) => {
+  //     expect(value).toBe('observable value');
+  //     done();
+  //   });
+  // });
 
-//   beforeEach(waitForAsync(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ DbservicioService ],
-//       imports: [IonicModule.forRoot()],
-//     }).compileComponents();
-
-//   }));
-
-//   it('should be created', () => {
-//   });
-// });
-// >>>>>>> parent of 44bf51b (2 PRUEBAS UNITARIAS LISTAS)
+  // it('#getPromiseValue should return value from a promise', (done: DoneFn) => {
+  //   service.getPromiseValue().then((value) => {
+  //     expect(value).toBe('promise value');
+  //     done();
+  //   });
+  // });
+});
