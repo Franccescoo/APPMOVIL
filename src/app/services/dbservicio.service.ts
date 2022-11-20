@@ -82,7 +82,7 @@ export class DbservicioService {
     this.platform.ready().then(() => {
       //creación de la BD
       this.sqlite.create({
-        name: 'miautoOoo.db',
+        name: 'miautoOooo.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;

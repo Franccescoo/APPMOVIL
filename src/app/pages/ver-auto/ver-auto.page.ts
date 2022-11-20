@@ -20,7 +20,7 @@ export class VerAutoPage implements OnInit {
   fkextras='';
   marcaextras='';
   Usuario: any[] = []
-
+  Auto: any[] = []
   constructor(private activedRouter: ActivatedRoute,private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation().extras.state){
@@ -30,7 +30,7 @@ export class VerAutoPage implements OnInit {
         this.fotoextras = this.router.getCurrentNavigation().extras.state.fotoenviado;
         this.idrolextras = this.router.getCurrentNavigation().extras.state.idrolenviado;
         this.patentextras = this.router.getCurrentNavigation().extras.state.patenteenviado;
-        this.fkextras = this.router.getCurrentNavigation().extras.state.fkenviado;
+        this.fkextras = this.router.getCurrentNavigation().extras.state.idrolautoenviado;
         this.marcaextras = this.router.getCurrentNavigation().extras.state.marcaenviado;
       }
     })
@@ -42,6 +42,13 @@ export class VerAutoPage implements OnInit {
         this.bd.fetchUser().subscribe(item => {
           this.Usuario = item;
 
+        })
+      }
+    })
+    this.bd.dbState().subscribe((res)=>{
+      if(res){
+        this.bd.fetchauto().subscribe(item =>{
+          this.Auto = item;
         })
       }
     })
