@@ -3,7 +3,7 @@ import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { reduce } from 'rxjs/operators';
 import { Auto } from './auto';
 import { Comentario } from './comentario';
@@ -348,21 +348,5 @@ async presentAlert1(msj: string,men: string) {
   await alert.present();
 }
 
-// public getValue(): string {
-//   return 'real value';
-// }
-
-// public getObservableValue(): Observable<string> {
-//   return of('observable value');
-// }
-
-// public getPromiseValue(): Promise<string> {
-//   return new Promise((resolve) => {
-//     resolve('promise value');
-//   });
-// }
-
 }
-
-
 
