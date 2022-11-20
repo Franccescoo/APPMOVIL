@@ -346,19 +346,19 @@ async presentAlert1(msj: string,men: string) {
   await alert.present();
 }
 
-public getValue(): string {
-  return 'real value';
-}
+// public getValue(): string {
+//   return 'real value';
+// }
 
-public getObservableValue(): Observable<string> {
-  return of('observable value');
-}
+// public getObservableValue(): Observable<string> {
+//   return of('observable value');
+// }
 
-public getPromiseValue(): Promise<string> {
-  return new Promise((resolve) => {
-    resolve('promise value');
-  });
-}
+// public getPromiseValue(): Promise<string> {
+//   return new Promise((resolve) => {
+//     resolve('promise value');
+//   });
+// }
 
 }
 
