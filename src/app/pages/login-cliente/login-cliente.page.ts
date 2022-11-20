@@ -100,7 +100,10 @@ export class LoginClientePage implements OnInit {
               nombreenviado: this.Usuario[0].nombre,
               claveenviado: this.Usuario[0].clave,
               fotoenviado: this.Usuario[0].foto,
-              idrolenviado: this.Usuario[0].fk_id_rol
+              idrolenviado: this.Usuario[0].fk_id_rol,
+              patenteenviado: this.Auto[0].patente,
+              fkenviado: this.Auto[0].fk_id_usuario,
+              marcaenviado: this.Auto[0].marca
             }
           }
           this.router.navigate(['/inicio-conductor'], navigationExtras);

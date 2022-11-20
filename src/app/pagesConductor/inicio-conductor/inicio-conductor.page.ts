@@ -29,7 +29,7 @@ export class InicioConductorPage implements OnInit {
   clave = '';
   idrol = '';
   Usuario: any[] = []
-  Auto: any[] = []
+
   constructor(private activedRouter: ActivatedRoute,private bd: DbservicioService, private api: CameraService, public nativeStorage: NativeStorage, private router: Router) {
     this.activedRouter.queryParams.subscribe(param=>{
       if(this.router.getCurrentNavigation().extras.state){
@@ -61,14 +61,6 @@ export class InicioConductorPage implements OnInit {
         })
       }
     })
-    this.bd.dbState().subscribe((res)=>{
-      if(res){
-        this.bd.fetchauto().subscribe(item =>{
-          this.Auto = item;
-        })
-      }
-    })
-    
 
   }
 
@@ -102,15 +94,5 @@ export class InicioConductorPage implements OnInit {
     this.api.TakePicture();
   }
 
-  verauto(){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        patenteenviado: this.Auto[0].patente,
-        idrolautoenviado: this.Auto[0].fk_id_rol,
-        marcaenviado: this.Usuario[0].marca,
-
-      }
-    }
-    this.router.navigate(['/ver-auto'], navigationExtras);
-  }
+  
 }
