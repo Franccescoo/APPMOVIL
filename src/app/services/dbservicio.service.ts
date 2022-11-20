@@ -237,11 +237,6 @@ export class DbservicioService {
     });
   }
 
-
-
-
-
-  
   agregarAuto(patente, modelo, marca, puestos, fk_idusuario) {
     let data = [patente, modelo, marca, puestos, fk_idusuario];
     return this.database.executeSql('INSERT INTO auto (  patente , modelo , marca , puestos , fk_idusuario) VALUES (? , ? , ? , ? , ?)', data).then(res => {
