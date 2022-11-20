@@ -348,4 +348,6 @@ async presentAlert1(msj: string,men: string) {
   await alert.present();
 }
 
+
 }
+
